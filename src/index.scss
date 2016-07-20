@@ -1,0 +1,19 @@
+/* Add External files here */
+@import './styles/material-palette/sass-material-colors';
+
+@import './styles/angular-material';
+@import './styles/buttons';
+@import './styles/typography';
+@import './styles/layout';
+@import './styles/forms';
+
+
+@import './styles/header';
+
+@import './styles/profile';
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}

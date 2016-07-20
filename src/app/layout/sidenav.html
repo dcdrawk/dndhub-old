@@ -1,0 +1,22 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')">
+  <!--<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Menu</h1>
+  </md-toolbar>-->
+  <!--<md-content>-->
+
+    <!--Menu-->
+    <ul class="sidenav-menu">
+      <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">
+        
+        <span ng-click="$ctrl.toggleMenu('#' + item.title)" class="sidenav-button expand-button" md-ink-ripple>
+          
+          <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
+        <ul>
+          <li ng-repeat="test in item.children">
+            <span ui-sref="{{test.sref}}" class="sidenav-button" md-ink-ripple>{{test.title}}</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  <!--</md-content>-->
+</md-sidenav>

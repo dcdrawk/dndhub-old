@@ -1,0 +1,347 @@
+{
+  "weapons": [{
+    "name": "Club",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "1 sp",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "weight": "2 lb.",
+    "properties": ["Light"]
+    }, {
+    "name": "Dagger",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "2 gp",
+    "damage": "1d4",
+    "damageType": "piercing",
+    "weight": "1 lb.",
+    "properties": ["Finesse", "Light", "Thrown", "(range 20/60)"]
+    }, {
+    "name": "Greatclub",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "2 sp",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "weight": "10 lb.",
+    "properties": ["Two-handed"]
+    }, {
+    "name": "Handaxe",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "5 gp",
+    "damage": "1d6",
+    "damageType": "slashing",
+    "weight": "2 lb.",
+    "properties": ["Light", "Thrown", "(range 20/60)"]
+    }, {
+    "name": "Javelin",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "5 sp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "2 lb",
+    "properties": ["Thrown", "(range 30/120)"]
+    }, {
+    "name": "Light Hammer",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "2 gp",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "weight": "2 lb.",
+    "properties": ["Light", "Thrown", "(range 20/60)", "Versatile (1d8)"]
+    }, {
+    "name": "Mace",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "5 gp",
+    "damage": "1d6",
+    "damageType": "bludgeoning",
+    "weight": "4 lb.",
+    "properties": []
+    }, {
+    "name": "Quarterstaff",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "2 sp",
+    "damage": "1d6",
+    "damageType": "bludgeoning",
+    "weight": "4 lb.",
+    "properties": ["Versatile (1d8)"]
+    }, {
+    "name": "Sickle",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "1 gp",
+    "damage": "1d4",
+    "damageType": "slashing",
+    "weight": "2 lb.",
+    "properties": ["Light"]
+    }, {
+    "name": "Spear",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "1 gp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "3 lb.",
+    "properties": ["Thrown", "(range 20/60)", "Versatile (1d8)"]
+    }, {
+    "name": "Unarmed Strike",
+    "type": "weapon",
+    "weaponType": "Simple Melee",
+    "cost": "",
+    "damage": "1",
+    "damageType": "bludgeoning",
+    "weight": "",
+    "properties": []
+    }, {
+    "name": "Light Crossbow",
+    "type": "weapon",
+    "weaponType": "Simple Ranged",
+    "cost": "25 gp",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": "5 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 80/320)", "Loading", "Two-handed"]
+    }, {
+    "name": "Dart",
+    "type": "weapon",
+    "weaponType": "Simple Ranged",
+    "cost": "5 cp",
+    "damage": "1d4",
+    "damageType": "piercing",
+    "weight": "1/4 lb.",
+    "properties": ["Finesse", "Thrown", "(range 20/60)"]
+    }, {
+    "name": "Shortbow",
+    "type": "weapon",
+    "weaponType": "Simple Ranged",
+    "cost": "25 gp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "1 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 80/320)", "Two-handed"]
+    }, {
+    "name": "Sling",
+    "type": "weapon",
+    "weaponType": "Simple Ranged",
+    "cost": "1 sp",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "weight": "",
+    "properties": ["Ammunition", "Ranged", "(range 30/120)"]
+    }, {
+    "name": "Battleaxe",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "10 gp",
+    "damage": "1d8",
+    "damageType": "slashing",
+    "weight": "4 lb.",
+    "properties": ["Versatile (1d10)"]
+    }, {
+    "name": "Flail",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "10 gp",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "weight": "2 lb.",
+    "properties": []
+    }, {
+    "name": "Glaive",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "20 gp",
+    "damage": "1d10",
+    "damageType": "slashing",
+    "weight": "6 lb.",
+    "properties": ["Heavy", "Reach", "Two-handed"]
+    }, {
+    "name": "Greataxe",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "30 gp",
+    "damage": "1d12",
+    "damageType": "slashing",
+    "weight": "7 lb.",
+    "properties": ["Heavy", "Two-handed"]
+    }, {
+    "name": "Greatsword",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "50 gp",
+    "damage": "2d6",
+    "damageType": "slashing",
+    "weight": "6 lb.",
+    "properties": ["Heavy", "Two-handed"]
+    }, {
+    "name": "Halberd",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "20 gp",
+    "damage": "1d10",
+    "damageType": "slashing",
+    "weight": "6 lb.",
+    "properties": ["Heavy", "Reach", "Two-handed"]
+    }, {
+    "name": "Lance",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "10 gp",
+    "damage": "1d12",
+    "damageType": "piercing",
+    "weight": "6 lb.",
+    "properties": ["Reach", "Special"],
+    "special": "You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren’t mounted."
+    }, {
+    "name": "Longsword",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "15 gp",
+    "damage": "1d8",
+    "damageType": "slashing",
+    "weight": "3 lb.",
+    "properties": ["Versatile (1d10)"]
+    }, {
+    "name": "Maul",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "10 gp",
+    "damage": "2d6",
+    "damageType": "bludgeoning",
+    "weight": "10 lb.",
+    "properties": ["Heavy", "Two-handed"]
+    }, {
+    "name": "Morningstar",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "15 gp",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": "4 lb.",
+    "properties": []
+    }, {
+    "name": "Pike",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "5 gp",
+    "damage": "1d10",
+    "damageType": "piercing",
+    "weight": "18 lb.",
+    "properties": ["Heavy", "Reach", "Two-handed"]
+    }, {
+    "name": "Rapier",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "25 gp",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": "2 lb.",
+    "properties": ["Finesse"]
+    }, {
+    "name": "Scimitar",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "25 gp",
+    "damage": "1d6",
+    "damageType": "slashing",
+    "weight": "3 lb.",
+    "properties": ["Finesse", "Light"]
+    }, {
+    "name": "Shortsword",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "10 gp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "2 lb.",
+    "properties": ["Finesse", "Light"]
+    }, {
+    "name": "Trident",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "5 gp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "4 lb.",
+    "properties": ["Thrown", "(range 20/60)", "Versatile (1d8)"]
+    }, {
+    "name": "War Pick",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "5 gp",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": "2 lb.",
+    "properties": []
+    }, {
+    "name": "Warhammer",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "15 gp",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "weight": "2 lb.",
+    "properties": ["Versatile (1d10)"]
+    }, {
+    "name": "Whip",
+    "type": "weapon",
+    "weaponType": "Martial Melee",
+    "cost": "2 gp",
+    "damage": "1d4",
+    "damageType": "slashing",
+    "weight": "3 lb.",
+    "properties": ["Finesse", "Reach"]
+    }, {
+    "name": "Blowgun",
+    "type": "weapon",
+    "weaponType": "Martial Ranged",
+    "cost": "10 gp",
+    "damage": "1",
+    "damageType": "piercing",
+    "weight": "1 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 25/100)", "Loading"]
+    }, {
+    "name": "Hand Crossbow",
+    "type": "weapon",
+    "weaponType": "Martial Ranged",
+    "cost": "75 gp",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "weight": "3 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 30/120)", "Light", "Loading"]
+    }, {
+    "name": "Heavy Crossbow",
+    "type": "weapon",
+    "weaponType": "Martial Ranged",
+    "cost": "50 gp",
+    "damage": "1d10",
+    "damageType": "piercing",
+    "weight": "18 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 100/400)", "Heavy", "Loading", "Two-handed"]
+    }, {
+    "name": "Longbow",
+    "type": "weapon",
+    "weaponType": "Martial Ranged",
+    "cost": "50 gp",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": "2 lb.",
+    "properties": ["Ammunition", "Ranged", "(range 150/600)","Heavy", "Two-handed"]
+    }, {
+    "name": "Net",
+    "type": "weapon",
+    "weaponType": "Martial Ranged",
+    "cost": "1gp",
+    "damage": "",
+    "damageType": "",
+    "weight": "3 lb.",
+    "properties": ["Special", "Thrown", "(range 5/15)"],
+    "special": "<p>A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net.</p><p>When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.</p>"
+    }]
+}

@@ -1,0 +1,11 @@
+{
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20160709055139",
+    "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts#dc9dabe74a5be62613b17a3605309783a12ff28a",
+    "angular-ui-router": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-router/angular-ui-router.d.ts#41f31600a1bff1adef3c76642183b20ec97aa81e",
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
+    "firebase": "registry:dt/firebase#2.4.1+20160412125105",
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#dc9dabe74a5be62613b17a3605309783a12ff28a",
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008"
+  }
+}

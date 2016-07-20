@@ -1,0 +1,23 @@
+<section layout="row" layout-wrap layout-padding class="page-header">
+  <h4>
+    Sign In
+  </h4>
+</section>
+
+<section class="md-padding" layout="row" layout-align="center center" layout-wrap>
+  <div flex="100">
+    <md-input-container>
+      <label>Email</label>
+      <input ng-model="$ctrl.email" type="email">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Password</label>
+      <input ng-model="$ctrl.password" type="password">
+    </md-input-container>
+  </div>
+  
+  <div flex="100" >    
+    <md-button class="md-raised md-primary" ng-click="$ctrl.signIn($ctrl.email, $ctrl.password)">Sign In</md-button>
+  </div>
+</section>

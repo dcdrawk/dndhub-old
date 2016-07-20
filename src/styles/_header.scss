@@ -1,0 +1,139 @@
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+.sidenav-menu {
+  width: 100%;
+  padding: 0px;
+  list-style: none;
+  ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      flex: 100%;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+  }
+  li ul li span{
+    padding-left: 32px;
+  }
+}
+
+.sidenav-button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  outline: none;
+}
+
+.header-menu {
+  height: 64px;
+  position: relative;
+  right: -8px;
+  button {
+    height: 64px;
+  }
+}
+
+.app-bar-photo {
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+#main-content {
+  height: 100vh;
+}
+.main-view {
+  display: block;
+  margin-left: 320px;
+  // transition: all .25s ease;
+  margin-top: 64px;
+}
+
+.app-bar .md-toolbar-tools {
+  transition: all .25s ease;
+  padding-left: 336px;
+}
+
+md-toolbar {
+  h1 {
+    white-space: pre;
+    text-overflow: ellipsis;
+  }
+}
+
+md-sidenav, 
+md-sidenav._md-locked-open,
+md-sidenav._md-locked-open._md-closed,
+md-sidenav._md-locked-open._md-closed.md-sidenav-left,
+md-sidenav._md-locked-open._md-closed {
+  position: fixed;
+}
+
+.menu-icon {
+  margin-right: 16px;
+}
+// md-sidenav, 
+// md-sidenav._md-locked-open-remove._md-closed{
+//   position: fixed;
+// }
+
+@media (max-width: 1280px) {
+  md-sidenav {
+    height: 100vh;
+    position: absolute;
+    top: -120px;
+  }
+  .app-bar .md-toolbar-tools {
+    padding-left: 16px;
+    .md-icon-button {
+      display: inline-block;
+    }
+  }
+  .main-view {
+    display: block;
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .menu-button {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .main-view {
+    margin-top: 48px;
+  }
+  .header-menu {
+    height: 48px;
+    button {
+      height: 48px;
+    }
+  }
+}
+
+@media (max-width: 829px) {
+  .main-view {
+    margin-top: 52px;
+  }
+  .header-menu {
+    height: 52px;
+    button {
+      height: 52px;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<md-toolbar class="app-bar md-whiteframe-2dp">
+  <div class="md-toolbar-tools">
+    <md-button ng-if="!$mdMedia('gt-md')" class="md-icon-button menu-button" aria-label="Settings" ng-click="$ctrl.toggleSidenav('right')">
+      <md-icon class="material-icons">menu</md-icon>
+    </md-button>
+    <h2>
+      <span>Codex</span>
+    </h2>
+    <span flex></span>
+    <md-menu md-position-mode="target-right target" class="header-menu" ng-if="$ctrl.user">
+      
+      <md-button aria-label="Open interactions menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+      <span  ng-if="!$ctrl.user.displayName">{{$ctrl.user.email}}</span>
+        <span ng-if="$ctrl.user.displayName">{{$ctrl.user.displayName}}</span>
+        <img class="app-bar-photo" ng-src="{{$ctrl.user.photoURL}}">
+        <md-icon md-menu-origin class="material-icons">arrow_drop_down</md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ui-sref="profile">
+            <md-icon class="material-icons">account_box</md-icon>
+            Profile
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.signOut();">
+            <md-icon class="material-icons" md-menu-align-target>exit_to_app</md-icon>
+            Sign Out
+          </md-button>
+        </md-menu-item>      
+        
+      </md-menu-content>
+    </md-menu>
+
+    <div ng-if="!$ctrl.user">
+      <md-button ui-sref="sign-up">
+        Sign Up
+      </md-button>
+      <md-button ui-sref="sign-in">
+        Sign In
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>
+

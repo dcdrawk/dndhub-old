@@ -1,0 +1,29 @@
+<section layout="row" layout-wrap layout-padding class="page-header">
+  <h4>
+    Sign Up
+  </h4>
+</section>
+
+<section class="md-padding" layout="row" layout-align="center center" layout-wrap>
+  <form flex="100" autocomplete="off">
+    <p>Sign up with your email</p>
+    <md-input-container>
+      <label>Email</label>
+      <input ng-model="$ctrl.email" type="email" autocomplete="off">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Password</label>
+      <input ng-model="$ctrl.password" type="password" autocomplete="off">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Re-type Password</label>
+      <input ng-model="$ctrl.passwordVerification" type="password" autocomplete="off">
+    </md-input-container>
+  </form>
+  
+  <div flex="100" >    
+    <md-button class="md-raised md-primary" ng-click="$ctrl.signUp()">Sign Up</md-button>
+  </div>
+</section>

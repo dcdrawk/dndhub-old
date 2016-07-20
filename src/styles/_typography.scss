@@ -1,0 +1,38 @@
+h1 {
+  @extend .md-display-3;
+}
+
+h2 {
+  @extend .md-display-2;
+}
+
+h3 {
+  @extend .md-display-1;
+}
+
+h4 {
+  @extend .md-headline;
+}
+
+h5 {
+  @extend .md-title;
+}
+
+p {
+  @extend .md-body-1;
+  strong {
+    @extend .md-body-2;
+  }
+}
+
+small, caption, figcaption {
+  @extend .md-caption;
+}
+
+.page-header {
+  background: material-color('blue', '700');
+  color: #fff;
+  h4 {
+    margin: 16px 0;
+  }
+}

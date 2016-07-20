@@ -1,0 +1,78 @@
+<section layout="row" layout-wrap layout-padding class="page-header">
+  <h4>
+    Profile
+  </h4>
+</section>
+
+<section class="md-padding" layout="row" layout-wrap layout-padding>
+  <div flex="33" flex-sm="50" flex-xs="100">
+
+      <!--Profile Photo-->
+      <div class="profile-photo text-center">
+        <img ng-if="!$ctrl.user.photoURL && !$ctrl.fileblob" src="http://placehold.it/200x200" class="md-whiteframe-2dp">
+        <img ng-if="$ctrl.fileblob" ng-src="{{$ctrl.fileblob}}" class="md-whiteframe-2dp">
+        <img ng-if="$ctrl.user.photoURL && !$ctrl.fileblob" ng-src="{{$ctrl.user.photoURL}}" class="md-whiteframe-2dp">
+      </div>
+
+      <!--Upload Image button-->
+      <div flex="100">
+        <md-button class="md-primary" ng-click="$ctrl.changeImage = true" ng-disabled="$ctrl.changeImage === true">
+          Change Profile Image        
+        </md-button>
+        <md-button class="md-raised" ng-if="$ctrl.changeImage === true" ng-click="$ctrl.changeImage = false; $ctrl.fileblob = null">
+          Cancel        
+        </md-button>
+      </div>  
+
+      <!--Select Image button-->
+      <div flex="100" ng-if="$ctrl.changeImage === true">
+        <label for="file-upload" class="md-button md-raised md-primary">
+            <md-icon class="material-icons">add_a_photo</md-icon>  
+            Select Image
+        </label>
+        <span class="file-name">{{$ctrl.file.name}}</span>
+        <input id="file-upload" type="file" ng-model="$ctrl.file" fileread="$ctrl.file" />
+        
+      </div>
+
+      <!--Upload Image button-->
+      <div flex="100" ng-if="$ctrl.changeImage === true && $ctrl.file">
+        <md-button class="md-raised md-accent" ng-click="$ctrl.uploadFile($ctrl.file)" ng-disabled="!$ctrl.file">
+          <md-icon class="material-icons">file_upload</md-icon>          
+          Upload Image
+        </md-button>
+      </div>  
+  </div>
+
+  <div flex="33" flex-sm="50" flex-xs="100">
+    <div layout="row" layout-wrap>
+
+      <md-input-container flex="100">
+        <label>Email</label>
+        <input ng-model="$ctrl.user.email" type="email">
+      </md-input-container>
+
+      <md-input-container flex="100">
+        <label>Display Name</label>
+        <input ng-model="$ctrl.user.displayName" type="text">
+      </md-input-container>    
+    </div>
+    <div flex="100">
+      <md-button class="md-raised md-primary" ng-click="$ctrl.updateProfile();">
+        <md-icon class="material-icons">save</md-icon>          
+        Save Profile
+      </md-button>
+
+      <md-button class="md-raised md-primary" ng-click="$ctrl.writeData();">
+        <md-icon class="material-icons">edit</md-icon>          
+        Write Data
+      </md-button>
+    </div>
+  </div>
+
+  <div flex="33" flex-sm="100" flex-xs="100" layout="column">
+    Other Info coming soon...
+    <p>{{$ctrl.file.name}}</p>
+  </div>
+  
+</section>
