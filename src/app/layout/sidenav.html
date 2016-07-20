@@ -6,16 +6,9 @@
 
     <!--Menu-->
     <ul class="sidenav-menu">
-      <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">
-        
-        <span ng-click="$ctrl.toggleMenu('#' + item.title)" class="sidenav-button expand-button" md-ink-ripple>
-          
+      <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
+        <span ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
           <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
-        <ul>
-          <li ng-repeat="test in item.children">
-            <span ui-sref="{{test.sref}}" class="sidenav-button" md-ink-ripple>{{test.title}}</span>
-          </li>
-        </ul>
       </li>
     </ul>
   <!--</md-content>-->

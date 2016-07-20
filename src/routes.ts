@@ -12,14 +12,16 @@ function routesConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvi
       url: '/',
       template: '<app></app>'
     })
-    .state('buttons', {
-      url: '/buttons',
-      template: '<buttons></buttons>'
-    })
-    .state('typography', {
-      url: '/typography',
-      template: '<typography></typography>'
-    })
+    // .state('buttons', {
+    //   url: '/buttons',
+    //   template: '<buttons></buttons>'
+    // })
+    // .state('typography', {
+    //   url: '/typography',
+    //   template: '<typography></typography>'
+    // })
+
+    //Authentication
     .state('profile', {
       url: '/profile',
       template: '<profile></profile>'
@@ -31,9 +33,11 @@ function routesConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvi
     .state('sign-up', {
       url: '/sign-up',
       template: '<signup></signup>'
+    })
+
+    //Character
+    .state('character-list', {
+      url: '/character-list',
+      template: '<characterlist></characterlist>'
     });
-    // .state('firebase', {
-    //   url: '/firebase',
-    //   template: '<firebase></firebase>'
-    // });
 }

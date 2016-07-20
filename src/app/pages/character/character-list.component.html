@@ -1,9 +1,42 @@
 <section layout="row" layout-wrap layout-padding class="page-header">
   <h4>
-    Characters
+    Characters {{$ctrl.test}}
   </h4>
 </section>
+<md-card>
 
-<section class="md-padding" layout="row" layout-wrap layout-padding>
-  
-</section>
+  <section class="md-padding" layout="row" layout-wrap layout-padding>
+    <!-- exact table from live demo -->
+    <div flex="100">
+      <md-button class="md-raised" ng-click="$ctrl.showNewCharacterModal($event)">New Character</md-button>
+    </div>
+    <md-table-container>
+      <table md-table md-row-select multiple ng-model="$ctrl.selected" md-progress="promise">
+        <thead md-head md-order="$ctrl.myOrder" md-on-reorder="">
+          <tr md-row>
+            <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-numeric md-order-by="calories.value"><span>Level</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="character" md-select-id="name" md-auto-select ng-repeat="character in $ctrl.characters | orderBy: $ctrl.myOrder">
+            <td md-cell>{{character.name}}</td>
+            <td md-cell>{{character.level}}</td>
+          </tr>
+
+          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.characters.length === 0">
+            <td md-cell colspan="2">No Characters Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </section>
+</md-card> 
+
+<!--Floating action button-->
+<!--<div layout="row">
+  <md-button class="md-primary md-fab md-fab-bottom-right">
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+
+</div>-->

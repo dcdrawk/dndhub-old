@@ -21,8 +21,10 @@ function themeConfig($mdThemingProvider: ng.material.IThemingProvider) {
   // $urlRouterProvider.otherwise('/');
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('indigo')
-    .accentPalette('blue', {
+    .primaryPalette('indigo', {
+      'default': '600'
+    })
+    .accentPalette('orange', {
       'default': '500' // use shade 200 for default, and keep all other shades the same
     });
 }

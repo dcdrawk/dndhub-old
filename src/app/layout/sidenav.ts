@@ -29,7 +29,7 @@ interface IMenuModel {
 
 const menu = [{
   title: 'Characters',
-  sref: 'characters',
+  sref: 'character-list',
   icon: 'people'
 },{
   title: 'Character Info',

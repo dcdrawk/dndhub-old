@@ -39,11 +39,36 @@ export default class FirebaseService {
     });
   }
 
+  getData(url) {
+    console.log('get user data');
+    var userId = firebase.auth().currentUser.uid;
+    return this.$q((resolve, reject) => {
+      firebase.database().ref(url).on('value', (snapshot) => {
+        console.log('Got data');
+        console.log(snapshot.val());
+
+        resolve(snapshot.val());
+        // updateStarCount(postElement, snapshot.val());
+      });
+    });
+  }
+
   writeUserData(url, data) {
     console.log('Write user data');
     var userId = firebase.auth().currentUser.uid;
     return this.$q((resolve, reject) => {
       firebase.database().ref(url + '/' + userId).set(data);
+    });
+  }
+
+  saveNewCharacter(character) {
+    console.log('Save Character');
+    var userId = firebase.auth().currentUser.uid;
+
+    return this.$q((resolve, reject) => {
+      firebase.database().ref('characters/' + userId + '/').push(character).then(() => {
+        resolve();
+      });
     });
   }
   
