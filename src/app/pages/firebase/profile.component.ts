@@ -10,7 +10,8 @@ class ProfileController {
   toastService: any;
   email: string;
   user: Object;
-
+  userSignedIn: any;
+  
   constructor(
     firebaseService: FirebaseService,
     toastService: ToastService,
@@ -20,7 +21,7 @@ class ProfileController {
     this.toastService = toastService;
     this.firebaseService = firebaseService;
 
-    var test = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
+    this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
       this.user = angular.extend({}, user);
       this.$scope.$apply();
     });
@@ -29,21 +30,11 @@ class ProfileController {
   }  
 
   init() {
-    console.log('init');
-    this.user = this.firebaseService.getCurrentUser();
+    this.getCurrentUser();
   }
 
   getCurrentUser() {
     this.user = this.firebaseService.getCurrentUser();
-  }
-
-  writeData() {
-    var url = 'test';
-
-    var data = {
-      testData: 'testing123'
-    }
-    this.firebaseService.writeUserData(url, data);
   }
 
   updateProfile() {
@@ -53,7 +44,6 @@ class ProfileController {
   }
 
   uploadFile(file:any) {
-    console.log(file);
     this.firebaseService.uploadProfilePhoto(file).then(() => {
       this.getCurrentUser();
     });

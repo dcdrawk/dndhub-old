@@ -25,7 +25,7 @@ import fileread from './app/directives/fileread';
 //-- Services --
 import ToastService from './app/services/toast.service';
 import FirebaseService from './app/pages/firebase/firebase.service';
-
+import GameDataService from './app/pages/firebase/game-data.service';
 //-- Pages --
 
 //Authentication
@@ -48,6 +48,7 @@ angular
   .config(routesConfig)
   .config(themeConfig)
   .service('FirebaseService', FirebaseService)
+  .service('GameDataService', GameDataService)
   .service('ToastService', ToastService)
   .directive('fileread', fileread)
   .component('app', main)
@@ -59,6 +60,6 @@ angular
   .component('signup', signUpComponent)
   .component('profile', profileComponent)
 
-  .component('characterlist', characterListComponent)
+  .component('characterlist', characterListComponent);
   // .component('buttons', Buttons)
   // .component('typography', typographyPage);

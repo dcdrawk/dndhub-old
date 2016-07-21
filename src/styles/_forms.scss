@@ -12,3 +12,9 @@ input[type="file"] {
   top: -18px;
   margin-left: 16px;
 }
+
+.md-no-error-spacer {
+    .md-errors-spacer {
+        display: none;
+    }
+}

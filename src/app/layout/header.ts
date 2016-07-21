@@ -2,7 +2,6 @@ import 'angular-material';
 import FirebaseService from '../pages/firebase/firebase.service';
 
 interface IMenuModel {
-    // menuItems: app.layout.IMenuItems[];
     toggleSidenav(menuId: string): void;
 }
 
@@ -11,6 +10,9 @@ class HeaderController implements IMenuModel {
   static $inject: Array<string> = ['FirebaseService', '$mdSidenav', '$scope'];
   user: any;
   firebaseService: any;
+  userSignedOut: any;
+  userSignedIn: any;
+  userUpdated: any;
 
   constructor(
     firebaseService: FirebaseService,
@@ -20,51 +22,40 @@ class HeaderController implements IMenuModel {
 
     this.firebaseService = firebaseService;
 
-    var userSignedOut = this.$scope.$on('USER_SIGNED_OUT', (event) => {
+    //Listen if the user signs out
+    this.userSignedOut = this.$scope.$on('USER_SIGNED_OUT', (event) => {
       this.user = undefined;
       this.$scope.$apply();
     });
 
-    var userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
+    //Listen if the user signs in
+    this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
       this.user = angular.extend({}, user);
       this.$scope.$apply();
     });
 
-    var userUpdated = this.$scope.$on('USER_UPDATED', (event, user) => {
+    //Listen if the user is updated
+    this.userUpdated = this.$scope.$on('USER_UPDATED', (event, user) => {
       this.user = user;
       this.$scope.$apply();
     });
   }
 
-// this.openMenu = function($mdOpenMenu, ev) {
-//       originatorEv = ev;
-//       $mdOpenMenu(ev);
-//     };  
-
-  openMenu($mdOpenMenu, ev) {
-    // originatorEv = ev;
-    console.log('open da menu');
+  //Open the top right menu
+  openMenu($mdOpenMenu:any, ev:any) {
     $mdOpenMenu(ev);
   }
 
-  clickMenu() {
-    console.log('clicked the menu');
-  }
-
-  toggleMenu(menuId: string) {
-    var test = $(menuId).find('ul');
-    $(test).slideToggle( 'fast' );
-  }
-
+  //Toggle the sidenav
   toggleSidenav(menuId: string) {
     this.$mdSidenav(menuId).toggle();
         console.log(menuId);
   }
 
+  //Sign the user out
   signOut() {
     this.firebaseService.signOut().then((response) => {
       this.user = this.firebaseService.currentUser;
-      // this.user.displayName.writable = true
     });
   }
 }

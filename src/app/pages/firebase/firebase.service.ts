@@ -17,16 +17,15 @@ export default class FirebaseService {
     firebase.auth().onAuthStateChanged(function(user:any) {
       if (user) {
         // User is signed in.
-        console.log('a user has signed in');
         this.currentUser = user;
         $rootScope.$broadcast('USER_SIGNED_IN', user);
       } else {
         // No user is signed in.
-        console.log('no user signed in');
       }
     });
   }
 
+  //Sign up with an email and password
   signUp(email:string, password:string) {
     return this.$q((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -39,21 +38,17 @@ export default class FirebaseService {
     });
   }
 
-  getData(url) {
-    console.log('get user data');
-    var userId = firebase.auth().currentUser.uid;
+  //Get firebase data from a url
+  getData(url:string) {
     return this.$q((resolve, reject) => {
       firebase.database().ref(url).on('value', (snapshot) => {
-        console.log('Got data');
-        console.log(snapshot.val());
-
         resolve(snapshot.val());
-        // updateStarCount(postElement, snapshot.val());
       });
     });
   }
 
-  writeUserData(url, data) {
+  //Write user data
+  writeUserData(url:string, data:any) {
     console.log('Write user data');
     var userId = firebase.auth().currentUser.uid;
     return this.$q((resolve, reject) => {
@@ -61,17 +56,25 @@ export default class FirebaseService {
     });
   }
 
-  saveNewCharacter(character) {
-    console.log('Save Character');
+  //Save a new character
+  saveNewCharacter(character:any) {
     var userId = firebase.auth().currentUser.uid;
-
     return this.$q((resolve, reject) => {
       firebase.database().ref('characters/' + userId + '/').push(character).then(() => {
         resolve();
       });
     });
   }
-  
+
+  //Delete a character
+  deleteCharacter(character:any) {
+    var userId = firebase.auth().currentUser.uid;
+    return this.$q((resolve, reject) => {
+      firebase.database().ref('characters/' + userId + '/' + character.id).remove().then(() => {
+        resolve();
+      });
+    });
+  }
 
   //sign in to firebase with email and password
   signIn(email:string, password:string) {
@@ -126,11 +129,9 @@ export default class FirebaseService {
     });
   }
 
+  //Get the current user
   getCurrentUser() {
-    console.log('getting current user');
     var user = firebase.auth().currentUser;
-    console.log(user);
-    console.log('getting current user');
     if (user) {
       return angular.extend({}, user);
       // User is signed in.
@@ -140,26 +141,27 @@ export default class FirebaseService {
     }
   }
 
+  //Upload a file (e.g. profile photo)
   uploadFile(file:any) {
     console.log(file);
     var storageRef = firebase.storage().ref();
     var uploadTask = storageRef.child('images/' + file.name).put(file);
 
-    uploadTask.on('state_changed', function(snapshot){
+    uploadTask.on('state_changed', function(snapshot:any){
       // Observe state change events such as progress, pause, and resume
       // See below for more detail
-    }, function(error) {
+    }, function(error:any) {
       console.error('upload error');
       // Handle unsuccessful uploads
     }, function() {
-      console.log('upload complete');
       // Handle successful uploads on complete
-      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      console.log('upload complete');
       var downloadURL = uploadTask.snapshot.downloadURL;
       console.log(downloadURL);
     });
   }
 
+  //Upload a profile photo
   uploadProfilePhoto(file:any) {
     console.log(file);
     var storageRef = firebase.storage().ref();
@@ -167,10 +169,9 @@ export default class FirebaseService {
 
     return this.$q((resolve, reject) => {
       uploadTask.on('state_changed', (snapshot) => {
-      // Observe state change events such as progress, pause, and resume
+        // Observe state change events such as progress, pause, and resume
         // See below for more detail
-      }, (error) => {
-        
+      }, (error) => {        
         console.error('upload error');
         reject();
         // Handle unsuccessful uploads
@@ -183,22 +184,8 @@ export default class FirebaseService {
         user.photoURL = downloadURL;
         this.updateProfile(user).then( () => {
           resolve();
-        });
-        
-      })
+        });        
+      });
     });
   }
-    // Create a root reference
-  //   var storageRef = firebase.storage().ref();
-
-  //   // Create a reference to 'mountains.jpg'
-  //   var mountainsRef = storageRef.child('mountains.jpg');
-
-  //   // Create a reference to 'images/mountains.jpg'
-  //   var mountainImagesRef = storageRef.child('images/mountains.jpg');
-
-  //   // While the file names are the same, the references point to different files
-  //   mountainsRef.name === mountainImagesRef.name            // true
-  //   mountainsRef.fullPath === mountainImagesRef.fullPath    // false
-  // }
 }
