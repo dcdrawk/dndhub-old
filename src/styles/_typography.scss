@@ -20,6 +20,7 @@ h5 {
 
 p {
   @extend .md-body-1;
+  font-size: 16px;
   strong {
     @extend .md-body-2;
   }
@@ -34,7 +35,7 @@ a {
 }
 
 .page-header {
-  background: material-color('indigo', '600');
+  background: material-color('indigo', '500');
   color: #fff;
   padding: 12px 24px;
   h4 {
@@ -42,4 +43,9 @@ a {
     font-size: 20px;
     padding: 0px;
   }
+}
+
+.no-margin {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }

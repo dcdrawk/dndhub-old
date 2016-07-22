@@ -19,7 +19,11 @@ export default class CharacterService {
     private $rootScope: angular.IRootScopeService,
     private firebaseService: FirebaseService
   ) {
-    
+    if(localStorage.getItem('selectedCharacter')) {
+      console.log('character in localstorage');
+      this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
+      this.$rootScope.$broadcast('CHARACTER_SELECTED');      
+    }
   }
 
   //Get the list of characters
@@ -51,6 +55,8 @@ export default class CharacterService {
   //Select a character
   selectCharacter(character:any) {
     this.selectedCharacter = character;
+    localStorage.setItem('selectedCharacter', JSON.stringify(character));
+    this.$rootScope.$broadcast('CHARACTER_SELECTED');
   }
 
   //Delete a character
