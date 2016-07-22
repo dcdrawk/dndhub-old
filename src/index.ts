@@ -41,6 +41,7 @@ import {characterListComponent} from './app/pages/character/character-list.compo
 import {newCharacterModalComponent} from './app/pages/character/new-character-modal.component';
 import {characterInfoComponent} from './app/pages/character/character-info.component';
 import {characterGeneralComponent} from './app/pages/character/general/general.component';
+import {characterStatsComponent} from './app/pages/character/stats/stats.component';
 //Demo Pages
 // import {Buttons} from './app/pages/components/buttons/buttons';
 // import {typographyPage} from './app/pages/styles/typography.component';
@@ -70,6 +71,7 @@ angular
   .component('characterlist', characterListComponent)
   .component('characterInfo', characterInfoComponent)
   .component('characterGeneral', characterGeneralComponent)
+  .component('characterStats', characterStatsComponent)
 
   //Auth
   .component('firebase', firebaseComponent)

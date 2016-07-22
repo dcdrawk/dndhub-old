@@ -9,26 +9,14 @@
 <md-card>
 
   <section class="md-padding" layout="row" layout-wrap layout-padding>
-    <!-- exact table from live demo -->
-    <!--<div flex="100">
-      <md-button class="md-primary md-raised" ng-click="$ctrl.showNewCharacterModal($event)" ng-disabled="!$ctrl.gameData">New Character</md-button>      
-    </div>-->
-
-    <!--<div flex="100">
-      <md-divider></md-divider>   
-    </div>-->
     <md-table-container>
       <table md-table multiple ng-model="$ctrl.selected" md-progress="promise">
         <thead md-head md-order="$ctrl.myOrder" md-on-reorder="">
           <tr md-row>
             <th md-column md-order-by="name"><span>Name</span></th>
             <th md-column md-numeric md-order-by="level"><span>Level</span></th>
-            <!--<th md-column md-numeric md-order-by="experience"><span>Experience</span></th>-->
             <th md-column md-numeric md-order-by="class"><span>Class</span></th>
             <th md-column md-numeric md-order-by="race"><span>Race</span></th>
-            <!--<th md-column md-numeric md-order-by="alignment"><span>Alignment</span></th>
-            <th md-column md-numeric md-order-by="background"><span>Background</span></th>
-            <th md-column md-numeric md-order-by="adventuringGroup"><span>Adventuring Group</span></th>-->
             <th md-column><span></span></th>
           </tr>
         </thead>
@@ -36,12 +24,8 @@
           <tr md-row ng-repeat="character in $ctrl.characters | orderBy: $ctrl.myOrder track by $index">
             <td md-cell>{{character.name}}</td>
             <td md-cell>{{character.level}}</td>
-            <!--<td md-cell>{{character.experience}}</td>-->
             <td md-cell>{{character.class}}</td>
             <td md-cell>{{character.race}}</td>
-            <!--<td md-cell>{{character.alignment}}</td>
-            <td md-cell>{{character.background}}</td>
-            <td md-cell>{{character.adventuringGroup}}</td>-->
             <td md-cell>
               <md-button class="md-icon-button" aria-label="Delete Character" ng-click="$ctrl.showConfirmDeleteDialog($event, character, $index);">
                 <md-icon class="material-icons table-icon">delete</md-icon>
@@ -56,12 +40,4 @@
       </table>
     </md-table-container>
   </section>
-</md-card> 
-
-<!--Floating action button-->
-<!--<div layout="row">
-  <md-button class="md-primary md-fab md-fab-bottom-right">
-    <md-icon class="material-icons">add</md-icon>
-  </md-button>
-
-</div>-->
+</md-card>
