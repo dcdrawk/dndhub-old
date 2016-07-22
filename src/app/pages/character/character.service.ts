@@ -3,6 +3,8 @@ import FirebaseService from '../firebase/firebase.service';
 
 declare var firebase: any;
 declare var config: any;
+declare var resolve: any;
+declare var reject: any;
 
 export default class CharacterService {
 
@@ -10,6 +12,7 @@ export default class CharacterService {
   db: any;
   currentUser: any;
   characters: any;
+  selectedCharacter: any;
 
   constructor(
     private $q: angular.IQService,
@@ -42,11 +45,12 @@ export default class CharacterService {
   //Save a new character
   saveNewCharacter(character:any) {
     var userId = firebase.auth().currentUser.uid;
-    return this.$q((resolve, reject) => {
-      firebase.database().ref('characters/' + userId + '/').push(character).then(() => {
-        resolve();
-      });
-    });
+    firebase.database().ref('characters/' + userId + '/').push(character);
+  }
+
+  //Select a character
+  selectCharacter(character:any) {
+    this.selectedCharacter = character;
   }
 
   //Delete a character

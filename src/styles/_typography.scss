@@ -30,13 +30,16 @@ small, caption, figcaption {
 }
 
 a {
-  color: material-color('blue', '700');
+  color: material-color('indigo', '700');
 }
 
 .page-header {
-  background: material-color('blue', '700');
+  background: material-color('indigo', '600');
   color: #fff;
+  padding: 12px 24px;
   h4 {
-    margin: 16px 0;
+    margin: 0;
+    font-size: 20px;
+    padding: 0px;
   }
 }

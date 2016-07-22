@@ -1,14 +1,14 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')">
 
-    <section class="md-padding" ng-if="!$ctrl.signedIn || !$ctrl.characters">
+    <section class="md-padding" ng-if="$ctrl.signedIn && !$ctrl.characters">
       <p>It looks like you haven't created any characters yet, <a ui-sref="character-list">go make one!</a></p>
     </section>
 
-    <section class="md-padding character-select">
+    <section class="md-padding character-select" ng-if="$ctrl.characters">
       <md-input-container>
         <label>Selected Character</label>
-        <md-select ng-model="$ctrl.selectedCharacterId">
-          <md-option ng-repeat="character in $ctrl.characters" value="{{character.id}}">
+        <md-select ng-model="$ctrl.selectedCharacterIndex" ng-change="$ctrl.selectCharacter($ctrl.selectedCharacterIndex);">
+          <md-option ng-repeat="character in $ctrl.characters" value="{{$index}}">
             {{character.name}}
           </md-option>
         </md-select>
@@ -16,7 +16,7 @@
     </section>
 
     <!--Menu-->
-    <ul class="sidenav-menu" ng-if="$ctrl.selectedCharacterId">
+    <ul class="sidenav-menu" ng-if="$ctrl.selectedCharacterIndex">
       <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
         <span ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
           <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
