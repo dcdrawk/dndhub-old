@@ -1,0 +1,116 @@
+<!--<md-dialog aria-label="New Character" class="modal-md">-->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>New Character!</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.close()">
+        <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <form name="myForm">
+        <div layout="row">
+          <!--Name-->
+          <md-input-container flex="33" class="md-no-error-spacer">
+            <label>Character Name</label>
+            <input type="text" ng-model="$ctrl.character.name" required>
+          </md-input-container>
+
+          <!--Level-->
+          <md-input-container flex="33" class="md-no-error-spacer">
+            <label>Level</label>
+            <input type="number" ng-model="$ctrl.character.level" required>
+          </md-input-container>
+
+          <!--Experience-->
+          <md-input-container flex="33" class="md-no-error-spacer">
+            <label>Experience</label>
+            <input type="number" ng-model="$ctrl.character.experience">
+          </md-input-container>          
+        </div>
+
+        
+        <div layout="row">
+          <!--Class-->
+          <md-input-container flex>
+            <label>Class</label>
+            <md-select ng-model="$ctrl.character.class" required>
+              <md-option ng-repeat="class in $ctrl.gameData.classes" value="{{class.name}}">
+                {{class.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!--Race-->
+          <md-input-container flex>
+            <label>Race</label>
+            <md-select ng-model="$ctrl.character.race" required>
+              <md-option ng-repeat="race in $ctrl.gameData.races" value="{{race.name}}" ng-click="$ctrl.selectRace(race);">
+                {{race.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!--Subrace-->
+          <md-input-container flex>
+            <label>Subrace</label>
+            <md-select ng-model="$ctrl.character.subrace" ng-disabled="!$ctrl.subraces">
+              <md-option ng-repeat="subrace in $ctrl.subraces" value="{{subrace.name}}">
+                {{subrace.name}}
+              </md-option>
+            </md-select>
+            
+            <!--If there are no subraces-->
+            <md-tooltip md-direction="bottom" ng-if="$ctrl.character.race && !$ctrl.subraces">
+              No {{character.race}} Subraces
+            </md-tooltip>
+
+            <!--Tell the user to select a race-->
+            <md-tooltip md-direction="bottom" ng-if="!$ctrl.character.race">
+              Select a race
+            </md-tooltip>
+          </md-input-container>          
+        </div>
+
+        <div layout="row">
+          <!--Class-->
+          <md-input-container flex>
+            <label>Alignment</label>
+            <md-select ng-model="$ctrl.character.alignment">
+              <md-option ng-repeat="alignment in $ctrl.gameData.alignments" value="{{alignment.name}}">
+                {{alignment.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!--Background-->
+          <md-input-container flex>
+            <label>Background</label>
+            <md-select ng-model="character.background">
+              <md-option ng-repeat="background in $ctrl.gameData.backgrounds" value="{{background.name}}">
+                {{background.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!--Adventuring Group-->
+          <md-input-container flex="33" class="md-no-error-spacer">
+            <label>Adventuring Group</label>
+            <input type="text" ng-model="$ctrl.character.adventuringGroup">
+          </md-input-container>
+        </div>
+      </form>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="$ctrl.close()">
+      Cancel
+    </md-button>
+    <md-button class="md-primary md-raised" ng-click="$ctrl.saveCharacter($ctrl.character)" ng-disabled="myForm.$invalid">
+      Save
+    </md-button>
+  </md-dialog-actions>
+<!--</md-dialog>-->

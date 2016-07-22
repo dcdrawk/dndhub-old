@@ -1,0 +1,27 @@
+md-content md-tabs-wrapper {
+  background-color: material-color('indigo', '500');
+  md-tab-item > span {
+    color: #fff;
+  }
+  md-content {
+    background-color: transparent;
+  }
+  md-icon {
+    color: rgba(0,0,0,0);
+  }
+}
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  color: #fff;
+  background: #fff;
+}
+
+md-tab-content md-content {
+  background-color: transparent;
+}
+md-tabs {
+  overflow: visible;
+}
+
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+  min-height: calc(100vh - 104px);
+}
