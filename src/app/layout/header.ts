@@ -1,6 +1,8 @@
 import 'angular-material';
 import FirebaseService from '../pages/firebase/firebase.service';
 
+declare var angular: any;
+
 interface IMenuModel {
     toggleSidenav(menuId: string): void;
 }

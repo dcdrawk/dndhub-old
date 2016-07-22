@@ -4,7 +4,7 @@
       <md-icon class="material-icons">menu</md-icon>
     </md-button>
     <h2>
-      <span>Codex</span>
+      <span>DnD Hub</span>
     </h2>
     <span flex></span>
     <md-menu md-position-mode="target-right target" class="header-menu" ng-if="$ctrl.user">
@@ -20,6 +20,12 @@
           <md-button ui-sref="profile">
             <md-icon class="material-icons">account_box</md-icon>
             Profile
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ui-sref="character-list">
+            <md-icon class="material-icons">group</md-icon>
+            Characters
           </md-button>
         </md-menu-item>
         <md-menu-divider></md-menu-divider>

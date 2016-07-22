@@ -29,6 +29,10 @@ small, caption, figcaption {
   @extend .md-caption;
 }
 
+a {
+  color: material-color('blue', '700');
+}
+
 .page-header {
   background: material-color('blue', '700');
   color: #fff;

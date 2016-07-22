@@ -5,19 +5,29 @@
 </section>
 
 <section class="md-padding" layout="row" layout-align="center center" layout-wrap>
-  <div flex="100">
-    <md-input-container>
-      <label>Email</label>
-      <input ng-model="$ctrl.email" type="email">
-    </md-input-container>
+  <div flex="33" flex-md="50" flex-sm="100" flex-xs="100">    
+    <md-card class="md-padding">
+      <div ng-if="$ctrl.user">
+        <p>
+          You are currently signed in as           
+          <strong ng-if="$ctrl.user.displayName">{{$ctrl.user.displayName}}</strong>
+          <strong ng-if="!$ctrl.user.displayName">{{$ctrl.user.email}}</strong>
+        </p>
+      </div>
+      <form name="signInForm" layout="column" ng-submit="$ctrl.signIn($ctrl.email, $ctrl.password)">
+        <md-input-container class="md-no-error-spacer">
+          <label>Email</label>
+          <input ng-model="$ctrl.email" type="email">
+        </md-input-container>
 
-    <md-input-container>
-      <label>Password</label>
-      <input ng-model="$ctrl.password" type="password">
-    </md-input-container>
-  </div>
-  
-  <div flex="100" >    
-    <md-button class="md-raised md-primary" ng-click="$ctrl.signIn($ctrl.email, $ctrl.password)">Sign In</md-button>
+        <md-input-container class="md-no-error-spacer">
+          <label>Password</label>
+          <input ng-model="$ctrl.password" type="password">
+        </md-input-container>
+        <input type="submit" class="md-button md-raised md-primary" value="Sign In" ng-disabled="!$ctrl.email || !$ctrl.password">
+        <md-button class="md-primary" ui-sref="sign-up">Sign Up</md-button>
+        <md-progress-circular md-mode="indeterminate" class="md-margin-auto" ng-if="$ctrl.signingIn"></md-progress-circular>        
+      </form>
+    </md-card>
   </div>
 </section>

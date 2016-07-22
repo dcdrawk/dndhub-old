@@ -3,17 +3,20 @@
     Characters {{$ctrl.test}}
   </h4>
 </section>
+
+<md-button class="md-primary md-raised new-button" ng-click="$ctrl.showNewCharacterModal($event)" ng-disabled="!$ctrl.gameData">New Character</md-button>
+
 <md-card>
 
   <section class="md-padding" layout="row" layout-wrap layout-padding>
     <!-- exact table from live demo -->
-    <div flex="100">
+    <!--<div flex="100">
       <md-button class="md-primary md-raised" ng-click="$ctrl.showNewCharacterModal($event)" ng-disabled="!$ctrl.gameData">New Character</md-button>      
-    </div>
+    </div>-->
 
-    <div flex="100">
+    <!--<div flex="100">
       <md-divider></md-divider>   
-    </div>
+    </div>-->
     <md-table-container>
       <table md-table multiple ng-model="$ctrl.selected" md-progress="promise">
         <thead md-head md-order="$ctrl.myOrder" md-on-reorder="">

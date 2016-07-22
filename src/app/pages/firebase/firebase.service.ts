@@ -4,13 +4,14 @@ declare var config: any;
 
 export default class FirebaseService {
 
-  static $inject: Array<string> = ['$q', '$rootScope'];
+  static $inject: Array<string> = ['$q', '$rootScope', '$state'];
   db: any;
   currentUser: any;
 
   constructor(
     private $q: angular.IQService,
-    private $rootScope: angular.IRootScopeService
+    private $rootScope: angular.IRootScopeService,
+    private $state: ng.ui.IStateService
   ) {
     firebase.initializeApp(config);
     this.$rootScope = $rootScope;
@@ -30,10 +31,12 @@ export default class FirebaseService {
     return this.$q((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
+        resolve();
         console.log('Sign up Successful!');
       })      
       .catch((error) => {
         // Handle Errors here.
+        reject();
       });
     });
   }
@@ -98,10 +101,12 @@ export default class FirebaseService {
     console.log('signing out...');
     return this.$q((resolve, reject) => {
       firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-        console.log('sign out successful.');
+        // Sign-out successful. 
+        // Set current user and local storage of characters to null
         this.currentUser = undefined;
+        localStorage.setItem('characters', null)
         this.$rootScope.$broadcast('USER_SIGNED_OUT');
+        this.$state.go('sign-in');
         resolve();
       }, (error) => {
         // An error happened.

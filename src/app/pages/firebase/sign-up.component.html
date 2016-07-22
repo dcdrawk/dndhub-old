@@ -5,8 +5,50 @@
 </section>
 
 <section class="md-padding" layout="row" layout-align="center center" layout-wrap>
-  <form flex="100" autocomplete="off">
-    <p>Sign up with your email</p>
+  <div flex="33" flex-md="50" flex-sm="100" flex-xs="100">
+    <md-card class="md-padding">
+      <div ng-if="$ctrl.user">
+        <p>
+          You are currently signed in as           
+          <strong ng-if="$ctrl.user.displayName">{{$ctrl.user.displayName}}</strong>
+          <strong ng-if="!$ctrl.user.displayName">{{$ctrl.user.email}}</strong>
+        </p>
+      </div>
+      <form name="signUpForm" layout="column" ng-submit="$ctrl.signUp()">
+        <p>Sign up with your email</p>
+        <md-input-container>
+          <label>Email</label>
+          <input required type="email" name="email" ng-model="$ctrl.email" ng-pattern="/^.+@.+\..+$/" md-no-asterisk>
+          <div ng-messages="signUpForm.email.$error">
+            <ng-message when="required">This is required</ng-message>
+            <ng-message when="email">Invalid Email Address</ng-message>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Password</label>
+          <input name="password" ng-model="$ctrl.password" type="password" required md-no-asterisk minlength="6">
+          <div ng-messages="signUpForm.password.$error">
+            <ng-message when="required">This is required</ng-message>
+            <ng-message when="minlength">Password must <contain></contain> at least 6 characters</ng-message>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Re-type Password</label>
+          <input name="passwordVerification" ng-model="$ctrl.passwordVerification" type="password" autocomplete="off" required match="$ctrl.password">
+          <div ng-messages="signUpForm.passwordVerification.$error">
+            <ng-message when="required">This is required</ng-message>
+            <ng-message when="match">Passwords do not match</ng-message>
+          </div>
+        </md-input-container>
+
+        <input type="submit" class="md-button md-raised md-primary" value="Sign Up" ng-disabled="signUpForm.$invalid">
+        <!--<md-progress-circular md-mode="indeterminate" class="md-margin-auto" ng-if="$ctrl.signingIn"></md-progress-circular>        -->
+      </form>
+    </md-card>
+    
+    <!--<p>Sign up with your email</p>
     <md-input-container>
       <label>Email</label>
       <input ng-model="$ctrl.email" type="email" autocomplete="off">
@@ -20,10 +62,10 @@
     <md-input-container>
       <label>Re-type Password</label>
       <input ng-model="$ctrl.passwordVerification" type="password" autocomplete="off">
-    </md-input-container>
-  </form>
-  
-  <div flex="100" >    
-    <md-button class="md-raised md-primary" ng-click="$ctrl.signUp()">Sign Up</md-button>
+    </md-input-container>-->
   </div>
+  
+  <!--<div flex="100" >    
+    <md-button class="md-raised md-primary" ng-click="$ctrl.signUp()">Sign Up</md-button>
+  </div>-->
 </section>
