@@ -5,7 +5,9 @@ import * as angular from 'angular';
 import 'firebase';
 import 'angular-ui-router';
 import 'angular-material';
+import 'angular-messages';
 import 'angular-highlightjs';
+import 'angular-validation-match';
 import 'jQuery';
 
 //-- Config --
@@ -26,6 +28,7 @@ import fileread from './app/directives/fileread';
 import ToastService from './app/services/toast.service';
 import FirebaseService from './app/pages/firebase/firebase.service';
 import GameDataService from './app/pages/firebase/game-data.service';
+import CharacterService from './app/pages/character/character.service';
 //-- Pages --
 
 //Authentication
@@ -44,12 +47,13 @@ import {characterListComponent} from './app/pages/character/character-list.compo
 import './index.scss';
 
 angular
-  .module('app', ['ui.router', 'ngMaterial', 'hljs', 'md.data.table'])
+  .module('app', ['ui.router', 'ngMessages', 'ngMaterial', 'hljs', 'md.data.table', 'validation.match'])
   .config(routesConfig)
   .config(themeConfig)
   .service('FirebaseService', FirebaseService)
   .service('GameDataService', GameDataService)
   .service('ToastService', ToastService)
+  .service('CharacterService', CharacterService)
   .directive('fileread', fileread)
   .component('app', main)
   .component('header', header)

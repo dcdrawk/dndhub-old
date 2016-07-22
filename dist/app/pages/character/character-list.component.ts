@@ -1,5 +1,6 @@
 import 'angular-material';
 import * as angular from 'angular';
+import CharacterService from './character.service';
 import FirebaseService from '../firebase/firebase.service';
 import GameDataService from '../firebase/game-data.service';
 import ToastService from '../../services/toast.service';
@@ -8,7 +9,7 @@ declare var firebase: any;
 
 class CharacterListController {
 
-  static $inject: Array<string> = ['FirebaseService', 'GameDataService','ToastService', '$scope', '$mdDialog'];
+  static $inject: Array<string> = ['FirebaseService', 'GameDataService',  'ToastService', 'CharacterService', '$scope', '$mdDialog', '$rootScope'];
 
   test: any;
   selected: any;
@@ -20,25 +21,15 @@ class CharacterListController {
   userSignedIn: any;
   gameDataLoaded: any;
 
-  private firebaseService: any;
-  private gameDataService: any;
-  private toastService: any;
-  
-
   constructor(
-    firebaseService: FirebaseService,
-    gameDataService: GameDataService,
-    toastService: ToastService,
+    private firebaseService: FirebaseService,
+    private gameDataService: GameDataService,
+    private toastService: ToastService,
+    private characterService: CharacterService,
     private $scope: angular.IScope,
-    private $mdDialog: ng.material.IDialogService
+    private $mdDialog: ng.material.IDialogService,
+    private $rootScope: angular.IRootScopeService
     ) {
-
-    // console.log('character list ctrl');
-
-    this.selected = [];
-    this.gameDataService = gameDataService;
-    this.toastService = toastService;
-    this.firebaseService = firebaseService;
 
     //If it detects a user has signed in, get the characters for that user
     this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
@@ -99,23 +90,14 @@ class CharacterListController {
 
   //Get the list of characters
   getCharacters() {
-    var userId = firebase.auth().currentUser.uid;
-    var url = 'characters/' + userId;
-    this.firebaseService.getData(url).then((characters) => {
-      //Map the character object to an array, including the id/key of the character
-      //Knowing the id/key will allow us to update/delete it in the future
-      this.characters = Object.keys(characters).map(function (key:string) {
-        let id = 'id';
-        characters[key][id] = key;
-        return characters[key];
-      });
-      //Set characters in local storage
-      localStorage.setItem('characters', JSON.stringify(this.characters));
+    this.characterService.getCharacters().then((characters:any[]) => {
+      this.characters = characters;
     });
   }
 
   deleteCharacter(character:any) {
     this.firebaseService.deleteCharacter(character).then(() => {
+      this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
       this.getCharacters();
     });
   }
@@ -149,6 +131,7 @@ class CharacterListController {
     .then((character) => {
       //Save the new character
       this.firebaseService.saveNewCharacter(character).then(() => {
+        this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
         this.getCharacters();
       });
     }, () => {

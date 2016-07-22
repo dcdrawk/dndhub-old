@@ -8,18 +8,12 @@ function routesConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvi
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
+
+    
     .state('app', {
       url: '/',
-      template: '<app></app>'
+      template: '<firebase></firebase>'
     })
-    // .state('buttons', {
-    //   url: '/buttons',
-    //   template: '<buttons></buttons>'
-    // })
-    // .state('typography', {
-    //   url: '/typography',
-    //   template: '<typography></typography>'
-    // })
 
     //Authentication
     .state('profile', {

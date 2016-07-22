@@ -28,7 +28,7 @@ import fileread from './app/directives/fileread';
 import ToastService from './app/services/toast.service';
 import FirebaseService from './app/pages/firebase/firebase.service';
 import GameDataService from './app/pages/firebase/game-data.service';
-import CharacterService from './app/pages/character/character.service'
+import CharacterService from './app/pages/character/character.service';
 //-- Pages --
 
 //Authentication

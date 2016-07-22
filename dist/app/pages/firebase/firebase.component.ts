@@ -1,17 +1,26 @@
+import * as angular from 'angular';
 import 'angular-material';
 import FirebaseService from './firebase.service';
+import 'angular-ui-router';
 
 class FirebaseController {
 
-  static $inject: Array<string> = ['FirebaseService'];
+  static $inject: Array<string> = ['FirebaseService', '$scope', '$state'];
   firebaseService: any;
   email: string;
   user: Object;
-
-  constructor(firebaseService: FirebaseService) {
+  userSignedIn: any;
+  signingIn: boolean;
+  constructor(
+    firebaseService: FirebaseService,
+    private $scope: angular.IScope,
+    private $state: ng.ui.IStateService
+  ) {
     this.firebaseService = firebaseService;
-    console.log(firebaseService);
-    console.log(this);
+    this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
+      this.user = angular.extend({}, user);
+      this.$scope.$apply();
+    });
   }
 
   init() {
@@ -19,20 +28,17 @@ class FirebaseController {
   }
 
   signIn(email:string, password:string) {
-
+    this.signingIn = true;
     this.firebaseService.signIn(email, password).then((response) => {
-      console.log('sign in completed!');
-      console.log(response);
-      // this.user = response;
+      this.signingIn = false;
       this.user = angular.extend({}, response);
-
+      this.$state.go('profile');
     });
   }
 
   signOut() {
     this.firebaseService.signOut().then((response) => {
       this.user = this.firebaseService.currentUser;
-      // this.user.displayName.writable = true
     });
   }
 

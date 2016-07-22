@@ -1,16 +1,21 @@
+import * as angular from 'angular';
 import 'angular-material';
 import FirebaseService from './firebase.service';
 
 class SignUpController {
 
-  static $inject: Array<string> = ['FirebaseService'];
+  static $inject: Array<string> = ['FirebaseService', '$scope', '$state'];
   firebaseService: any;
   email: string;
   password: string;
 
   user: Object;
 
-  constructor(firebaseService: FirebaseService) {
+  constructor(
+    firebaseService: FirebaseService,
+    private $scope: angular.IScope,
+    private $state: ng.ui.IStateService
+  ) {
     this.firebaseService = firebaseService;
   }
 
@@ -19,7 +24,9 @@ class SignUpController {
   }
 
   signUp() {
-    this.firebaseService.signUp(this.email, this.password);
+    this.firebaseService.signUp(this.email, this.password).then(() => {
+      this.$state.go('profile');
+    });
   }
 }
 
