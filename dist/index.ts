@@ -38,7 +38,10 @@ import {signUpComponent} from './app/pages/firebase/sign-up.component';
 
 //Characters
 import {characterListComponent} from './app/pages/character/character-list.component';
-
+import {newCharacterModalComponent} from './app/pages/character/new-character-modal.component';
+import {characterInfoComponent} from './app/pages/character/character-info.component';
+import {characterGeneralComponent} from './app/pages/character/general/general.component';
+import {characterStatsComponent} from './app/pages/character/stats/stats.component';
 //Demo Pages
 // import {Buttons} from './app/pages/components/buttons/buttons';
 // import {typographyPage} from './app/pages/styles/typography.component';
@@ -55,15 +58,22 @@ angular
   .service('ToastService', ToastService)
   .service('CharacterService', CharacterService)
   .directive('fileread', fileread)
+
+  //Layout
   .component('app', main)
   .component('header', header)
   .component('sidenav', sidenav)
   .component('fountainTitle', title)
   .component('fountainFooter', footer)
+  
+  //Character
+  .component('newCharacterModal', newCharacterModalComponent)
+  .component('characterlist', characterListComponent)
+  .component('characterInfo', characterInfoComponent)
+  .component('characterGeneral', characterGeneralComponent)
+  .component('characterStats', characterStatsComponent)
+
+  //Auth
   .component('firebase', firebaseComponent)
   .component('signup', signUpComponent)
-  .component('profile', profileComponent)
-
-  .component('characterlist', characterListComponent);
-  // .component('buttons', Buttons)
-  // .component('typography', typographyPage);
+  .component('profile', profileComponent);

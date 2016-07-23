@@ -33,5 +33,9 @@ function routesConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvi
     .state('character-list', {
       url: '/character-list',
       template: '<characterlist></characterlist>'
+    })
+    .state('character-info', {
+      url: '/character-info',
+      template: '<character-info></character-info>'
     });
 }

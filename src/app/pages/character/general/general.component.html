@@ -8,13 +8,13 @@
         <!--Name-->
         <md-input-container flex="33" class="md-no-error-spacer">
           <label>Character Name</label>
-          <input type="text" ng-model="$ctrl.character.name" required>
+          <input type="text" ng-model="$ctrl.character.name">
         </md-input-container>
 
         <!--Level-->
         <md-input-container flex="33" class="md-no-error-spacer">
           <label>Level</label>
-          <input type="number" ng-model="$ctrl.character.level" required>
+          <input type="number" ng-model="$ctrl.character.level">
         </md-input-container>
 
         <!--Experience-->
@@ -29,7 +29,7 @@
         <!--Class-->
         <md-input-container flex>
           <label>Class</label>
-          <md-select ng-model="$ctrl.character.class" required>
+          <md-select ng-model="$ctrl.character.class">
             <md-option ng-repeat="class in $ctrl.gameData.classes" value="{{class.name}}">
               {{class.name}}
             </md-option>
@@ -39,7 +39,7 @@
         <!--Race-->
         <md-input-container flex>
           <label>Race</label>
-          <md-select ng-model="$ctrl.character.race" required>
+          <md-select ng-model="$ctrl.character.race" ng-change="$ctrl.getSubraces($ctrl.gameData.races, $ctrl.character.race);">
             <md-option ng-repeat="race in $ctrl.gameData.races" value="{{race.name}}" ng-click="$ctrl.selectRace(race);">
               {{race.name}}
             </md-option>
@@ -49,16 +49,16 @@
         <!--Subrace-->
         <md-input-container flex>
           <label>Subrace</label>
-          <md-select ng-model="$ctrl.character.subrace" ng-disabled="!$ctrl.subraces">
+          <md-select ng-model="$ctrl.character.subrace">
             <md-option ng-repeat="subrace in $ctrl.subraces" value="{{subrace.name}}">
               {{subrace.name}}
             </md-option>
           </md-select>
           
           <!--If there are no subraces-->
-          <md-tooltip md-direction="bottom" ng-if="$ctrl.character.race && !$ctrl.subraces">
+          <!--<md-tooltip md-direction="bottom" ng-if="$ctrl.character.race && !$ctrl.subraces">
             No {{character.race}} Subraces
-          </md-tooltip>
+          </md-tooltip>-->
 
           <!--Tell the user to select a race-->
           <md-tooltip md-direction="bottom" ng-if="!$ctrl.character.race">
@@ -97,3 +97,4 @@
     </form>
   </md-card-content>
 </md-card>
+{{$ctrl.subraces}}

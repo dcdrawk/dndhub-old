@@ -57,7 +57,7 @@
           <md-input-container flex>
             <label>Subrace</label>
             <md-select ng-model="$ctrl.character.subrace" ng-disabled="!$ctrl.subraces">
-              <md-option ng-repeat="subrace in $ctrl.subraces" value="{{subrace.name}}">
+              <md-option ng-repeat="subrace in $ctrl.subraces track by $index" value="{{subrace.name}}">
                 {{subrace.name}}
               </md-option>
             </md-select>
@@ -88,7 +88,7 @@
           <!--Background-->
           <md-input-container flex>
             <label>Background</label>
-            <md-select ng-model="character.background">
+            <md-select ng-model="$ctrl.character.background">
               <md-option ng-repeat="background in $ctrl.gameData.backgrounds" value="{{background.name}}">
                 {{background.name}}
               </md-option>

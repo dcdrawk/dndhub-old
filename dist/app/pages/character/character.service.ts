@@ -3,6 +3,8 @@ import FirebaseService from '../firebase/firebase.service';
 
 declare var firebase: any;
 declare var config: any;
+declare var resolve: any;
+declare var reject: any;
 
 export default class CharacterService {
 
@@ -10,13 +12,18 @@ export default class CharacterService {
   db: any;
   currentUser: any;
   characters: any;
+  selectedCharacter: any;
 
   constructor(
     private $q: angular.IQService,
     private $rootScope: angular.IRootScopeService,
     private firebaseService: FirebaseService
   ) {
-    
+    if(localStorage.getItem('selectedCharacter')) {
+      console.log('character in localstorage');
+      this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
+      this.$rootScope.$broadcast('CHARACTER_SELECTED');      
+    }
   }
 
   //Get the list of characters
@@ -42,11 +49,14 @@ export default class CharacterService {
   //Save a new character
   saveNewCharacter(character:any) {
     var userId = firebase.auth().currentUser.uid;
-    return this.$q((resolve, reject) => {
-      firebase.database().ref('characters/' + userId + '/').push(character).then(() => {
-        resolve();
-      });
-    });
+    firebase.database().ref('characters/' + userId + '/').push(character);
+  }
+
+  //Select a character
+  selectCharacter(character:any) {
+    this.selectedCharacter = character;
+    localStorage.setItem('selectedCharacter', JSON.stringify(character));
+    this.$rootScope.$broadcast('CHARACTER_SELECTED');
   }
 
   //Delete a character

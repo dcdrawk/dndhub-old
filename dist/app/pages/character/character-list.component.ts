@@ -9,7 +9,16 @@ declare var firebase: any;
 
 class CharacterListController {
 
-  static $inject: Array<string> = ['FirebaseService', 'GameDataService',  'ToastService', 'CharacterService', '$scope', '$mdDialog', '$rootScope'];
+  static $inject: Array<string> = [
+    'FirebaseService',
+    'GameDataService',
+    'ToastService',
+    'CharacterService',
+    '$scope',
+    '$mdDialog',
+    '$rootScope',
+    // '$mdDialogOptions',
+  ];
 
   test: any;
   selected: any;
@@ -29,6 +38,7 @@ class CharacterListController {
     private $scope: angular.IScope,
     private $mdDialog: ng.material.IDialogService,
     private $rootScope: angular.IRootScopeService
+    // private $mdDialogOptions: ng.material.IDialogOptions
     ) {
 
     //If it detects a user has signed in, get the characters for that user
@@ -95,6 +105,7 @@ class CharacterListController {
     });
   }
 
+
   deleteCharacter(character:any) {
     this.firebaseService.deleteCharacter(character).then(() => {
       this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
@@ -104,38 +115,14 @@ class CharacterListController {
 
   showNewCharacterModal(ev:any) {
     this.$mdDialog.show({
-      templateUrl: './app/pages/character/new-character.modal.html',
+      template: '<new-character-modal/>',
+      ariaLabel: 'New Character Dialog',
       parent: angular.element(document.body),
       targetEvent: ev,
-      clickOutsideToClose:true,
-      locals: {
-        gameData: this.gameData
-      },
-      controller($scope:any, $mdDialog: ng.material.IDialogService, gameData:any) {
-          $scope.gameData = gameData;
-          $scope.selectRace = (race) => {
-            if(race.subraces) {
-              $scope.subraces = race.subraces;
-            } else {
-              $scope.subraces = undefined;
-            }
-          };
-          $scope.saveCharacter = (character) => {
-            $mdDialog.hide(character);
-          };
-          $scope.close = () => {
-            $mdDialog.hide();
-          };
-      }
+      clickOutsideToClose: true
     })
-    .then((character) => {
-      //Save the new character
-      this.firebaseService.saveNewCharacter(character).then(() => {
-        this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
-        this.getCharacters();
-      });
-    }, () => {
-      //Cancelled Dialog
+    .then(() => {
+      this.getCharacters();
     });
   }
 }
