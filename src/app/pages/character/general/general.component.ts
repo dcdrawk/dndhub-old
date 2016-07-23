@@ -1,6 +1,6 @@
 import 'angular-material';
 import * as angular from 'angular';
-// import CharacterService from '../character.service';
+import CharacterService from '../character.service';
 // import FirebaseService from '../../firebase/firebase.service';
 // import GameDataService from '../../firebase/game-data.service';
 // import ToastService from '../../../services/toast.service';
@@ -13,7 +13,7 @@ class CharacterGeneralController {
     // 'FirebaseService',
     // 'GameDataService',
     // 'ToastService',
-    // 'CharacterService',
+    'CharacterService',
     '$scope',
     // '$rootScope',
     // // '$mdDialogOptions',
@@ -27,14 +27,16 @@ class CharacterGeneralController {
     // private firebaseService: FirebaseService,
     // private gameDataService: GameDataService,
     // private toastService: ToastService,
-    // private characterService: CharacterService,
+    private characterService: CharacterService,
     private $scope: angular.IScope
     // private $rootScope: angular.IRootScopeService
     ) {
       // console.log(this.character.race);
       // console.log(this.gameData);
       // console.log(this.character.race);
-      this.getSubraces(this.gameData.races, this.character.race);
+      if(this.gameData && this.character) {
+        this.getSubraces(this.gameData.races, this.character.race);
+      }
       // this.subraces = ['TEST'];
   }  
 
@@ -48,19 +50,11 @@ class CharacterGeneralController {
         this.subraces = undefined;
       }
     }
+  }
 
-    // races.forEach((race:any) => {
-    //   if(race.name === characterRace && race.subraces) {
-    //     this.subraces = race.subraces;
-    //     return;
-    //   } else {
-    //     console.log('no subraces');
-    //     this.subraces = undefined;
-    //   }
-    // });
-    // this.$scope.$apply();
-    // // console.log()
-    // this.subraces = ['DWADAWDA'];
+  updateCharacter(path: string, property: string, value:any){
+    this.characterService.updateCharacter(path, property, value);
+    localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
   }
 
   // selectRace(race: any) {

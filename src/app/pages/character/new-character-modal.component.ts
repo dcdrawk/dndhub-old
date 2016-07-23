@@ -30,6 +30,7 @@ class NewCharacterModalController {
   gameDataLoaded: any;
   subraces: any[];
   saving: boolean;
+  character: any;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -49,6 +50,12 @@ class NewCharacterModalController {
     if(this.gameDataService.gameData) {
       this.gameData = this.gameDataService.gameData;
     }
+
+    // this.character = {
+    //   abilityScores: [{
+
+    //   }]
+    // };
   }
 
   close() {

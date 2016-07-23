@@ -24,7 +24,16 @@ export default class CharacterService {
       this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
       this.$rootScope.$broadcast('CHARACTER_SELECTED');      
     }
-  }
+
+    if(!localStorage.getItem('characters')) {
+      this.getCharacters().then((characterlist) => {
+        this.characters = characterlist;
+      });
+    } else {
+      //Get characters from local storage
+      this.characters = JSON.parse(localStorage.getItem('characters'));
+    }
+}
 
   //Get the list of characters
   getCharacters() {
@@ -40,6 +49,7 @@ export default class CharacterService {
           return characters[key];
         });
         //Set characters in local storage
+        
         localStorage.setItem('characters', JSON.stringify(characterlist));
         resolve(characterlist);
       });
@@ -51,6 +61,25 @@ export default class CharacterService {
     var userId = firebase.auth().currentUser.uid;
     firebase.database().ref('characters/' + userId + '/').push(character);
   }
+
+  //Save a character, requires a path to the property and value being assigned
+  //e.g. path = 'skills/dexterity' value: {bon} 
+  updateCharacter(path: string, property: string, value:any) {
+    console.log(this.selectedCharacter);
+    var userId = firebase.auth().currentUser.uid;
+    let update = {};
+    update[property] = value;
+    firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update);
+
+    //Update the master character list in local storage
+    let characterIndex = this.getSelectedId();    
+    console.log(this.characters);
+    // this.characters[characterIndex] = this.selectedCharacter;
+    // console.log(this.selectedCharacter);
+    // localStorage.setItem('selectCharacter', JSON.stringify(this.selectedCharacter));
+    localStorage.setItem('characters', JSON.stringify(this.characters));
+  }
+  
 
   //Select a character
   selectCharacter(character:any) {
@@ -67,6 +96,14 @@ export default class CharacterService {
         resolve();
       });
     });
+  }
+
+  getSelectedId() {
+    if(!localStorage.getItem('selectedCharacterIndex')) {
+      return undefined;
+    } else {
+      return +localStorage.getItem('selectedCharacterIndex');
+    }
   }
 
 }
