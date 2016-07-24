@@ -7,23 +7,61 @@
       <!--Armor Class-->
       <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
         <label>Armor Class</label>
-        <input type="number" ng-model="$ctrl.character.armorClass" ng-model-options="{ debounce: 2000 }" 
+        <input type="number" ng-model="$ctrl.character.armorClass"
         ng-change="$ctrl.updateCharacter('', 'armorClass', $ctrl.character.armorClass);">
       </md-input-container>
 
       <!--Initiative-->
       <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
         <label>Initiative</label>
-        <input type="number" ng-model="$ctrl.character.initiative" ng-model-options="{ debounce: 2000 }" 
+        <input type="number" ng-model="$ctrl.character.initiative"
         ng-change="$ctrl.updateCharacter('', 'initiative', $ctrl.character.initiative);">
       </md-input-container>
 
       <!--Speed-->
       <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
         <label>Speed</label>
-        <input type="number" ng-model="$ctrl.character.speed" ng-model-options="{ debounce: 2000 }"
+        <input type="number" ng-model="$ctrl.character.speed"
         ng-change="$ctrl.updateCharacter('', 'speed', $ctrl.character.speed);">
-        </md-input-container>          
+      </md-input-container>          
+    </div>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-content>
+    <div layout="row" layout-wrap>
+      <!--Current Hit Points-->
+      <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Current Hit Points</label>
+        <input type="number" ng-model="$ctrl.character.currentHP"
+        ng-change="$ctrl.updateCharacter('', 'currentHP', $ctrl.character.currentHP);">
+      </md-input-container>
+
+      <!--Max Hit Points-->
+      <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Max Hit Points</label>
+        <input type="number" ng-model="$ctrl.character.maxHP"
+        ng-change="$ctrl.updateCharacter('', 'maxHP', $ctrl.character.maxHP); $ctrl.updateTotalHP()">
+      </md-input-container>
+
+      <!--Temp Hit Points-->
+      <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Temp Hit Points</label>
+        <input type="number" ng-model="$ctrl.character.tempHP"
+        ng-change="$ctrl.updateCharacter('', 'tempHP', $ctrl.character.tempHP); $ctrl.updateTotalHP()">
+      </md-input-container>
+
+      <!--Total Hit Points-->
+      <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Total Hit Points</label>
+        <input type="number" ng-model="$ctrl.totalHP" disabled>
+        <!--If there are no subraces-->
+        <md-tooltip md-direction="bottom">
+          Max HP + Temp HP
+        </md-tooltip>
+      </md-input-container>
+
+      
     </div>
   </md-card-content>
 </md-card>

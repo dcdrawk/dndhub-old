@@ -37,6 +37,7 @@ class CharacterStatsController {
   selected: any;
   abilityScores: any[];
   skillOrder: any;
+  totalHP: number;
 
   constructor(
     // private firebaseService: FirebaseService,
@@ -50,11 +51,16 @@ class CharacterStatsController {
       this.selected = [];
       this.abilityScores = abilityScores;
       this.skillOrder = 'name';
+      this.totalHP = this.character.maxHP + this.character.tempHP;
   }  
 
   updateCharacter(path: string, property: string, value:any){
     this.characterService.updateCharacter(path, property, value);
     localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+  }
+
+  updateTotalHP() {
+    this.totalHP = this.character.maxHP + this.character.tempHP;
   }
 }
 
