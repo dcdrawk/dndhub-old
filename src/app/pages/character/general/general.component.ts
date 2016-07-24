@@ -15,7 +15,7 @@ class CharacterGeneralController {
     // 'ToastService',
     'CharacterService',
     '$scope',
-    // '$rootScope',
+    '$rootScope',
     // // '$mdDialogOptions',
   ];
 
@@ -28,8 +28,8 @@ class CharacterGeneralController {
     // private gameDataService: GameDataService,
     // private toastService: ToastService,
     private characterService: CharacterService,
-    private $scope: angular.IScope
-    // private $rootScope: angular.IRootScopeService
+    private $scope: angular.IScope,
+    private $rootScope: angular.IRootScopeService
     ) {
       // console.log(this.character.race);
       // console.log(this.gameData);
@@ -55,6 +55,13 @@ class CharacterGeneralController {
   updateCharacter(path: string, property: string, value:any){
     this.characterService.updateCharacter(path, property, value);
     localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+  }
+
+  updateCharacterName(name) {
+    console.log('update name');
+    console.log('name updated!!!!');
+    console.log('name updated!!!!');
+    this.$rootScope.$broadcast('CHARACTER_NAME_UPDATED', name);
   }
 
   // selectRace(race: any) {

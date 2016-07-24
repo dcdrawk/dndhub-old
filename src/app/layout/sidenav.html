@@ -7,8 +7,8 @@
     <section class="md-padding character-select" ng-if="$ctrl.characters">
       <md-input-container>
         <label>Selected Character</label>
-        <md-select ng-model="$ctrl.selectedCharacterIndex" ng-change="$ctrl.selectCharacter($ctrl.selectedCharacterIndex);">
-          <md-option ng-repeat="character in $ctrl.characters" value="{{$index}}">
+        <md-select ng-model="$ctrl.selectedCharacterIndex" ng-change="$ctrl.selectCharacter($ctrl.selectedCharacterIndex);" ng-if="$ctrl.characters">
+          <md-option ng-repeat="character in $ctrl.characters" value="{{$index}}" >
             {{character.name}}
           </md-option>
         </md-select>

@@ -69,15 +69,18 @@ export default class CharacterService {
     var userId = firebase.auth().currentUser.uid;
     let update = {};
     update[property] = value;
-    firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update);
+    firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update).then(() => {
+      console.log('update successful');
+      localStorage.setItem('characters', JSON.stringify(this.getCharacters()));
+    });
 
     //Update the master character list in local storage
-    let characterIndex = this.getSelectedId();    
-    console.log(this.characters);
-    // this.characters[characterIndex] = this.selectedCharacter;
-    // console.log(this.selectedCharacter);
-    // localStorage.setItem('selectCharacter', JSON.stringify(this.selectedCharacter));
-    localStorage.setItem('characters', JSON.stringify(this.characters));
+    // let characterIndex = this.getSelectedId();    
+    // // console.log(this.characters);
+    // // this.characters[characterIndex] = JSON.parse(localStorage.getItem('selectedCharacter'));
+    // // console.log(JSON.parse(localStorage.getItem('selectedCharacter')));
+    // // localStorage.setItem('selectCharacter', JSON.stringify(this.selectedCharacter));
+    // localStorage.setItem('characters', JSON.stringify(this.characters));
   }
   
 

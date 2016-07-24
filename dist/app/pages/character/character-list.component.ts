@@ -122,7 +122,8 @@ class CharacterListController {
       clickOutsideToClose: true
     })
     .then(() => {
-      this.getCharacters();
+      this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
+      this.getCharacters();      
     });
   }
 }

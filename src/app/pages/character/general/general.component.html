@@ -8,11 +8,11 @@
         <!--Name-->
         <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Character Name</label>
-          <input type="text" ng-model="$ctrl.character.name" ng-model-options="{ debounce: 5000 }" 
-          ng-change="$ctrl.updateCharacter('', 'name', $ctrl.character.name);">
+          <input type="text" ng-model="$ctrl.character.name"
+          ng-change="$ctrl.updateCharacterName($ctrl.character.name); $ctrl.updateCharacter('', 'name', $ctrl.character.name);">
         </md-input-container>
 
-        <!--Level-->
+        <!--Level $ctrl.updateCharacter('', 'name', $ctrl.character.name);-->
         <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Level</label>
           <input type="number" ng-model="$ctrl.character.level" ng-model-options="{ debounce: 5000 }" 
@@ -75,7 +75,7 @@
         <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Alignment</label>
           <md-select ng-model="$ctrl.character.alignment"
-          ng-change="$ctrl.updateCharacter('', 'experience', $ctrl.character.experience);">
+          ng-change="$ctrl.updateCharacter('', 'alignment', $ctrl.character.alignment);">
             <md-option ng-repeat="alignment in $ctrl.gameData.alignments" value="{{alignment.name}}">
               {{alignment.name}}
             </md-option>

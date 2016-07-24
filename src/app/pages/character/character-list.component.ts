@@ -123,6 +123,7 @@ class CharacterListController {
     })
     .then(() => {
       this.getCharacters();
+      this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
     });
   }
 }
