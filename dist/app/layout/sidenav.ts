@@ -43,14 +43,16 @@ class SidenavController implements IMenuModel {
       //Check if characters are in local storage
       this.signedIn = true;
       console.log('signed in...');
-      if(!localStorage.getItem('characters')) {
-        this.getCharacters();
-        this.selectedCharacterIndex = this.getSelectedId();
-      } else {
-        //Get characters from local storage
-        this.characters = JSON.parse(localStorage.getItem('characters'));
-        this.selectedCharacterIndex = this.getSelectedId();
-      }
+
+      this.characters = this.characterService.characters;
+      // if(!localStorage.getItem('characters')) {
+      //   this.getCharacters();
+      this.selectedCharacterIndex = this.getSelectedId();
+      // } else {
+      //   //Get characters from local storage
+      //   this.characters = JSON.parse(localStorage.getItem('characters'));
+      //   this.selectedCharacterIndex = this.getSelectedId();
+      // }
 
       console.log(this.selectedCharacterIndex);
       this.$scope.$apply();
@@ -79,6 +81,7 @@ class SidenavController implements IMenuModel {
   
   //Get the list of characters
   selectCharacter(index: number) {
+    console.log('select character');
     console.log(this.characters[index]);
     localStorage.setItem('selectedCharacterIndex', index.toString());
     this.characterService.selectCharacter(this.characters[index]);

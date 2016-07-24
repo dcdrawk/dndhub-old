@@ -1,6 +1,6 @@
 import 'angular-material';
 import * as angular from 'angular';
-// import CharacterService from '../character.service';
+import CharacterService from '../character.service';
 // import FirebaseService from '../../firebase/firebase.service';
 // import GameDataService from '../../firebase/game-data.service';
 // import ToastService from '../../../services/toast.service';
@@ -27,7 +27,7 @@ class CharacterStatsController {
     // 'FirebaseService',
     // 'GameDataService',
     // 'ToastService',
-    // 'CharacterService',
+    'CharacterService',
     // '$scope',
     // '$rootScope',
     // // '$mdDialogOptions',
@@ -37,12 +37,13 @@ class CharacterStatsController {
   selected: any;
   abilityScores: any[];
   skillOrder: any;
+  totalHP: number;
 
   constructor(
     // private firebaseService: FirebaseService,
     // private gameDataService: GameDataService,
     // private toastService: ToastService,
-    // private characterService: CharacterService,
+    private characterService: CharacterService
     // private $scope: angular.IScope,
     // private $rootScope: angular.IRootScopeService
     
@@ -50,7 +51,17 @@ class CharacterStatsController {
       this.selected = [];
       this.abilityScores = abilityScores;
       this.skillOrder = 'name';
+      this.totalHP = this.character.maxHP + this.character.tempHP;
   }  
+
+  updateCharacter(path: string, property: string, value:any){
+    this.characterService.updateCharacter(path, property, value);
+    localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+  }
+
+  updateTotalHP() {
+    this.totalHP = this.character.maxHP + this.character.tempHP;
+  }
 }
 
 export const characterStatsComponent = {
