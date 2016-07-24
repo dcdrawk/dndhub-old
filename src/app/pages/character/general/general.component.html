@@ -4,23 +4,23 @@
 <md-card>
   <md-card-content>
     <form name="myForm">
-      <div layout="row">
+      <div layout="row" layout-wrap>
         <!--Name-->
-        <md-input-container flex="33" class="md-no-error-spacer">
+        <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Character Name</label>
           <input type="text" ng-model="$ctrl.character.name" ng-model-options="{ debounce: 5000 }" 
           ng-change="$ctrl.updateCharacter('', 'name', $ctrl.character.name);">
         </md-input-container>
 
         <!--Level-->
-        <md-input-container flex="33" class="md-no-error-spacer">
+        <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Level</label>
           <input type="number" ng-model="$ctrl.character.level" ng-model-options="{ debounce: 5000 }" 
           ng-change="$ctrl.updateCharacter('', 'level', $ctrl.character.level);">
         </md-input-container>
 
         <!--Experience-->
-        <md-input-container flex="33" class="md-no-error-spacer">
+        <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Experience</label>
           <input type="number" ng-model="$ctrl.character.experience" ng-model-options="{ debounce: 5000 }"
           ng-change="$ctrl.updateCharacter('', 'experience', $ctrl.character.experience);">
@@ -28,9 +28,9 @@
       </div>
 
 
-      <div layout="row">
+      <div layout="row" layout-wrap>
         <!--Class-->
-        <md-input-container flex>
+        <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Class</label>
           <md-select ng-model="$ctrl.character.class" ng-change="$ctrl.updateCharacter('', 'class', $ctrl.character.class);">
             <md-option ng-repeat="class in $ctrl.gameData.classes" value="{{class.name}}">
@@ -40,7 +40,7 @@
         </md-input-container>
 
         <!--Race-->
-        <md-input-container flex>
+        <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Race</label>
           <md-select ng-model="$ctrl.character.race" ng-change="$ctrl.getSubraces($ctrl.gameData.races, $ctrl.character.race); $ctrl.updateCharacter('', 'race', $ctrl.character.race);">
             <md-option ng-repeat="race in $ctrl.gameData.races" value="{{race.name}}" ng-click="$ctrl.selectRace(race);">
@@ -50,7 +50,7 @@
         </md-input-container>
 
         <!--Subrace-->
-        <md-input-container flex>
+        <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Subrace</label>
           <md-select ng-model="$ctrl.character.subrace" ng-change="$ctrl.updateCharacter('', 'subrace', $ctrl.character.subrace);">
             <md-option ng-repeat="subrace in $ctrl.subraces" value="{{subrace.name}}">
@@ -70,9 +70,9 @@
         </md-input-container>          
       </div>
 
-      <div layout="row">
+      <div layout="row" layout-wrap>
         <!--Class-->
-        <md-input-container flex>
+        <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Alignment</label>
           <md-select ng-model="$ctrl.character.alignment"
           ng-change="$ctrl.updateCharacter('', 'experience', $ctrl.character.experience);">
@@ -83,7 +83,7 @@
         </md-input-container>
 
         <!--Background-->
-        <md-input-container flex>
+        <md-input-container flex flex-sm="100" flex-xs="100">
           <label>Background</label>
           <md-select ng-model="$ctrl.character.background"
           ng-change="$ctrl.updateCharacter('', 'background', $ctrl.character.background);">
@@ -94,7 +94,7 @@
         </md-input-container>
 
         <!--Adventuring Group-->
-        <md-input-container flex="33" class="md-no-error-spacer">
+        <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
           <label>Adventuring Group</label>
           <input type="text" ng-model="$ctrl.character.adventuringGroup"
           ng-change="$ctrl.updateCharacter('', 'adventuringGroup', $ctrl.character.adventuringGroup);">

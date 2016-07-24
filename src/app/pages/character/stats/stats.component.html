@@ -1,4 +1,34 @@
 <div layout="column" layout-padding>
+  <h5 class="no-margin">Combat</h5>
+</div>
+<md-card>
+  <md-card-content>
+    <div layout="row" layout-wrap>
+      <!--Armor Class-->
+      <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Armor Class</label>
+        <input type="number" ng-model="$ctrl.character.armorClass" ng-model-options="{ debounce: 2000 }" 
+        ng-change="$ctrl.updateCharacter('', 'armorClass', $ctrl.character.armorClass);">
+      </md-input-container>
+
+      <!--Initiative-->
+      <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Initiative</label>
+        <input type="number" ng-model="$ctrl.character.initiative" ng-model-options="{ debounce: 2000 }" 
+        ng-change="$ctrl.updateCharacter('', 'initiative', $ctrl.character.initiative);">
+      </md-input-container>
+
+      <!--Speed-->
+      <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <label>Speed</label>
+        <input type="number" ng-model="$ctrl.character.speed" ng-model-options="{ debounce: 2000 }"
+        ng-change="$ctrl.updateCharacter('', 'speed', $ctrl.character.speed);">
+        </md-input-container>          
+    </div>
+  </md-card-content>
+</md-card>
+
+<div layout="column" layout-padding>
   <h5 class="no-margin">Ability Scores</h5>
 </div>
 <md-card>
