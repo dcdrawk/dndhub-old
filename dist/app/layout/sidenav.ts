@@ -28,6 +28,7 @@ class SidenavController implements IMenuModel {
   signedIn: boolean;
   characterListUpdated: any;
   selectedCharacterIndex: number;
+  characterNameUpdated: any;
 
   constructor(
     private $mdSidenav: ng.material.ISidenavService,
@@ -45,28 +46,32 @@ class SidenavController implements IMenuModel {
       console.log('signed in...');
 
       this.characters = this.characterService.characters;
-      // if(!localStorage.getItem('characters')) {
-      //   this.getCharacters();
       this.selectedCharacterIndex = this.getSelectedId();
-      // } else {
-      //   //Get characters from local storage
-      //   this.characters = JSON.parse(localStorage.getItem('characters'));
-      //   this.selectedCharacterIndex = this.getSelectedId();
-      // }
-
       console.log(this.selectedCharacterIndex);
       this.$scope.$apply();
     });
 
     //Get notified if the character list is updated
     this.characterListUpdated = this.$scope.$on('CHARACTER_LIST_UPDATED', (event) => {
+      this.characters = undefined;
       this.getCharacters();
+    });
+
+    //Get notified if a character name is updated so we can keep the list up to date
+    this.characterNameUpdated = this.$scope.$on('CHARACTER_NAME_UPDATED', (event, name) => {
+      this.characters[this.selectedCharacterIndex].name = name;
+      // this.characters = undefined;
+      console.log('name updated!!!!');
+      // this.characters = undefined;
+      // this.getCharacters();
     });
   }
 
   //Get the list of characters
   getCharacters() {
+      console.log('DWADAWDADADADDDDDDDDDDDDDDDDDDed');
     this.characterService.getCharacters().then((characters:any[]) => {
+      console.log(characters);
       this.characters = characters;      
     });
   }

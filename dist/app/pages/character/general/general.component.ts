@@ -15,7 +15,7 @@ class CharacterGeneralController {
     // 'ToastService',
     'CharacterService',
     '$scope',
-    // '$rootScope',
+    '$rootScope',
     // // '$mdDialogOptions',
   ];
 
@@ -28,42 +28,36 @@ class CharacterGeneralController {
     // private gameDataService: GameDataService,
     // private toastService: ToastService,
     private characterService: CharacterService,
-    private $scope: angular.IScope
-    // private $rootScope: angular.IRootScopeService
+    private $scope: angular.IScope,
+    private $rootScope: angular.IRootScopeService
     ) {
-      // console.log(this.character.race);
-      // console.log(this.gameData);
-      // console.log(this.character.race);
       if(this.gameData && this.character) {
         this.getSubraces(this.gameData.races, this.character.race);
       }
-      // this.subraces = ['TEST'];
   }  
 
   getSubraces(races: any[], characterRace: string) {
-    for(var i in races) {
-      let race = races[i];
-      if(race.name === characterRace) {
-        this.subraces = race.subraces;
+    for(let i in races) {
+      // let race = races[i];
+      if(races[i].name === characterRace) {
+        this.subraces = races[i].subraces;
         return;
       } else {
         this.subraces = undefined;
+        return;
       }
     }
   }
 
-  updateCharacter(path: string, property: string, value:any){
+  updateCharacter(path: string, property: string, value:any) {
     this.characterService.updateCharacter(path, property, value);
     localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
   }
 
-  // selectRace(race: any) {
-  //   if(race.subraces) {
-  //     this.subraces = race.subraces;
-  //   } else {
-  //     this.subraces = undefined;
-  //   }
-  // }
+  updateCharacterName(name: string) {
+    this.$rootScope.$broadcast('CHARACTER_NAME_UPDATED', name);
+  }
+
 }
 
 export const characterGeneralComponent = {

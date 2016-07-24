@@ -1,5 +1,4 @@
 import 'angular-material';
-import * as angular from 'angular';
 import CharacterService from '../character.service';
 // import FirebaseService from '../../firebase/firebase.service';
 // import GameDataService from '../../firebase/game-data.service';
@@ -54,7 +53,7 @@ class CharacterStatsController {
       this.totalHP = this.character.maxHP + this.character.tempHP;
   }  
 
-  updateCharacter(path: string, property: string, value:any){
+  updateCharacter(path: string, property: string, value:any) {
     localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
     this.characterService.updateCharacter(path, property, value);
   }

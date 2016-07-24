@@ -90,11 +90,10 @@ class CharacterListController {
           .ok('Delete')
           .cancel('Cancel');
     this.$mdDialog.show(confirm).then(() => {
-      console.log('confirm delete');
       this.characters.splice(index, 1);
       this.deleteCharacter(character);
     }, () => {
-      console.log('cancel delete');
+      //Delete was canceled
     });
   }
 
