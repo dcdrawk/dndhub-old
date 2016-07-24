@@ -1,0 +1,96 @@
+<div layout="column" layout-padding>
+  <h5 class="no-margin">Ability Scores</h5>
+</div>
+<md-card>
+  <md-card-content>
+    <md-table-container>
+      <table md-table md-progress="promise">
+        <thead md-head md-order="$ctrl.abilityScoreOrder" md-on-reorder="">
+          <tr md-row>
+            <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-numeric md-order-by="base"><span>Base</span></th>
+            <th md-column md-numeric md-order-by="bonus"><span>Bonus Effects</span></th>
+            <th md-column md-numeric md-order-by="total"><span>Total</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="abilityScore in $ctrl.abilityScores | orderBy: $ctrl.abilityScoreOrder track by $index">
+            <td md-cell>{{abilityScore.name}}</td>
+            <td md-cell>
+              <md-input-container class="no-margin md-no-error-spacer">
+                <input type="number" ng-model="$ctrl.character.abilityScores[abilityScore.name].base"
+                ng-change="$ctrl.updateCharacter('abilityScores/' + abilityScore.name + '/', 'base', $ctrl.character.abilityScores[abilityScore.name].base);"
+                aria-label="ability score bonus" class="text-center">
+              </md-input-container>
+            </td>
+            <td md-cell>
+              <md-input-container class="no-margin md-no-error-spacer">
+                <input type="number" ng-model="$ctrl.character.abilityScores[abilityScore.name].bonus"
+                ng-change="$ctrl.updateCharacter('abilityScores/' + abilityScore.name + '/', 'bonus', $ctrl.character.abilityScores[abilityScore.name].bonus);"
+                aria-label="ability score bonus" class="text-center">
+              </md-input-container>
+            </td>
+            <td md-cell>
+              {{$ctrl.character.abilityScores[abilityScore.name].base + $ctrl.character.abilityScores[abilityScore.name].bonus}}
+            </td>
+          </tr>
+
+          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.characters.length === 0">
+            <td md-cell colspan="2">No Characters Found</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card-content>
+</md-card>
+
+
+<div layout="column" layout-padding>
+  <h5 class="no-margin">Skills {{$ctrl.skillOrder}}</h5>
+</div>
+<md-card>
+  <md-card-content>
+    <md-table-container>
+      <table md-table ng-model="$ctrl.selected" md-progress="promise">
+        <thead md-head md-order="$ctrl.skillOrder" md-on-reorder="">
+          <tr md-row>
+            <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-numeric md-order-by="abilityScore"><span>Modifier</span></th>
+            <th md-column md-numeric md-order-by="abilityScore"><span>Ability Score</span></th>
+            <th md-column md-numeric md-order-by="abilityScore"><span>Traning</span></th>
+            <th md-column md-numeric md-order-by="level"><span>Bonus</span></th>
+            <th md-column md-numeric md-order-by="level"><span>Total</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="skill in $ctrl.gameData.skills | orderBy: $ctrl.skillOrder track by $index">
+            <td md-cell>{{skill.name}}</td>
+            <td md-cell>{{skill.abilityScore}}</td>
+            <td md-cell>{{$ctrl.character.abilityScores[skill.abilityScore].base +
+            $ctrl.character.abilityScores[skill.abilityScore].bonus}}</td>
+            <td md-cell>
+              <md-checkbox ng-model="$ctrl.character.skills[skill.name].trained" aria-label="Checkbox 1" class="md-primary"
+              ng-change="$ctrl.updateCharacter('skills/' + skill.name + '/', 'trained', $ctrl.character.skills[skill.name].trained);">
+              </md-checkbox>
+            </td>
+            <td md-cell>
+              <md-input-container class="no-margin md-no-error-spacer">
+                <input aria-label="skill bonus" ng-model="$ctrl.character.skills[skill.name].bonus"
+                ng-change="$ctrl.updateCharacter('skills/' + skill.name + '/', 'bonus', $ctrl.character.skills[skill.name].bonus);">
+              </md-input-container>
+            </td>
+            <td md-cell>
+              {{$ctrl.character.skills[skill.name].bonus}}
+            </td>
+          </tr>
+
+          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.characters.length === 0">
+            <td md-cell colspan="2">No Characters Found</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card-content>
+</md-card>
