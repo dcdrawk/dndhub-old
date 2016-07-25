@@ -8,6 +8,7 @@
         <thead md-head md-order="$ctrl.featOrder" md-on-reorder="">
           <tr md-row>
             <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column><span>Known</span></th>
             <!--<th md-column md-numeric md-order-by="abilityScore"><span>Modifier</span></th>
             <th md-column md-numeric md-order-by="abilityScore"><span>Ability Score</span></th>
             <th md-column md-numeric md-order-by="abilityScore"><span>Traning</span></th>
@@ -16,8 +17,15 @@
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder track by $index" ng-click="$ctrl.showFeatsModal($event, feat);">
+          <tr md-row 
+          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+         ng-click="$ctrl.showFeatsModal($event, feat);">
             <td md-cell>{{feat.name}}</td>
+            <td md-cell>
+              <md-checkbox ng-model="" aria-label="Checkbox 1" class="md-primary"
+              ng-change="">
+              </md-checkbox>
+            </td>
             <!--<td md-cell>{{skill.abilityScore}}</td>
             <td md-cell>{{$ctrl.character.abilityScores[skill.abilityScore].base +
             $ctrl.character.abilityScores[skill.abilityScore].bonus}}</td>
@@ -44,5 +52,8 @@
         </tbody>
       </table>
     </md-table-container>
+
+    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.gameData.feats.length}}" md-page-select></md-table-pagination>
+
   </md-card-content>
 </md-card>

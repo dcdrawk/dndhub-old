@@ -16,6 +16,8 @@ class CharacterFeatsController {
   selected: any;
   feats: any;
   gameData: any;
+  limit: string;
+  page: string;
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
@@ -25,6 +27,8 @@ class CharacterFeatsController {
     private $mdDialog: ng.material.IDialogService
     ) {
       this.selected = [];
+      this.limit = '5';
+      this.page = '1';
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
       // this.totalHP = this.character.maxHP + this.character.tempHP;
