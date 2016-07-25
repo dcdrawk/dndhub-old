@@ -1,0 +1,25 @@
+<div class="modal-md">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{$ctrl.name}}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.close()">
+        <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <div ng-bind-html="$ctrl.description"></div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="$ctrl.close()">
+      Cancel
+    </md-button>
+    <md-button class="md-primary md-raised" ng-click="$ctrl.saveCharacter($ctrl.character)" ng-disabled="myForm.$invalid">
+      Save
+    </md-button>
+  </md-dialog-actions>
+</div>
