@@ -50,6 +50,7 @@ class SidenavController implements IMenuModel {
       console.log(this.selectedCharacterIndex);
       this.$scope.$apply();
     });
+    
 
     //Get notified if the character list is updated
     this.characterListUpdated = this.$scope.$on('CHARACTER_LIST_UPDATED', (event) => {
