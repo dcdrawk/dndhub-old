@@ -42,9 +42,8 @@ import {newCharacterModalComponent} from './app/pages/character/new-character-mo
 import {characterInfoComponent} from './app/pages/character/character-info.component';
 import {characterGeneralComponent} from './app/pages/character/general/general.component';
 import {characterStatsComponent} from './app/pages/character/stats/stats.component';
-//Demo Pages
-// import {Buttons} from './app/pages/components/buttons/buttons';
-// import {typographyPage} from './app/pages/styles/typography.component';
+import {characterFeatsComponent} from './app/pages/character/feats/feats.component';
+import {characterFeatsModalComponent} from './app/pages/character/feats/feats-modal.component';
 
 //SCSS
 import './index.scss';
@@ -72,6 +71,8 @@ angular
   .component('characterInfo', characterInfoComponent)
   .component('characterGeneral', characterGeneralComponent)
   .component('characterStats', characterStatsComponent)
+  .component('characterFeats', characterFeatsComponent)
+  .component('characterFeatsModal', characterFeatsModalComponent)
 
   //Auth
   .component('firebase', firebaseComponent)

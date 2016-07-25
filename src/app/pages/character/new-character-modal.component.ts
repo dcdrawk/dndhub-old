@@ -50,12 +50,6 @@ class NewCharacterModalController {
     if(this.gameDataService.gameData) {
       this.gameData = this.gameDataService.gameData;
     }
-
-    // this.character = {
-    //   abilityScores: [{
-
-    //   }]
-    // };
   }
 
   close() {
