@@ -1,12 +1,10 @@
-<!--<div layout="column" layout-padding>
-  <h5 class="no-margin">Feats</h5>
-</div>-->
-
+<!--Search Box-->
 <div layout="row" layout-padding>
+  
   <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
     <!-- Use floating placeholder instead of label -->
     <md-icon class="material-icons">search</md-icon>
-    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search">
+    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();">
   </md-input-container>
 
 </div>
@@ -18,67 +16,38 @@
       <md-input-container flex="25" flex-sm="50" flex-xs="100">
         <label>Filter</label>
         <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
-
           <md-option value="" selected>
             All Feats
           </md-option>
-
           <md-option value="known">
             Known Feats
           </md-option>
-
           <md-option value="unknown">
             Unknown Feats
           </md-option>
         </md-select>
       </md-input-container>
-
-      <!--<md-input-container flex="25" flex-sm="50" flex-xs="100">
-        <label>Search</label>
-        <input ng-model="$ctrl.search">
-      </md-input-container>-->
     </section>
 
+    <!--Feats table-->
     <md-table-container>
       <table md-table ng-model="$ctrl.selected" md-progress="promise">
         <thead md-head md-order="$ctrl.featOrder" md-on-reorder="">
           <tr md-row>
+            <th md-column class="checkbox-col"><span>Known</span></th>
             <th md-column md-order-by="name"><span>Name</span></th>
-            <th md-column><span>Known</span></th>
-            <!--<th md-column md-numeric md-order-by="abilityScore"><span>Modifier</span></th>
-            <th md-column md-numeric md-order-by="abilityScore"><span>Ability Score</span></th>
-            <th md-column md-numeric md-order-by="abilityScore"><span>Traning</span></th>
-            <th md-column md-numeric md-order-by="level"><span>Bonus</span></th>
-            <th md-column md-numeric md-order-by="level"><span>Total</span></th>-->
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row 
           ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
           ng-click="$ctrl.showFeatsModal($event, feat);">
-            <td md-cell>{{feat.name}}</td>
             <td md-cell ng-click="$event.stopPropagation();">
               <md-checkbox ng-model="feat.known" aria-label="Checkbox 1" class="md-primary"
               ng-change="$ctrl.selectFeat(feat);">
               </md-checkbox>
             </td>
-            <!--<td md-cell>{{skill.abilityScore}}</td>
-            <td md-cell>{{$ctrl.character.abilityScores[skill.abilityScore].base +
-            $ctrl.character.abilityScores[skill.abilityScore].bonus}}</td>
-            <td md-cell>
-              <md-checkbox ng-model="$ctrl.character.skills[skill.name].trained" aria-label="Checkbox 1" class="md-primary"
-              ng-change="$ctrl.updateCharacter('skills/' + skill.name + '/', 'trained', $ctrl.character.skills[skill.name].trained);">
-              </md-checkbox>
-            </td>
-            <td md-cell>
-              <md-input-container class="no-margin md-no-error-spacer">
-                <input aria-label="skill bonus" ng-model="$ctrl.character.skills[skill.name].bonus"
-                ng-change="$ctrl.updateCharacter('skills/' + skill.name + '/', 'bonus', $ctrl.character.skills[skill.name].bonus);">
-              </md-input-container>
-            </td>
-            <td md-cell>
-              {{$ctrl.character.skills[skill.name].bonus}}
-            </td>-->
+            <td md-cell>{{feat.name}}</td>
           </tr>
 
           <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.characters.length === 0">
@@ -89,7 +58,7 @@
       </table>
     </md-table-container>
 
-    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.gameData.feats.length}}" md-page-select></md-table-pagination>
+    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
 
   </md-card-content>
 </md-card>

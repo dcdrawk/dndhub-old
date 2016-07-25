@@ -21,7 +21,6 @@ class CharacterFeatsController {
   count: string;
   known: any;
   filter: any;
-  search: string;
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
@@ -33,7 +32,7 @@ class CharacterFeatsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
-      this.count = this.gameData.feats.length;
+
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
       // this.totalHP = this.character.maxHP + this.character.tempHP;
@@ -50,57 +49,22 @@ class CharacterFeatsController {
   }
 
   changeFilter(filter: any) {
+    console.log('changeFilter');
     switch (filter) {
       case 'known':
         this.filter = {
           known: true
-        };
-        //Set the count for the pagination
-        this.count = this.gameData.feats.filter((value) => {
-          return value.known === true;
-        }).length;
-        break;
+        }
+        break;    
       case 'unknown':
         this.filter = {
           known: false
         }
-        //Set the count for the pagination
-        this.count = this.gameData.feats.filter((value) => {
-          return value.known === false;
-        }).length;
         break; 
       default:
         this.filter = undefined
-        //Set the count for the pagination
-        this.count = this.gameData.feats.length;
         break;
-    }    
-  }
-
-  updateCount() {
-       console.log('Filter this');
-
-    if(this.filter && this.filter.known == true) {     
-
-       console.log('filter true');
-      this.count = this.gameData.feats.filter((value) => {
-        return value.known === false && value.name.indexOf(this.search) > -1;
-      }).length;
-    } else if(this.filter && this.filter.known == true) {
-       console.log('filter false');
-      this.count = this.gameData.feats.filter((value) => {
-        return value.known === true && value.name.indexOf(this.search) > -1;
-      }).length;
-    } else {
-       console.log('no filter');
-      this.count = this.gameData.feats.filter((value) => {
-        console.log(value.name.indexOf(this.search));
-        return value.name.toLowerCase().indexOf(this.search) >= 0;
-      }).length;
     }
-
-    console.log(this.count);
-
   }
 
   mapFeats() {
@@ -138,6 +102,27 @@ class CharacterFeatsController {
       }
     }
     this.mapFeats();
+
+    console.log(this.character.feats);
+
+    // for(var i in this.character.feats) {
+    //   if(this.character.feats[i].name == feat.name) {
+
+    //   }
+    // }
+    // if(feat.known) {
+
+    //   if(this.character.feats) {
+
+    //   } else {
+    //     this.character.feats = [];
+    //   }
+    // }
+    
+    // let update = {
+    //   name: feat.name,
+    //   known: feat.known
+    // }
     this.updateCharacter('', 'feats', this.character.feats);
   }
 
@@ -149,6 +134,9 @@ class CharacterFeatsController {
   showFeatsModal(ev:any, feat:any) {
     console.log(feat);
     this.$mdDialog.show({
+
+      // template: '<character-feats-modal feat="' + this.gameData.feats + '"/>',
+      // template: `<character-feats-modal feat-name="'${feat.name}'" feat-description="'${feat.description}'" />`,
       template: `<character-feats-modal feat-name="'${feat.name}'" feat-description="'${feat.description}'" />`,
       ariaLabel: 'Character Feats Modal',
       parent: angular.element(document.body),

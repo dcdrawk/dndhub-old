@@ -38,7 +38,6 @@ class CharacterGeneralController {
 
   getSubraces(races: any[], characterRace: string) {
     for(let i in races) {
-      // let race = races[i];
       if(races[i].name === characterRace) {
         this.subraces = races[i].subraces;
         return;
