@@ -18,6 +18,9 @@ class CharacterFeatsController {
   gameData: any;
   limit: string;
   page: string;
+  count: string;
+  known: any;
+  filter: any;
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
@@ -29,10 +32,99 @@ class CharacterFeatsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
+
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
       // this.totalHP = this.character.maxHP + this.character.tempHP;
+
+      this.init();
   }  
+
+  init() {
+    // this.count = this.gameData.feats.length;
+    this.known = {
+      known: true
+    };    
+    this.mapFeats();
+  }
+
+  changeFilter(filter: any) {
+    console.log('changeFilter');
+    switch (filter) {
+      case 'known':
+        this.filter = {
+          known: true
+        }
+        break;    
+      case 'unknown':
+        this.filter = {
+          known: false
+        }
+        break; 
+      default:
+        this.filter = undefined
+        break;
+    }
+  }
+
+  mapFeats() {
+    if(this.character.feats) {
+      this.gameData.feats.forEach((feat:any, index:number) => {
+        for(var i in this.character.feats) {
+          if(this.character.feats[i].name === feat.name) {
+            feat.known = true;
+            return;
+          } else {
+            feat.known = false;
+            // return;
+          }
+        }
+      });
+    }
+  }
+
+  selectFeat(feat: any) {
+    if(!this.character.feats) {
+      this.character.feats = [];
+    }
+
+    if(feat.known) {
+      let update = {
+        name: feat.name,
+        known: feat.known
+      }
+      this.character.feats.push(update);
+    } else {
+      for(var i in this.character.feats) {
+        if(this.character.feats[i].name == feat.name) {
+          this.character.feats.splice(i, 1);
+        }
+      }
+    }
+    this.mapFeats();
+
+    console.log(this.character.feats);
+
+    // for(var i in this.character.feats) {
+    //   if(this.character.feats[i].name == feat.name) {
+
+    //   }
+    // }
+    // if(feat.known) {
+
+    //   if(this.character.feats) {
+
+    //   } else {
+    //     this.character.feats = [];
+    //   }
+    // }
+    
+    // let update = {
+    //   name: feat.name,
+    //   known: feat.known
+    // }
+    this.updateCharacter('', 'feats', this.character.feats);
+  }
 
   updateCharacter(path: string, property: string, value:any) {
     localStorage.setItem('selectedCharacter', JSON.stringify(this.character));

@@ -3,6 +3,27 @@
 </div>
 <md-card>
   <md-card-content>
+
+    <!--Filter-->
+    <md-input-container flex flex-sm="100" flex-xs="100">
+      <label>Filter</label>
+      <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
+
+        <md-option value="" default>
+          All Feats
+        </md-option>
+
+        <md-option value="known">
+          Known Feats
+        </md-option>
+
+        <md-option value="unknown">
+          Unknown Feats
+        </md-option>
+      </md-select>
+    </md-input-container>
+
+
     <md-table-container>
       <table md-table ng-model="$ctrl.selected" md-progress="promise">
         <thead md-head md-order="$ctrl.featOrder" md-on-reorder="">
@@ -18,12 +39,12 @@
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
-         ng-click="$ctrl.showFeatsModal($event, feat);">
+          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+          ng-click="$ctrl.showFeatsModal($event, feat);">
             <td md-cell>{{feat.name}}</td>
-            <td md-cell>
-              <md-checkbox ng-model="" aria-label="Checkbox 1" class="md-primary"
-              ng-change="">
+            <td md-cell ng-click="$event.stopPropagation();">
+              <md-checkbox ng-model="feat.known" aria-label="Checkbox 1" class="md-primary"
+              ng-change="$ctrl.selectFeat(feat);">
               </md-checkbox>
             </td>
             <!--<td md-cell>{{skill.abilityScore}}</td>
