@@ -1,28 +1,43 @@
-<div layout="column" layout-padding>
+<!--<div layout="column" layout-padding>
   <h5 class="no-margin">Feats</h5>
+</div>-->
+
+<div layout="row" layout-padding>
+  <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
+    <!-- Use floating placeholder instead of label -->
+    <md-icon class="material-icons">search</md-icon>
+    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search">
+  </md-input-container>
+
 </div>
 <md-card>
   <md-card-content>
+    <section layout="row">
 
-    <!--Filter-->
-    <md-input-container flex flex-sm="100" flex-xs="100">
-      <label>Filter</label>
-      <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
+      <!--Filter-->
+      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Filter</label>
+        <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
 
-        <md-option value="" default>
-          All Feats
-        </md-option>
+          <md-option value="" selected>
+            All Feats
+          </md-option>
 
-        <md-option value="known">
-          Known Feats
-        </md-option>
+          <md-option value="known">
+            Known Feats
+          </md-option>
 
-        <md-option value="unknown">
-          Unknown Feats
-        </md-option>
-      </md-select>
-    </md-input-container>
+          <md-option value="unknown">
+            Unknown Feats
+          </md-option>
+        </md-select>
+      </md-input-container>
 
+      <!--<md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Search</label>
+        <input ng-model="$ctrl.search">
+      </md-input-container>-->
+    </section>
 
     <md-table-container>
       <table md-table ng-model="$ctrl.selected" md-progress="promise">
@@ -39,7 +54,7 @@
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
           ng-click="$ctrl.showFeatsModal($event, feat);">
             <td md-cell>{{feat.name}}</td>
             <td md-cell ng-click="$event.stopPropagation();">

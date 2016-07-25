@@ -18,3 +18,9 @@ input[type="file"] {
         display: none;
     }
 }
+
+md-input-container {
+    &.md-no-margin {
+        margin: 0px;
+    }
+}
