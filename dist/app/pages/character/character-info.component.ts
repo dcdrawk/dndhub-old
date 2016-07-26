@@ -28,6 +28,7 @@ class CharacterInfoController {
   gameData: any;
   userSignedIn: any;
   gameDataLoaded: any;
+  charcterListLoaded: any;
 
   character: any;
   charcterSelected: any;
@@ -40,30 +41,56 @@ class CharacterInfoController {
     private $scope: angular.IScope,
     private $rootScope: angular.IRootScopeService
     ) {
-
-    this.init();
-  }  
+      this.charcterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {
+        this.characters = characters;
+        this.character = this.getSelectedCharacter();
+      });
+      this.init();
+    }  
 
   init() {
-
+    console.log('character info');
     //Set the game data, if it exists
     if(this.gameDataService.gameData) {
+      // this.gameData = this.gameDataService.gameData;
       this.gameData = this.gameDataService.gameData;
     }
 
     //Set the game data, if it exists
-    this.character = this.getSelectedCharacter();
+    // this.character = this.getSelectedCharacter();
+
+    if(this.characterService.selectedCharacter) {
+      this.character = this.characterService.selectedCharacter;
+      // console.log('char info characters exists');
+      // // this.character = this.getSelectedCharacter();
+      // this.character = {};
+    }
+
+    this.charcterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {
+      console.log('character info loaded characters');
+      this.characters = characters;
+      this.character = this.getSelectedCharacter();
+    });
 
     this.charcterSelected = this.$scope.$on('CHARACTER_SELECTED', (event) => {
+      console.log('character info character selected!!!!');
       this.character = this.characterService.selectedCharacter;
+    });
+
+    this.charcterListLoaded = this.$scope.$on('CHARCTER_LIST_LOADED', (event, characters) => {
+      this.characters = characters;
+      this.character = this.getSelectedCharacter();
+      // console.log('CHARACTER LOADJIOWDAJIOADJWAIODJIOAWJDIAOJDOA');
+      // console.log(this.characters);
+      // console.log(this.character);
     });
   }
 
   getSelectedCharacter() {
-    if(!localStorage.getItem('selectedCharacter')) {
+    if(!localStorage.getItem('selectedCharacterIndex')) {
       return undefined;
     } else {
-      return JSON.parse(localStorage.getItem('selectedCharacter'));
+      return this.characterService.selectedCharacter;
     }
   }
 }

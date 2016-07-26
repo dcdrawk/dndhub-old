@@ -50,7 +50,7 @@ class CharacterGeneralController {
 
   updateCharacter(path: string, property: string, value:any) {
     this.characterService.updateCharacter(path, property, value);
-    localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+    // localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
   }
 
   updateCharacterName(name: string) {

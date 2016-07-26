@@ -26,11 +26,13 @@ class SidenavController implements IMenuModel {
   static $inject: Array<string> = ['$mdSidenav', '$scope', 'CharacterService', '$state'];
   menu: any[];
   userSignedIn: any;
+  userSignedOut : any;
   characters: any;
   signedIn: boolean;
   characterListUpdated: any;
   selectedCharacterIndex: number;
   characterNameUpdated: any;
+  characterListLoaded: any;
 
   constructor(
     private $mdSidenav: ng.material.ISidenavService,
@@ -40,42 +42,42 @@ class SidenavController implements IMenuModel {
   ) {
     this.menu = menu;
     this.signedIn = false;
+    this.getSelectedId();
 
     //Listen if the user signs in
     this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
-      //Check if characters are in local storage
       this.signedIn = true;
-      console.log('signed in...');
-
-      this.characters = this.characterService.characters;
       this.selectedCharacterIndex = this.getSelectedId();
-      console.log(this.selectedCharacterIndex);
-      this.$scope.$apply();
+    });
+
+    //Listen if the user signs in
+    this.userSignedOut = this.$scope.$on('USER_SIGNED_OUT', (event, user) => {
+      this.signedIn = false;
+      this.characters = undefined;
     });
     
+    //Get notified if the character list is updated
+    this.characterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {
+      this.characters = characters;
+      
+    });
 
     //Get notified if the character list is updated
     this.characterListUpdated = this.$scope.$on('CHARACTER_LIST_UPDATED', (event) => {
       this.characters = undefined;
-      this.getCharacters();
     });
 
     //Get notified if a character name is updated so we can keep the list up to date
     this.characterNameUpdated = this.$scope.$on('CHARACTER_NAME_UPDATED', (event, name) => {
       this.characters[this.selectedCharacterIndex].name = name;
-      // this.characters = undefined;
-      console.log('name updated!!!!');
-      // this.characters = undefined;
-      // this.getCharacters();
     });
   }
 
   //Get the list of characters
   getCharacters() {
-      // console.log('DWADAWDADADADDDDDDDDDDDDDDDDDDed');
     if(firebase.auth().currentUser) {    
       this.characterService.getCharacters().then((characters:any[]) => {
-        console.log(characters);
+        // console.log(characters);
         this.characters = characters;      
       });
     }
@@ -91,10 +93,10 @@ class SidenavController implements IMenuModel {
   
   //Get the list of characters
   selectCharacter(index: number) {
-    console.log('select character');
-    console.log(this.characters[index]);
     localStorage.setItem('selectedCharacterIndex', index.toString());
     this.characterService.selectCharacter(this.characters[index]);
+
+    console.log(this.characterService.selectedCharacter);
   }
 
   toggleSidenav(menuId: string) {

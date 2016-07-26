@@ -49,7 +49,8 @@ export default class GameDataService {
           resolve();
         });
       });
-    });
+    });    
+    
     return this.$q.all(promises);
   }
 }

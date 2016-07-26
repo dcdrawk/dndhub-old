@@ -104,7 +104,7 @@ export default class FirebaseService {
         // Sign-out successful. 
         // Set current user and local storage of characters to null
         this.currentUser = undefined;
-        localStorage.setItem('characters', null);
+        localStorage.setItem('selectedCharacterIndex', null);
         this.$rootScope.$broadcast('USER_SIGNED_OUT');
         this.$state.go('sign-in');
         resolve();

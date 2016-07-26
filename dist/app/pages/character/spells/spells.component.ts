@@ -32,8 +32,6 @@ class CharacterSpellsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
-      console.log(this.gameData);
-
       this.count = this.gameData.spells.length;
       this.search = '';
       // this.abilityScores = abilityScores;
@@ -112,7 +110,7 @@ class CharacterSpellsController {
   }
 
   updateCharacter(path: string, property: string, value:any) {
-    localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+    // localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
     this.characterService.updateCharacter(path, property, value);
   }
 

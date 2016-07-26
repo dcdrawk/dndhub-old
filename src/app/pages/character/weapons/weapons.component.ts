@@ -110,7 +110,7 @@ class CharacterWeaponsController {
   }
 
   updateCharacter(path: string, property: string, value:any) {
-    localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
+    // localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
     this.characterService.updateCharacter(path, property, value);
   }
 

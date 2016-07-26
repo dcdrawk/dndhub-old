@@ -1,9 +1,14 @@
-<section layout="row" layout-wrap layout-padding class="page-header">
+<!--<section layout="row" layout-wrap layout-padding class="page-header">
   <h4>
     Character Info
   </h4>
-</section>
-<md-tabs>
+</section>-->
+
+<div class="md-padding" ng-if="!$ctrl.character">
+  <md-progress-circular md-mode="indeterminate" class="md-margin-auto"></md-progress-circular>   
+</div>
+
+<md-tabs ng-if="$ctrl.character" md-selected="$ctrl.selectedIndex"> 
 
   <!--General Tab-->
   <md-tab label="General">
@@ -16,7 +21,6 @@
   <md-tab label="Stats">
     <md-content class="md-padding">
       <character-stats game-data="$ctrl.gameData" character="$ctrl.character"></character-stats>
-      <!--<character-general></character-general>-->
     </md-content>
   </md-tab>
 
@@ -31,7 +35,6 @@
   <md-tab label="Weapons">
     <md-content class="md-padding">
       <character-weapons game-data="$ctrl.gameData" character="$ctrl.character"></character-weapons>
-      <!--<character-general></character-general>-->
     </md-content>
   </md-tab>
 
@@ -39,7 +42,6 @@
   <md-tab label="Spells">
     <md-content class="md-padding">
       <character-spells game-data="$ctrl.gameData" character="$ctrl.character"></character-spells>
-      <!--<character-general></character-general>-->
     </md-content>
   </md-tab>
 

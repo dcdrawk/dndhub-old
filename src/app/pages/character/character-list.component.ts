@@ -44,18 +44,18 @@ class CharacterListController {
     //If it detects a user has signed in, get the characters for that user
     this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
       //Check if characters are in local storage
-      if(!localStorage.getItem('characters')) {
+      // if(!localStorage.getItem('characters')) {
         this.getCharacters();
-      } else {
+      // } else {
         //Get characters from local storage
-        this.characters = JSON.parse(localStorage.getItem('characters'));
-      }
+        // this.characters = JSON.parse(localStorage.getItem('characters'));
+      // }
     });
 
     //Listen if the game data loads...
     this.gameDataLoaded = this.$scope.$on('GAME_DATA_LOADED', (event) => {
       this.gameData = this.gameDataService.gameData;
-      this.$scope.$apply();
+      // this.$scope.$apply();
     });
 
     //Set the game data, if it exists
@@ -71,11 +71,11 @@ class CharacterListController {
       this.userId = firebase.auth().currentUser.uid;
       if(this.userId) {
         //If characters dont exist in local storage, get them!
-        if(!localStorage.getItem('characters')) {
+        // if(!localStorage.getItem('characters')) {
           this.getCharacters();
-        } else {
-          this.characters = JSON.parse(localStorage.getItem('characters'));
-        }
+        // } else {
+        //   this.characters = JSON.parse(localStorage.getItem('characters'));
+        // }
       }
     }
   }
@@ -99,8 +99,13 @@ class CharacterListController {
 
   //Get the list of characters
   getCharacters() {
+    console.log('get them');
     this.characterService.getCharacters().then((characters:any[]) => {
-      this.characters = characters;
+      if(characters) {
+        this.characters = characters;
+      } else {
+        this.characters = [];
+      }
     });
   }
 

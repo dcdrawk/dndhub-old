@@ -8,51 +8,64 @@ declare var reject: any;
 
 export default class CharacterService {
 
-  static $inject: Array<string> = ['$q', '$rootScope', 'FirebaseService'];
+  static $inject: Array<string> = [
+   '$q',
+   '$rootScope',
+   'FirebaseService'
+  ];
   db: any;
   currentUser: any;
   characters: any;
   selectedCharacter: any;
+  userSignedIn: any;
 
   constructor(
     private $q: angular.IQService,
     private $rootScope: angular.IRootScopeService,
     private firebaseService: FirebaseService
   ) {
-    if(firebase.auth().currentUser) {
-      if(localStorage.getItem('selectedCharacter')) {
-        console.log('character in localstorage');
-        this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
-        this.$rootScope.$broadcast('CHARACTER_SELECTED');      
-      }
-      if(!localStorage.getItem('characters')) {
-        this.getCharacters().then((characterlist) => {
-          this.characters = characterlist;
-        });
-      } else {
-        //Get characters from local storage
-        this.characters = JSON.parse(localStorage.getItem('characters'));
-      }
-    }
-}
+    console.log(
+      'character service'
+    );
+    this.userSignedIn = this.$rootScope.$on('USER_SIGNED_IN', () => {
+      this.getCharacters().then((characterlist) => {
+        this.characters = characterlist;
+        this.$rootScope.$broadcast('CHARACTER_LIST_LOADED', characterlist);
+        if(localStorage.getItem('selectedCharacterIndex')) {
+          this.selectedCharacter = this.characters[+localStorage.getItem('selectedCharacterIndex')];
+          this.$rootScope.$broadcast('CHARACTER_SELECTED', characterlist);
+        }
+      });
+    });
+
+    // console.log('SERVICE THIS');
+//     if(firebase.auth().currentUser) {
+      
+    // }
+  }
 
   //Get the list of characters
   getCharacters() {
+    console.log('CHARACTER SERVICE GET CHARACTERS');
     // if(firebase.auth().currentUser) {
       var userId = firebase.auth().currentUser.uid;
       var url = 'characters/' + userId;
+      var characterlist = [];
       return this.$q((resolve, reject) => {
-        this.firebaseService.getData(url).then((characters) => {
+        this.firebaseService.getData(url).then((characters:any) => {
+          // console.log(characters);
           //Map the character object to an array, including the id/key of the character
           //Knowing the id/key will allow us to update/delete it in the future
-          let characterlist:any[] = Object.keys(characters).map(function (key:string) {
-            let id = 'id';
-            characters[key][id] = key;
-            return characters[key];
-          });
-          //Set characters in local storage
-          
-          localStorage.setItem('characters', JSON.stringify(characterlist));
+
+          if(characters) {
+            characterlist = Object.keys(characters).map(function (key:string) {
+              let id = 'id';
+              characters[key][id] = key;
+              return characters[key];
+            });
+          }
+          this.characters = characterlist;
+          this.$rootScope.$broadcast('CHARACTER_LIST_LOADED', characterlist);
           resolve(characterlist);
         });
       });
@@ -74,7 +87,7 @@ export default class CharacterService {
     update[property] = value;
     firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update).then(() => {
       console.log('update successful');
-      localStorage.setItem('characters', JSON.stringify(this.getCharacters()));
+      // localStorage.setItem('characters', JSON.stringify(this.getCharacters()));
     });
 
     //Update the master character list in local storage
@@ -90,7 +103,7 @@ export default class CharacterService {
   //Select a character
   selectCharacter(character:any) {
     this.selectedCharacter = character;
-    localStorage.setItem('selectedCharacter', JSON.stringify(character));
+    // localStorage.setItem('selectedCharacter', JSON.stringify(character));
     this.$rootScope.$broadcast('CHARACTER_SELECTED');
   }
 
