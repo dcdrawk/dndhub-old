@@ -5,6 +5,8 @@ interface IMenuModel {
     toggleSidenav(menuId: string): void;
 }
 
+declare var firebase: any;
+
 const menu = [{
   title: 'Character Info',
   sref: 'character-info',
@@ -70,11 +72,13 @@ class SidenavController implements IMenuModel {
 
   //Get the list of characters
   getCharacters() {
-      console.log('DWADAWDADADADDDDDDDDDDDDDDDDDDed');
-    this.characterService.getCharacters().then((characters:any[]) => {
-      console.log(characters);
-      this.characters = characters;      
-    });
+      // console.log('DWADAWDADADADDDDDDDDDDDDDDDDDDed');
+    if(firebase.auth().currentUser) {    
+      this.characterService.getCharacters().then((characters:any[]) => {
+        console.log(characters);
+        this.characters = characters;      
+      });
+    }
   }
 
   getSelectedId() {

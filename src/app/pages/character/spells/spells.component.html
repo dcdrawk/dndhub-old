@@ -34,17 +34,29 @@
           <md-option value="" selected>
             All Schools
           </md-option>
-          <md-option value="necromancy">
-            Necromancy
-          </md-option>
           <md-option value="abjuration">
             Abjuration
           </md-option>
           <md-option value="conjuration">
             Conjuration
           </md-option>
+          <md-option value="divination">
+            Divination
+          </md-option>
+          <md-option value="enchantment">
+            Enchantment
+          </md-option>
           <md-option value="evocation">
             Evocation
+          </md-option>
+          <md-option value="illusion">
+            Illusion
+          </md-option>
+          <md-option value="necromancy">
+            Necromancy
+          </md-option>
+          <md-option value="transmutation">
+            Transmutation
           </md-option>
         </md-select>
       </md-input-container>
@@ -83,6 +95,55 @@
           <md-option value="8">
             8th-level
           </md-option>
+          <md-option value="9">
+            9th-level
+          </md-option>
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <!--Damage Type-->
+      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Class</label>
+        <md-select ng-model="$ctrl.filters.class" ng-change="$ctrl.updateCount()">
+          <md-option value="" selected>
+            All Classes
+          </md-option>
+          <!--<md-option value="barb">
+            Barbarian
+          </md-option>-->
+          <md-option value="bard">
+            Bard
+          </md-option>
+          <md-option value="cler">
+            Cleric
+          </md-option>
+          <md-option value="dru">
+            Druid
+          </md-option>
+          <!--<md-option value="fig">
+            Fighter
+          </md-option>-->
+          <!--<md-option value="mon">
+            Monk
+          </md-option>-->
+          <md-option value="pal">
+            Paladin
+          </md-option>
+          <md-option value="ran">
+            Ranger
+          </md-option>
+          <!--<md-option value="rog">
+            Rogue
+          </md-option>-->
+          <md-option value="sor">
+            Sorcerer
+          </md-option>
+          <md-option value="war">
+            Warlock
+          </md-option>
+          <md-option value="wiz">
+            Wizard
           </md-option>
         </md-select>
       </md-input-container>

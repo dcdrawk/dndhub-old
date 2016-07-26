@@ -19,41 +19,44 @@ export default class CharacterService {
     private $rootScope: angular.IRootScopeService,
     private firebaseService: FirebaseService
   ) {
-    if(localStorage.getItem('selectedCharacter')) {
-      console.log('character in localstorage');
-      this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
-      this.$rootScope.$broadcast('CHARACTER_SELECTED');      
-    }
-
-    if(!localStorage.getItem('characters')) {
-      this.getCharacters().then((characterlist) => {
-        this.characters = characterlist;
-      });
-    } else {
-      //Get characters from local storage
-      this.characters = JSON.parse(localStorage.getItem('characters'));
+    if(firebase.auth().currentUser) {
+      if(localStorage.getItem('selectedCharacter')) {
+        console.log('character in localstorage');
+        this.selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
+        this.$rootScope.$broadcast('CHARACTER_SELECTED');      
+      }
+      if(!localStorage.getItem('characters')) {
+        this.getCharacters().then((characterlist) => {
+          this.characters = characterlist;
+        });
+      } else {
+        //Get characters from local storage
+        this.characters = JSON.parse(localStorage.getItem('characters'));
+      }
     }
 }
 
   //Get the list of characters
   getCharacters() {
-    var userId = firebase.auth().currentUser.uid;
-    var url = 'characters/' + userId;
-    return this.$q((resolve, reject) => {
-      this.firebaseService.getData(url).then((characters) => {
-        //Map the character object to an array, including the id/key of the character
-        //Knowing the id/key will allow us to update/delete it in the future
-        let characterlist:any[] = Object.keys(characters).map(function (key:string) {
-          let id = 'id';
-          characters[key][id] = key;
-          return characters[key];
+    // if(firebase.auth().currentUser) {
+      var userId = firebase.auth().currentUser.uid;
+      var url = 'characters/' + userId;
+      return this.$q((resolve, reject) => {
+        this.firebaseService.getData(url).then((characters) => {
+          //Map the character object to an array, including the id/key of the character
+          //Knowing the id/key will allow us to update/delete it in the future
+          let characterlist:any[] = Object.keys(characters).map(function (key:string) {
+            let id = 'id';
+            characters[key][id] = key;
+            return characters[key];
+          });
+          //Set characters in local storage
+          
+          localStorage.setItem('characters', JSON.stringify(characterlist));
+          resolve(characterlist);
         });
-        //Set characters in local storage
-        
-        localStorage.setItem('characters', JSON.stringify(characterlist));
-        resolve(characterlist);
       });
-    });
+    // }
   }
 
   //Save a new character
