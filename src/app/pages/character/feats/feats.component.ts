@@ -1,6 +1,4 @@
 import 'angular-material';
-import * as angular from 'angular';
-
 import CharacterService from '../character.service';
 
 declare var firebase: any;
@@ -22,9 +20,6 @@ class CharacterFeatsController {
   known: any;
   filter: any;
   search: string;
-  // abilityScores: any[];
-  // skillOrder: any;
-  // totalHP: number;
 
   constructor(
     private characterService: CharacterService,
@@ -34,15 +29,10 @@ class CharacterFeatsController {
       this.limit = '5';
       this.page = '1';
       this.count = this.gameData.feats.length;
-      // this.abilityScores = abilityScores;
-      // this.skillOrder = 'name';
-      // this.totalHP = this.character.maxHP + this.character.tempHP;
-
       this.init();
   }  
 
   init() {
-    // this.count = this.gameData.feats.length;
     this.known = {
       known: true
     };    
@@ -63,14 +53,14 @@ class CharacterFeatsController {
       case 'unknown':
         this.filter = {
           known: false
-        }
+        };
         //Set the count for the pagination
         this.count = this.gameData.feats.filter((value) => {
           return value.known === false;
         }).length;
         break; 
       default:
-        this.filter = undefined
+        this.filter = undefined;
         //Set the count for the pagination
         this.count = this.gameData.feats.length;
         break;
@@ -78,29 +68,20 @@ class CharacterFeatsController {
   }
 
   updateCount() {
-       console.log('Filter this');
-
-    if(this.filter && this.filter.known == true) {     
-
-       console.log('filter true');
+    if(this.filter && this.filter.known === true) {
       this.count = this.gameData.feats.filter((value) => {
         return value.known === false && value.name.indexOf(this.search) > -1;
       }).length;
-    } else if(this.filter && this.filter.known == true) {
-       console.log('filter false');
+    } else if(this.filter && this.filter.known === true) {
       this.count = this.gameData.feats.filter((value) => {
         return value.known === true && value.name.indexOf(this.search) > -1;
       }).length;
     } else {
-       console.log('no filter');
       this.count = this.gameData.feats.filter((value) => {
         console.log(value.name.indexOf(this.search));
         return value.name.toLowerCase().indexOf(this.search) >= 0;
       }).length;
     }
-
-    console.log(this.count);
-
   }
 
   mapFeats() {
@@ -128,11 +109,11 @@ class CharacterFeatsController {
       let update = {
         name: feat.name,
         known: feat.known
-      }
+      };
       this.character.feats.push(update);
     } else {
       for(var i in this.character.feats) {
-        if(this.character.feats[i].name == feat.name) {
+        if(this.character.feats[i].name === feat.name) {
           this.character.feats.splice(i, 1);
         }
       }

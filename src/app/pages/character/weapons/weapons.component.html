@@ -15,15 +15,56 @@
       <!--Filter-->
       <md-input-container flex="25" flex-sm="50" flex-xs="100">
         <label>Filter</label>
-        <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
-          <md-option value="" selected>
+        <md-select ng-model="$ctrl.filters.equipped" ng-change="$ctrl.updateCount()">
+          <md-option ng-value="undefined" selected>
             All Weapons
           </md-option>
-          <md-option value="equipped">
+          <md-option ng-value="true">
             Equipped Weapons
           </md-option>
-          <md-option value="unequipped">
+          <md-option ng-value="false">
             Unequipped Weapons
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <!--Damage Type-->
+      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Damage Type</label>
+        <md-select ng-model="$ctrl.filters.damageType" ng-change="$ctrl.updateCount()">
+          <md-option value="" selected>
+            All Damage Types
+          </md-option>
+          <md-option value="bludgeoning">
+            Bludgeoning
+          </md-option>
+          <md-option value="piercing">
+            Piercing
+          </md-option>
+          <md-option value="slashing">
+            Slashing
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <!--Weapon Type-->
+      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Weapon Type</label>
+        <md-select ng-model="$ctrl.filters.weaponType" ng-change="$ctrl.updateCount()">
+          <md-option value="" selected>
+            All Weapon Types
+          </md-option>
+          <md-option value="Simple Melee">
+            Simple Melee
+          </md-option>
+          <md-option value="Simple Ranged">
+            Simple Ranged
+          </md-option>
+          <md-option value="Martial Melee">
+            Martial Melee
+          </md-option>
+          <md-option value="Martial Ranged">
+            Martial Ranged
           </md-option>
         </md-select>
       </md-input-container>
@@ -36,11 +77,14 @@
           <tr md-row>
             <th md-column class="checkbox-col"><span>Equipped</span></th>
             <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-order-by="damage"><span>Damage</span></th>
+            <th md-column md-order-by="damageType"><span>Damage Type</span></th>
+            <th md-column md-order-by="weaponType"><span>Weapon Type</span></th>
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="weapon in $ctrl.gameData.weapons | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+          ng-repeat="weapon in $ctrl.gameData.weapons | orderBy: $ctrl.featOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
           ng-click="$ctrl.showWeaponModal($event, weapon);">
             <td md-cell ng-click="$event.stopPropagation();">
               <md-checkbox ng-model="weapon.equipped" aria-label="Checkbox 1" class="md-primary"
@@ -48,10 +92,13 @@
               </md-checkbox>
             </td>
             <td md-cell>{{weapon.name}}</td>
+            <td md-cell>{{weapon.damage}}</td>
+            <td md-cell class="text-capitalize">{{weapon.damageType}}</td>
+            <td md-cell>{{weapon.weaponType}}</td>
           </tr>
 
           <tr md-row ng-if="$ctrl.count === 0">
-            <td md-cell colspan="2">
+            <td md-cell colspan="5">
               <div class="text-center">No Weapons Found</div>
             </td>
           </tr>

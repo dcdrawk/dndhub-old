@@ -1,6 +1,4 @@
 import 'angular-material';
-import * as angular from 'angular';
-
 import CharacterService from '../character.service';
 
 declare var firebase: any;
@@ -22,6 +20,7 @@ class CharacterWeaponsController {
   equipped: any;
   filter: any;
   search: string;
+  filters: any;
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
@@ -34,6 +33,7 @@ class CharacterWeaponsController {
       this.limit = '5';
       this.page = '1';
       this.count = this.gameData.weapons.length;
+      this.search = '';
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
       // this.totalHP = this.character.maxHP + this.character.tempHP;
@@ -49,54 +49,26 @@ class CharacterWeaponsController {
     this.mapWeapons();
   }
 
-  changeFilter(filter: any) {
-    switch (filter) {
-      case 'equipped':
-        this.filter = {
-          equipped: true
-        };
-        //Set the count for the pagination
-        this.count = this.gameData.weapons.filter((value) => {
-          return value.equipped === true;
-        }).length;
-        break;
-      case 'unequipped':
-        this.filter = {
-          equipped: false
-        }
-        //Set the count for the pagination
-        this.count = this.gameData.weapons.filter((value) => {
-          return value.equipped === false;
-        }).length;
-        break; 
-      default:
-        this.filter = undefined
-        //Set the count for the pagination
-        this.count = this.gameData.weapons.length;
-        break;
-    }    
-  }
-
   updateCount() {
+    let array = this.gameData.weapons;
 
-    if(this.filter && this.filter.equipped == true) {     
+    array = array.filter((value) => {
+      return value.name.toLowerCase().indexOf(this.search) > -1;
+    });
 
-       console.log('filter true');
-      this.count = this.gameData.weapons.filter((value) => {
-        return value.equipped === false && value.name.indexOf(this.search) > -1;
-      }).length;
-    } else if(this.filter && this.filter.equipped == true) {
-       console.log('filter false');
-      this.count = this.gameData.weapons.filter((value) => {
-        return value.equipped === true && value.name.indexOf(this.search) > -1;
-      }).length;
-    } else {
-       console.log('no filter');
-      this.count = this.gameData.weapons.filter((value) => {
-        console.log(value.name.indexOf(this.search));
-        return value.name.toLowerCase().indexOf(this.search) >= 0;
-      }).length;
+    for(var i in this.filters) {
+      if(typeof this.filters[i] === 'boolean' && this.filters[i]!== '') {
+        array = array.filter((value) => {
+          return value[i] === this.filters[i];
+        });
+        console.log(array);
+      } else if(typeof this.filters[i] === 'string' && this.filters[i]!== '') {
+        array = array.filter((value) => {
+          return  value[i].toLowerCase().indexOf(this.filters[i].toLowerCase()) > -1;
+        });
+      }
     }
+    this.count = array.length;
   }
 
   mapWeapons() {
@@ -124,11 +96,11 @@ class CharacterWeaponsController {
       let update = {
         name: feat.name,
         equipped: feat.equipped
-      }
+      };
       this.character.weapons.push(update);
     } else {
       for(var i in this.character.weapons) {
-        if(this.character.weapons[i].name == feat.name) {
+        if(this.character.weapons[i].name === feat.name) {
           this.character.weapons.splice(i, 1);
         }
       }
