@@ -162,7 +162,7 @@
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="spell in $ctrl.gameData.spells | orderBy: $ctrl.spellOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
+          ng-repeat="spell in $ctrl.spells | orderBy: $ctrl.spellOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
           ng-click="$ctrl.showSpellModal($event, spell);">
             <td md-cell ng-click="$event.stopPropagation();">
               <md-checkbox ng-model="spell.known" aria-label="Checkbox" class="md-primary"

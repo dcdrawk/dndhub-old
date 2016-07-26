@@ -21,6 +21,7 @@ class CharacterSpellsController {
   filter: any;
   search: string;
   filters: any;
+  spells: any;
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
@@ -32,7 +33,7 @@ class CharacterSpellsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
-      this.count = this.gameData.spells.length;
+      this.count = this.spells.length;
       this.search = '';
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
@@ -42,15 +43,16 @@ class CharacterSpellsController {
   }  
 
   init() {
-    // this.count = this.gameData.feats.length;
+    // this.count = this.feats.length;
     // this.equipped = {
     //   equipped: true
     // };
-    this.mapSpells();
+    
+    // this.mapSpells();
   }
 
   updateCount() {
-    let array = this.gameData.spells;
+    let array = this.spells;
 
     array = array.filter((value) => {
       return value.name.toLowerCase().indexOf(this.search) > -1;
@@ -73,7 +75,7 @@ class CharacterSpellsController {
 
   mapSpells() {
     if(this.character.spells) {
-      this.gameData.spells.forEach((spell:any, index:number) => {
+      this.spells.forEach((spell:any, index:number) => {
         for(var i in this.character.spells) {
           if(this.character.spells[i].name === spell.name) {
             spell.known = true;
@@ -138,6 +140,6 @@ export const characterSpellsComponent = {
   templateUrl: 'app/pages/character/spells/spells.component.html',
   bindings: {
     character: '=',
-    gameData: '='
+    spells: '='
   }
 };

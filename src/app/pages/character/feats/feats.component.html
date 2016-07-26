@@ -46,7 +46,7 @@
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="feat in $ctrl.gameData.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+          ng-repeat="feat in $ctrl.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
           ng-click="$ctrl.showFeatsModal($event, feat);">
             <td md-cell ng-click="$event.stopPropagation();">
               <md-checkbox ng-model="feat.known" aria-label="Checkbox 1" class="md-primary"

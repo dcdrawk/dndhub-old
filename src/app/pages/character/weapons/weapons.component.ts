@@ -32,7 +32,7 @@ class CharacterWeaponsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
-      this.count = this.gameData.weapons.length;
+      
       this.search = '';
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
@@ -42,15 +42,16 @@ class CharacterWeaponsController {
   }  
 
   init() {
-    // this.count = this.gameData.feats.length;
+    // this.count = this.feats.length;
+    // this.count = this.weapons.length.toString();
     this.equipped = {
       equipped: true
     };    
-    this.mapWeapons();
+    // this.mapWeapons();
   }
 
   updateCount() {
-    let array = this.gameData.weapons;
+    let array = this.weapons;
 
     array = array.filter((value) => {
       return value.name.toLowerCase().indexOf(this.search) > -1;
@@ -68,12 +69,12 @@ class CharacterWeaponsController {
         });
       }
     }
-    this.count = array.length;
+    this.count = array.length.toString();
   }
 
   mapWeapons() {
     if(this.character.weapons) {
-      this.gameData.weapons.forEach((feat:any, index:number) => {
+      this.weapons.forEach((feat:any, index:number) => {
         for(var i in this.character.weapons) {
           if(this.character.weapons[i].name === feat.name) {
             feat.equipped = true;
@@ -138,6 +139,6 @@ export const characterWeaponsComponent = {
   templateUrl: 'app/pages/character/weapons/weapons.component.html',
   bindings: {
     character: '=',
-    gameData: '='
+    weapons: '='
   }
 };

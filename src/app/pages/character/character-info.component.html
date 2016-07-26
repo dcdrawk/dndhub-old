@@ -1,11 +1,12 @@
-<!--<section layout="row" layout-wrap layout-padding class="page-header">
+<section layout="row" layout-wrap layout-padding class="page-header" hide-sm hide-xs>
   <h4>
-    Character Info
+    Character Info {{$ctrl.tabloaded}}
   </h4>
-</section>-->
+</section>
 
-<div class="md-padding" ng-if="!$ctrl.character">
-  <md-progress-circular md-mode="indeterminate" class="md-margin-auto"></md-progress-circular>   
+<div class="md-padding" ng-if="!$ctrl.character || $ctrl.loading">
+  <!--<md-progress-circular md-mode="indeterminate" class="md-margin-auto"></md-progress-circular>   -->
+  <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 </div>
 
 <md-tabs ng-if="$ctrl.character" md-selected="$ctrl.selectedIndex"> 
@@ -13,35 +14,35 @@
   <!--General Tab-->
   <md-tab label="General">
     <md-content class="md-padding">
-      <character-general game-data="$ctrl.gameData" character="$ctrl.character"></character-general>
+      <character-general game-data="$ctrl.gameData" character="$ctrl.character" ng-if="!$ctrl.loading"></character-general>
     </md-content>
   </md-tab>
 
   <!--Skills Tab-->
   <md-tab label="Stats">
     <md-content class="md-padding">
-      <character-stats game-data="$ctrl.gameData" character="$ctrl.character"></character-stats>
+      <character-stats skills="$ctrl.gameData.skills" character="$ctrl.character" ng-if="!$ctrl.loading"></character-stats>
     </md-content>
   </md-tab>
 
   <!--Feats Tab-->
   <md-tab label="Feats">
     <md-content class="md-padding">
-      <character-feats game-data="$ctrl.gameData" character="$ctrl.character"></character-feats>
+      <character-feats feats="$ctrl.gameData.feats" character="$ctrl.character"></character-feats>
     </md-content>
   </md-tab>
 
   <!--Weapons Tab-->
   <md-tab label="Weapons">
     <md-content class="md-padding">
-      <character-weapons game-data="$ctrl.gameData" character="$ctrl.character"></character-weapons>
+      <character-weapons weapons="$ctrl.gameData.weapons" character="$ctrl.character" ng-if="!$ctrl.loading"></character-weapons>
     </md-content>
   </md-tab>
 
   <!--Spells Tab-->
   <md-tab label="Spells">
     <md-content class="md-padding">
-      <character-spells game-data="$ctrl.gameData" character="$ctrl.character"></character-spells>
+      <character-spells spells="$ctrl.gameData.spells" character="$ctrl.character" ng-if="!$ctrl.loading"></character-spells>
     </md-content>
   </md-tab>
 

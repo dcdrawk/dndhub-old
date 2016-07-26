@@ -89,7 +89,7 @@
         </thead>
         <tbody md-body>
           <tr md-row 
-          ng-repeat="weapon in $ctrl.gameData.weapons | orderBy: $ctrl.featOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
+          ng-repeat="weapon in $ctrl.weapons | orderBy: $ctrl.featOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
           ng-click="$ctrl.showWeaponModal($event, weapon);">
             <td md-cell ng-click="$event.stopPropagation();">
               <md-checkbox ng-model="weapon.equipped" aria-label="Checkbox 1" class="md-primary"

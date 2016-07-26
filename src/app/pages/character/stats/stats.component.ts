@@ -68,6 +68,7 @@ export const characterStatsComponent = {
   templateUrl: 'app/pages/character/stats/stats.component.html',
   bindings: {
     character: '=',
-    gameData: '='
-  }
+    skills: '='
+  },
+  transclude: true
 };
