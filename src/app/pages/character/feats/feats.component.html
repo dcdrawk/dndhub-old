@@ -5,12 +5,18 @@
     <!-- Use floating placeholder instead of label -->
     <md-icon class="material-icons">search</md-icon>
     <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();">
+    <!--Clear Search button-->
+    <md-button class="md-icon-button clear-search" aria-label="More" ng-if="$ctrl.search.length > 0" ng-click="$ctrl.search = ''">
+      <md-icon class="material-icons">
+        close
+      </md-icon>
+    </md-button>
   </md-input-container>
 
 </div>
 <md-card>
   <md-card-content>
-    <section layout="row">
+    <section layout="row" class="table-filters">
 
       <!--Filter-->
       <md-input-container flex="25" flex-sm="50" flex-xs="100">
@@ -50,8 +56,8 @@
             <td md-cell>{{feat.name}}</td>
           </tr>
 
-          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.characters.length === 0">
-            <td md-cell colspan="2">No Characters Found</td>
+          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.count === 0">
+            <td md-cell colspan="2">No Feats Found</td>
           </tr>
 
         </tbody>

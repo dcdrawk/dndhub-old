@@ -75,13 +75,13 @@ class CharacterSpellsController {
 
   mapSpells() {
     if(this.character.spells) {
-      this.gameData.spells.forEach((feat:any, index:number) => {
+      this.gameData.spells.forEach((spell:any, index:number) => {
         for(var i in this.character.spells) {
-          if(this.character.spells[i].name === feat.name) {
-            feat.equipped = true;
+          if(this.character.spells[i].name === spell.name) {
+            spell.known = true;
             return;
           } else {
-            feat.equipped = false;
+            spell.known = false;
             // return;
           }
         }
@@ -89,15 +89,15 @@ class CharacterSpellsController {
     }
   }
 
-  selectWeapon(spell: any) {
+  selectSpell(spell: any) {
     if(!this.character.spells) {
       this.character.spells = [];
     }
 
-    if(spell.equipped) {
+    if(spell.known) {
       let update = {
         name: spell.name,
-        equipped: spell.equipped
+        known: spell.known
       };
       this.character.spells.push(update);
     } else {

@@ -25,3 +25,8 @@ md-tabs {
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
   min-height: calc(100vh - 104px);
 }
+
+md-tab-content md-content {
+  max-width: 936px;
+  margin: auto;
+}

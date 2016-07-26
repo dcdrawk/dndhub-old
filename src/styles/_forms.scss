@@ -1,11 +1,11 @@
 input[type="file"] {
-    display: none;
+  display: none;
 }
 .custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 .file-name {
   position: relative;
@@ -14,13 +14,24 @@ input[type="file"] {
 }
 
 .md-no-error-spacer {
-    .md-errors-spacer {
-        display: none;
-    }
+  .md-errors-spacer {
+    display: none;
+  }
 }
 
 md-input-container {
-    &.md-no-margin {
-        margin: 0px;
-    }
+  &.md-no-margin {
+    margin: 0px;
+  }
+}
+
+.md-button.md-icon-button.clear-search {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  min-height: 30px;
+  min-width: 30px;
+  width: 30px;
+  right: 0;
 }
