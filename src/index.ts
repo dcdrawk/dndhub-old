@@ -45,7 +45,7 @@ import {characterStatsComponent} from './app/pages/character/stats/stats.compone
 import {characterFeatsComponent} from './app/pages/character/feats/feats.component';
 import {characterFeatsModalComponent} from './app/pages/character/feats/feats-modal.component';
 import {characterWeaponsComponent} from './app/pages/character/weapons/weapons.component';
-
+import {characterSpellsComponent} from './app/pages/character/spells/spells.component';
 //SCSS
 import './index.scss';
 
@@ -75,7 +75,7 @@ angular
   .component('characterFeats', characterFeatsComponent)
   .component('characterFeatsModal', characterFeatsModalComponent)
   .component('characterWeapons', characterWeaponsComponent)
-
+  .component('characterSpells', characterSpellsComponent)
   //Auth
   .component('firebase', firebaseComponent)
   .component('signup', signUpComponent)

@@ -11,7 +11,8 @@ const endpoints = [
   'feats',
   'languages',
   'races',
-  'weapons'
+  'weapons',
+  'spells'
 ];
 
 

@@ -1,0 +1,107 @@
+<!--Search Box-->
+<div layout="row" layout-padding>
+  
+  <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
+    <!-- Use floating placeholder instead of label -->
+    <md-icon class="material-icons">search</md-icon>
+    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();">
+  </md-input-container>
+
+</div>
+<md-card>
+  <md-card-content>
+    <section layout="row">
+
+      <!--Filter-->
+      <!--<md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Filter</label>
+        <md-select ng-model="$ctrl.filters.equipped" ng-change="$ctrl.updateCount()">
+          <md-option ng-value="undefined" selected>
+            All Weapons
+          </md-option>
+          <md-option ng-value="true">
+            Equipped Weapons
+          </md-option>
+          <md-option ng-value="false">
+            Unequipped Weapons
+          </md-option>
+        </md-select>
+      </md-input-container>-->
+
+      <!--Damage Type-->
+      <!--<md-input-container flex="25" flex-sm="50" flex-xs="100">
+        <label>Damage Type</label>
+        <md-select ng-model="$ctrl.filters.damageType" ng-change="$ctrl.updateCount()">
+          <md-option value="" selected>
+            All Damage Types
+          </md-option>
+          <md-option value="bludgeoning">
+            Bludgeoning
+          </md-option>
+          <md-option value="piercing">
+            Piercing
+          </md-option>
+          <md-option value="slashing">
+            Slashing
+          </md-option>
+        </md-select>
+      </md-input-container>-->
+
+      <!--Weapon Type-->
+        <!--<md-input-container flex="25" flex-sm="50" flex-xs="100">
+          <label>Weapon Type</label>
+          <md-select ng-model="$ctrl.filters.weaponType" ng-change="$ctrl.updateCount()">
+            <md-option value="" selected>
+              All Weapon Types
+            </md-option>
+            <md-option value="Simple Melee">
+              Simple Melee
+            </md-option>
+            <md-option value="Simple Ranged">
+              Simple Ranged
+            </md-option>
+            <md-option value="Martial Melee">
+              Martial Melee
+            </md-option>
+            <md-option value="Martial Ranged">
+              Martial Ranged
+            </md-option>
+          </md-select>
+        </md-input-container>-->
+    </section>
+
+    <!--Feats table-->
+    <md-table-container>
+      <table md-table ng-model="$ctrl.selected" md-progress="promise">
+        <thead md-head md-order="$ctrl.spellOrder" md-on-reorder="">
+          <tr md-row>
+            <th md-column class="checkbox-col"><span>Known</span></th>
+            <th md-column md-order-by="name"><span>Name</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+          ng-repeat="spell in $ctrl.gameData.spells | orderBy: $ctrl.spellOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
+          ng-click="$ctrl.showSpellModal($event, spell);">
+            <td md-cell ng-click="$event.stopPropagation();">
+              <md-checkbox ng-model="spell.known" aria-label="Checkbox" class="md-primary"
+              ng-change="$ctrl.selectSpell(spell);">
+              </md-checkbox>
+            </td>
+            <td md-cell>{{spell.name}}</td>
+          </tr>
+
+          <tr md-row ng-if="$ctrl.count === 0">
+            <td md-cell colspan="5">
+              <div class="text-center">No Spells Found</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
+
+  </md-card-content>
+</md-card>
