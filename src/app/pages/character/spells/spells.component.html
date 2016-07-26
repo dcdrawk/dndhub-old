@@ -10,9 +10,9 @@
 </div>
 <md-card>
   <md-card-content>
-<section layout="row" class="table-filters">
+<section layout="row" class="table-filters" layout-wrap>
       <!--Filter-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+      <md-input-container flex="25" flex-sm="50" flex-xs="50">
         <label>Filter</label>
         <md-select ng-model="$ctrl.filters.known" ng-change="$ctrl.updateCount()">
           <md-option ng-value="undefined" selected>
@@ -28,7 +28,7 @@
       </md-input-container>
 
       <!--Damage Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+      <md-input-container flex="25" flex-sm="50" flex-xs="50">
         <label>School</label>
         <md-select ng-model="$ctrl.filters.school" ng-change="$ctrl.updateCount()">
           <md-option value="" selected>
@@ -62,7 +62,7 @@
       </md-input-container>
 
       <!--Weapon Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+      <md-input-container flex="25" flex-sm="50" flex-xs="50">
         <label>Level</label>
         <md-select ng-model="$ctrl.filters.level" ng-change="$ctrl.updateCount()">
           <md-option value="" selected>
@@ -103,7 +103,7 @@
       </md-input-container>
 
       <!--Damage Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="100">
+      <md-input-container flex="25" flex-sm="50" flex-xs="50">
         <label>Class</label>
         <md-select ng-model="$ctrl.filters.class" ng-change="$ctrl.updateCount()">
           <md-option value="" selected>

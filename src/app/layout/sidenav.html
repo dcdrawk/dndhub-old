@@ -21,9 +21,19 @@
     </section>
 
     <!--Menu-->
-    <ul class="sidenav-menu" ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
+    <ul hide-sm hide-xs class="sidenav-menu"
+    ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
       <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
         <span ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
+          <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
+      </li>
+    </ul>
+
+    <!--Menu-->
+    <ul hide show-sm show-xs class="sidenav-menu"
+    ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
+      <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
+        <span ng-click="$ctrl.toggleSidenav('right')" ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
           <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
       </li>
     </ul>

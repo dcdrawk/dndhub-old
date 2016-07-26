@@ -77,7 +77,7 @@
           <tr md-row>
             <th md-column md-order-by="name"><span>Name</span></th>
             <th md-column md-numeric md-order-by="base"><span>Base</span></th>
-            <th md-column md-numeric md-order-by="bonus"><span>Bonus Effects</span></th>
+            <th md-column md-numeric md-order-by="bonus"><span>Bonus</span></th>
             <th md-column md-numeric md-order-by="total"><span>Total</span></th>
           </tr>
         </thead>
@@ -124,19 +124,19 @@
         <thead md-head md-order="$ctrl.skillOrder" md-on-reorder="">
           <tr md-row>
             <th md-column md-order-by="name"><span>Name</span></th>
-            <th md-column md-numeric md-order-by="abilityScore"><span>Modifier</span></th>
-            <th md-column md-numeric md-order-by="abilityScore"><span>Ability Score</span></th>
-            <th md-column md-numeric md-order-by="abilityScore"><span>Traning</span></th>
-            <th md-column md-numeric md-order-by="level"><span>Bonus</span></th>
-            <th md-column md-numeric md-order-by="level"><span>Total</span></th>
+            <!--<th md-column md-numeric md-order-by="abilityScore" hide-xs hide-sm><span>Modifier</span></th>
+            <th md-column md-numeric hide-xs><span>Ability Score</span></th>-->
+            <th md-column md-numeric ><span>Traning</span></th>
+            <th md-column md-numeric ><span>Bonus</span></th>
+            <th md-column md-numeric md-order-by="total"><span>Total</span></th>
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row ng-repeat="skill in $ctrl.skills | orderBy: $ctrl.skillOrder track by $index">
             <td md-cell>{{skill.name}}</td>
-            <td md-cell>{{skill.abilityScore}}</td>
-            <td md-cell>{{$ctrl.character.abilityScores[skill.abilityScore].base +
-            $ctrl.character.abilityScores[skill.abilityScore].bonus}}</td>
+            <!--<td md-cell hide-xs hide-sm>{{skill.abilityScore}}</td>
+            <td md-cell  hide-xs>{{$ctrl.character.abilityScores[skill.abilityScore].base +
+            $ctrl.character.abilityScores[skill.abilityScore].bonus}}</td>-->
             <td md-cell>
               <md-checkbox ng-model="$ctrl.character.skills[skill.name].trained" aria-label="Checkbox 1" class="md-primary"
               ng-change="$ctrl.updateCharacter('skills/' + skill.name + '/', 'trained', $ctrl.character.skills[skill.name].trained);">

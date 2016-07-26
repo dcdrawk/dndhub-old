@@ -30,3 +30,8 @@ md-tab-content md-content {
   max-width: 936px;
   margin: auto;
 }
+@media (max-width: 960px) {
+  md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+      min-height: calc(100vh - 48px);
+  }
+}

@@ -1,0 +1,11 @@
+@media (max-width: 960px) {
+  md-card {
+    margin: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  md-card md-card-content {
+    padding: 8px;
+  }
+}
