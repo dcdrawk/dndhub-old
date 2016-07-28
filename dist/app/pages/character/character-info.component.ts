@@ -16,6 +16,7 @@ class CharacterInfoController {
     'CharacterService',
     '$scope',
     '$rootScope',
+    '$timeout'
     // '$mdDialogOptions',
   ];
 
@@ -39,13 +40,16 @@ class CharacterInfoController {
     private toastService: ToastService,
     private characterService: CharacterService,
     private $scope: angular.IScope,
-    private $rootScope: angular.IRootScopeService
+    private $rootScope: angular.IRootScopeService,
+    private $timeout: angular.ITimeoutService
     ) {
       this.charcterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {
         this.characters = characters;
         this.character = this.getSelectedCharacter();
       });
-      this.init();
+      this.$timeout(() => {
+        this.init();
+      }, 250)
     }  
 
   init() {
@@ -61,9 +65,6 @@ class CharacterInfoController {
 
     if(this.characterService.selectedCharacter) {
       this.character = this.characterService.selectedCharacter;
-      // console.log('char info characters exists');
-      // // this.character = this.getSelectedCharacter();
-      // this.character = {};
     }
 
     this.charcterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {

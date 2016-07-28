@@ -28,7 +28,7 @@ class CharacterFeatsController {
       this.selected = [];
       this.limit = '5';
       this.page = '1';
-      this.count = this.gameData.feats.length;
+      this.count = this.feats.length;
       this.init();
   }  
 
@@ -36,7 +36,7 @@ class CharacterFeatsController {
     this.known = {
       known: true
     };    
-    this.mapFeats();
+    // this.mapFeats();
   }
 
   changeFilter(filter: any) {
@@ -46,7 +46,7 @@ class CharacterFeatsController {
           known: true
         };
         //Set the count for the pagination
-        this.count = this.gameData.feats.filter((value) => {
+        this.count = this.feats.filter((value) => {
           return value.known === true;
         }).length;
         break;
@@ -55,29 +55,29 @@ class CharacterFeatsController {
           known: false
         };
         //Set the count for the pagination
-        this.count = this.gameData.feats.filter((value) => {
+        this.count = this.feats.filter((value) => {
           return value.known === false;
         }).length;
         break; 
       default:
         this.filter = undefined;
         //Set the count for the pagination
-        this.count = this.gameData.feats.length;
+        this.count = this.feats.length;
         break;
     }    
   }
 
   updateCount() {
     if(this.filter && this.filter.known === true) {
-      this.count = this.gameData.feats.filter((value) => {
+      this.count = this.feats.filter((value) => {
         return value.known === false && value.name.indexOf(this.search) > -1;
       }).length;
     } else if(this.filter && this.filter.known === true) {
-      this.count = this.gameData.feats.filter((value) => {
+      this.count = this.feats.filter((value) => {
         return value.known === true && value.name.indexOf(this.search) > -1;
       }).length;
     } else {
-      this.count = this.gameData.feats.filter((value) => {
+      this.count = this.feats.filter((value) => {
         console.log(value.name.indexOf(this.search));
         return value.name.toLowerCase().indexOf(this.search) >= 0;
       }).length;
@@ -86,7 +86,7 @@ class CharacterFeatsController {
 
   mapFeats() {
     if(this.character.feats) {
-      this.gameData.feats.forEach((feat:any, index:number) => {
+      this.feats.forEach((feat:any, index:number) => {
         for(var i in this.character.feats) {
           if(this.character.feats[i].name === feat.name) {
             feat.known = true;
@@ -152,6 +152,6 @@ export const characterFeatsComponent = {
   templateUrl: 'app/pages/character/feats/feats.component.html',
   bindings: {
     character: '=',
-    gameData: '='
+    feats: '='
   }
 };

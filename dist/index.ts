@@ -9,6 +9,7 @@ import 'angular-messages';
 import 'angular-highlightjs';
 import 'angular-validation-match';
 import 'jQuery';
+import 'fastclick';
 
 //-- Config --
 import routesConfig from './routes';
