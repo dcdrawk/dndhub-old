@@ -56,6 +56,7 @@ class CharacterStatsController {
 
     this.statsService.getRaces().then((races: any[]) => {
       this.races = races;
+      this.getSpeed();
     });
     
     if(this.characterService.selectedCharacter) {
@@ -93,13 +94,16 @@ class CharacterStatsController {
 
     this.getInitiative();
     
-    this.getSpeed();
+    
 
   }
 
   getProficiencyBonus() {
+    console.log('get bonus');
     if(this.character.proficiencyBonusLock) {      
+      console.log('get bonus!!!');
       this.character.proficiencyBonus = Math.ceil(parseInt(this.character.level)/4+1);
+      console.log(this.character.proficiencyBonus);
     }
   }
 

@@ -1,6 +1,6 @@
 <section layout="row" layout-wrap layout-padding class="page-header">
   <h4>
-    Stats
+    Stats {{$ctrl.character.proficiencyBonus}} {{$ctrl.character.proficiencyBonusLock}}
   </h4>
 </section>
 
@@ -12,7 +12,7 @@
     <md-card-content>
       <div layout="row" layout-wrap>
         <!--Proficiency Bonus-->
-        <div flex="25" flex-sm="50" flex-xs="100" layout="row">
+        <div flex="25" flex-sm="50" flex-xs="50" layout="row">
           <md-input-container ng-if="$ctrl.character.proficiencyBonusLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Proficiency Bonus</label>
             <input type="number" ng-model="$ctrl.character.proficiencyBonus" disabled
@@ -22,14 +22,15 @@
             </md-tooltip>
           </md-input-container>
           <md-input-container ng-if="!$ctrl.character.proficiencyBonusLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
-            <label>Proficiency Bonus</label>
+            <label>Proficiency Bonus!!</label>
             <input type="number" ng-model="$ctrl.character.proficiencyBonus"
             ng-change="$ctrl.updateCharacter('', 'proficiencyBonus', $ctrl.character.proficiencyBonus);">
           </md-input-container>
           <md-input-container flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <md-checkbox aria-label="Checkbox 1" class="md-primary inline-checkbox"
             ng-model="$ctrl.character.proficiencyBonusLock"
-            ng-change="$ctrl.updateCharacter('', 'proficiencyBonusLock', $ctrl.character.proficiencyBonusLock); $ctrl.character.proficiencyBonus = $ctrl.getProficiencyBonus($ctrl.character.level);">
+            ng-change="$ctrl.updateCharacter('', 'proficiencyBonusLock', $ctrl.character.proficiencyBonusLock);
+            $ctrl.getProficiencyBonus();">
               <md-icon class="material-icons">
                 <span ng-if="$ctrl.character.proficiencyBonusLock">
                   lock
@@ -43,14 +44,14 @@
         </div>
 
         <!--Armor Class-->
-        <md-input-container flex="25" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+        <md-input-container flex="25" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
           <label>Armor Class</label>
           <input type="number" ng-model="$ctrl.character.armorClass"
           ng-change="$ctrl.updateCharacter('', 'armorClass', $ctrl.character.armorClass);">
         </md-input-container>
 
         <!--Initiative-->
-        <div flex="25" flex-sm="50" flex-xs="100" layout="row">
+        <div flex="25" flex-sm="50" flex-xs="50" layout="row">
           <md-input-container ng-if="$ctrl.character.initiativeLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Initiative</label>
             <input type="number" ng-model="$ctrl.character.initiative" disabled
@@ -59,7 +60,7 @@
               Dex Modifier
             </md-tooltip>
           </md-input-container>
-          <md-input-container ng-if="!$ctrl.character.initiativeLock" flex="50" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+          <md-input-container ng-if="!$ctrl.character.initiativeLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Initiative</label>
             <input type="number" ng-model="$ctrl.character.initiative"
             ng-change="$ctrl.updateCharacter('', 'initiative', $ctrl.character.initiative);">
@@ -81,7 +82,7 @@
         </div>
 
         <!--Speed-->
-        <div flex="25" flex-sm="50" flex-xs="100" layout="row">
+        <div flex="25" flex-sm="50" flex-xs="50" layout="row">
           <md-input-container ng-if="$ctrl.character.speedLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Speed</label>
             <input type="number" ng-model="$ctrl.character.speed" disabled
