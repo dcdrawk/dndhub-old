@@ -1,6 +1,6 @@
 <section layout="row" layout-wrap layout-padding class="page-header">
   <h4>
-    Stats {{$ctrl.character.proficiencyBonus}} {{$ctrl.character.proficiencyBonusLock}}
+    Stats
   </h4>
 </section>
 
@@ -91,7 +91,7 @@
               {{$ctrl.character.race}}
             </md-tooltip>
           </md-input-container>
-          <md-input-container ng-if="!$ctrl.character.speedLock" flex="50" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+          <md-input-container ng-if="!$ctrl.character.speedLock" flex="50" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Speed</label>
             <input type="number" ng-model="$ctrl.character.speed" step="5"
             ng-change="$ctrl.updateCharacter('', 'speed', $ctrl.character.speed);">
@@ -118,28 +118,28 @@
     <md-card-content>
       <div layout="row" layout-wrap>
         <!--Current Hit Points-->
-        <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <md-input-container flex="25" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
           <label>Current Hit Points</label>
           <input type="number" ng-model="$ctrl.character.currentHP"
           ng-change="$ctrl.updateCharacter('', 'currentHP', $ctrl.character.currentHP);">
         </md-input-container>
 
         <!--Max Hit Points-->
-        <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <md-input-container flex="25" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
           <label>Max Hit Points</label>
           <input type="number" ng-model="$ctrl.character.maxHP"
           ng-change="$ctrl.updateCharacter('', 'maxHP', $ctrl.character.maxHP); $ctrl.updateTotalHP()">
         </md-input-container>
 
         <!--Temp Hit Points-->
-        <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <md-input-container flex="25" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
           <label>Temp Hit Points</label>
           <input type="number" ng-model="$ctrl.character.tempHP"
           ng-change="$ctrl.updateCharacter('', 'tempHP', $ctrl.character.tempHP); $ctrl.updateTotalHP()">
         </md-input-container>
 
         <!--Total Hit Points-->
-        <md-input-container flex="25" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+        <md-input-container flex="25" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
           <label>Total Hit Points</label>
           <input type="number" ng-model="$ctrl.totalHP" disabled>
           <!--If there are no subraces-->

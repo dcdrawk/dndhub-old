@@ -38,7 +38,7 @@ function routesConfig(
     })
     .state('character', {
       url: '/character',
-      template: '<ui-view></ui-view>'
+      template: '<ui-view class="test"></ui-view>'
     })
     .state('character.general', {
       url: '/general',

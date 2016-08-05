@@ -71,7 +71,6 @@ class CharacterStatsController {
   init() {
     this.character = this.characterService.selectedCharacter;
     this.totalHP = this.character.maxHP + this.character.tempHP;
-    console.log(this.character.proficiencyBonusLock);
 
     if(typeof this.character.proficiencyBonusLock === 'undefined') {
       this.character.proficiencyBonusLock = true;
@@ -99,11 +98,8 @@ class CharacterStatsController {
   }
 
   getProficiencyBonus() {
-    console.log('get bonus');
-    if(this.character.proficiencyBonusLock) {      
-      console.log('get bonus!!!');
+    if(this.character.proficiencyBonusLock) {
       this.character.proficiencyBonus = Math.ceil(parseInt(this.character.level)/4+1);
-      console.log(this.character.proficiencyBonus);
     }
   }
 
@@ -119,7 +115,6 @@ class CharacterStatsController {
   getSpeed() {
     if(this.character.speedLock) {
       this.races.forEach((race) => {
-        console.log(race.name);
         if(this.character.race === race.name) {
           this.character.speed = +race.speed;
         }
@@ -129,7 +124,6 @@ class CharacterStatsController {
 
   getAbilityScoreModifier(score) {
     return Math.floor((parseInt(score) / 2 - 5));
-    // return statMods;
   }
 
 

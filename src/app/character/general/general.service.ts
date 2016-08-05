@@ -18,7 +18,7 @@ export default class GeneralService {
     private $rootScope: angular.IRootScopeService,
     private cacheService: CacheService
   ) {
-
+    
   }
 
   //Get the classes

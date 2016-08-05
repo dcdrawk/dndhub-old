@@ -23,18 +23,12 @@ export default class StatsService {
 
   //Get the game data for DND
   getSkills() {
-    console.log('get the data');
     return this.$q((resolve, reject) => {
       if(this.cacheService.get('skills')) {
-        console.log('skills in cacheService');
         resolve(this.cacheService.get('skills'));
       } else {
-        console.log('skills not in cache, fetching...');
         firebase.database().ref('/skills').once('value').then((snapshot) => {
-          console.log('skills loaded!');
           this.cacheService.put('skills', snapshot.val());
-          // console.log(snapshot.val());
-          // this.gameData[endpoint] = snapshot.val();
           resolve(snapshot.val());
         });
       }
