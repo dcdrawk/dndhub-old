@@ -36,6 +36,9 @@ class CharacterStatsController {
   skillOrder: any;
   totalHP: number;
   skills: any[];
+  races: any[];
+  proficiencyBonus: number;
+
   show: boolean;
   constructor(
     private characterService: CharacterService,
@@ -50,17 +53,81 @@ class CharacterStatsController {
     this.statsService.getSkills().then((skills: any[]) => {
       this.skills = skills;
     });
+
+    this.statsService.getRaces().then((races: any[]) => {
+      this.races = races;
+    });
     
     if(this.characterService.selectedCharacter) {
-      this.character = this.characterService.selectedCharacter;
-      this.totalHP = this.character.maxHP + this.character.tempHP;
+      this.init();
     }
 
     this.$scope.$on('CHARACTER_SELECTED', () => {
-      this.character = this.characterService.selectedCharacter;
-      this.totalHP = this.character.maxHP + this.character.tempHP;
+      this.init();
     });
   }
+
+  init() {
+    this.character = this.characterService.selectedCharacter;
+    this.totalHP = this.character.maxHP + this.character.tempHP;
+    console.log(this.character.proficiencyBonusLock);
+
+    if(typeof this.character.proficiencyBonusLock === 'undefined') {
+      this.character.proficiencyBonusLock = true;
+    }
+
+    if(typeof this.character.initiativeLock === 'undefined') {
+      this.character.initiativeLock = true;
+    }
+
+    if(typeof this.character.speedLock === 'undefined') {
+      this.character.speedLock = true;
+    }
+
+    // if(this.character.proficiencyBonusLock) {
+    //   this.character.proficiencyBonus = this.getProficiencyBonus(this.character.level);
+    // }
+
+    
+    this.getProficiencyBonus();
+
+    this.getInitiative();
+    
+    this.getSpeed();
+
+  }
+
+  getProficiencyBonus() {
+    if(this.character.proficiencyBonusLock) {      
+      this.character.proficiencyBonus = Math.ceil(parseInt(this.character.level)/4+1);
+    }
+  }
+
+  getInitiative() {
+    if(this.character.initiativeLock) {
+      this.character.initiative = this.getAbilityScoreModifier(
+        this.character.abilityScores.Dexterity.base + 
+        this.character.abilityScores.Dexterity.bonus
+      );
+    }
+  }
+
+  getSpeed() {
+    if(this.character.speedLock) {
+      this.races.forEach((race) => {
+        console.log(race.name);
+        if(this.character.race === race.name) {
+          this.character.speed = +race.speed;
+        }
+      });
+    }
+  }
+
+  getAbilityScoreModifier(score) {
+    return Math.floor((parseInt(score) / 2 - 5));
+    // return statMods;
+  }
+
 
   updateCharacter(path: string, property: string, value:any) {
     this.characterService.updateCharacter(path, property, value);

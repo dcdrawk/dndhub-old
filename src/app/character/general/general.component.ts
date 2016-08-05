@@ -70,7 +70,7 @@ class CharacterGeneralController {
         this.character = this.characterService.selectedCharacter;
         this.getSubraces(this.character.race);
       });
-  }  
+  }
 
   getSubraces(characterRace: string) {
     for(let i in this.races) {

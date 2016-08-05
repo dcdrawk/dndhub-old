@@ -40,4 +40,18 @@ export default class StatsService {
       }
     });
   }
+
+  //Get the races
+  getRaces() {
+    return this.$q((resolve, reject) => {
+      if(this.cacheService.get('races')) {
+        resolve(this.cacheService.get('races'));
+      } else {
+        firebase.database().ref('/races').once('value').then((snapshot) => {
+          this.cacheService.put('races', snapshot.val());
+          resolve(snapshot.val());
+        });
+      }
+    });
+  }
 }

@@ -27,26 +27,30 @@ import fileread from './app/directives/fileread';
 
 //-- Services --
 import ToastService from './app/services/toast.service';
-import FirebaseService from './app/pages/firebase/firebase.service';
-import GameDataService from './app/pages/firebase/game-data.service';
-import CharacterService from './app/pages/character/character.service';
-//-- Pages --
+import FirebaseService from './app/firebase/firebase.service';
+import GameDataService from './app/firebase/game-data.service';
+import CacheService from './app/services/cache.service';
 
 //Authentication
-import {firebaseComponent} from './app/pages/firebase/firebase.component';
-import {profileComponent} from './app/pages/firebase/profile.component';
-import {signUpComponent} from './app/pages/firebase/sign-up.component';
+import {signInComponent} from './app/firebase/sign-in.component';
+import {profileComponent} from './app/firebase/profile.component';
+import {signUpComponent} from './app/firebase/sign-up.component';
 
-//Characters
-import {characterListComponent} from './app/pages/character/character-list.component';
-import {newCharacterModalComponent} from './app/pages/character/new-character-modal.component';
-import {characterInfoComponent} from './app/pages/character/character-info.component';
-import {characterGeneralComponent} from './app/pages/character/general/general.component';
-import {characterStatsComponent} from './app/pages/character/stats/stats.component';
-import {characterFeatsComponent} from './app/pages/character/feats/feats.component';
-import {characterFeatsModalComponent} from './app/pages/character/feats/feats-modal.component';
-import {characterWeaponsComponent} from './app/pages/character/weapons/weapons.component';
-import {characterSpellsComponent} from './app/pages/character/spells/spells.component';
+// -- Character Components --
+import {characterListComponent} from './app/character/character-list/character-list.component';
+import {newCharacterModalComponent} from './app/character/new-character/new-character-modal.component';
+import {characterGeneralComponent} from './app/character/general/general.component';
+import {characterStatsComponent} from './app/character/stats/stats.component';
+import {characterFeatsComponent} from './app/character/feats/feats.component';
+import {characterFeatsModalComponent} from './app/character/feats/feats-modal.component';
+import {characterWeaponsComponent} from './app/character/weapons/weapons.component';
+import {characterSpellsComponent} from './app/character/spells/spells.component';
+
+// -- Character Services --
+import CharacterService from './app/character/character.service';
+import GeneralService from './app/character/general/general.service';
+import StatsService from './app/character/stats/stats.service';
+
 //SCSS
 import './index.scss';
 
@@ -57,7 +61,8 @@ angular
   .service('FirebaseService', FirebaseService)
   .service('GameDataService', GameDataService)
   .service('ToastService', ToastService)
-  .service('CharacterService', CharacterService)
+  .service('CacheService', CacheService)
+  
   .directive('fileread', fileread)
 
   //Layout
@@ -67,17 +72,23 @@ angular
   .component('fountainTitle', title)
   .component('fountainFooter', footer)
   
-  //Character
+  //Character Components
   .component('newCharacterModal', newCharacterModalComponent)
   .component('characterlist', characterListComponent)
-  .component('characterInfo', characterInfoComponent)
   .component('characterGeneral', characterGeneralComponent)
   .component('characterStats', characterStatsComponent)
   .component('characterFeats', characterFeatsComponent)
   .component('characterFeatsModal', characterFeatsModalComponent)
   .component('characterWeapons', characterWeaponsComponent)
   .component('characterSpells', characterSpellsComponent)
+
+  //Character Services
+  .service('CharacterService', CharacterService)
+  .service('GeneralService', GeneralService)
+  .service('StatsService', StatsService)
+
+
   //Auth
-  .component('firebase', firebaseComponent)
-  .component('signup', signUpComponent)
+  .component('signIn', signInComponent)
+  .component('signUp', signUpComponent)
   .component('profile', profileComponent);

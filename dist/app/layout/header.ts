@@ -1,5 +1,5 @@
 import 'angular-material';
-import FirebaseService from '../pages/firebase/firebase.service';
+import FirebaseService from '../firebase/firebase.service';
 
 declare var angular: any;
 

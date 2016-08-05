@@ -30,6 +30,14 @@ table.md-table {
   border-bottom: 1px solid #d8d8d8;
 }
 
+table.md-table td.md-cell.md-numeric.text-center,
+table.md-table th.md-column.md-numeric.text-center {
+   text-align: center;
+   input {
+     text-align: center;
+   }
+ }
+
 @media (max-width: 960px) {
   .table-filters {
     margin: -16px -8px 0 -8px;
