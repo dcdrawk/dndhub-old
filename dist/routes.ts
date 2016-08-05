@@ -46,12 +46,10 @@ function routesConfig(
     })
     .state('character.stats', {
       url: '/stats',
-      template: '<character-stats></character-stats>',
-      // resolve:{
-      //   // 
-      //   stats:  function(){
-      //     return {value: 'simple!'};
-      //   }
-      // }
+      template: '<character-stats/>'
+    })
+    .state('character.feats', {
+      url: '/feats',
+      template: '<character-feats/>'
     })
 }

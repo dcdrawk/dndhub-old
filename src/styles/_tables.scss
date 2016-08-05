@@ -70,4 +70,8 @@ table.md-table th.md-column.md-numeric.text-center {
   table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
     padding: 0 8px 0 0;
   }
+
+  .md-table-pagination {
+    padding: 0 12px;
+  }
 }

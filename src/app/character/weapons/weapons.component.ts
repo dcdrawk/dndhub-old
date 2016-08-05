@@ -1,13 +1,18 @@
 import 'angular-material';
-import CharacterService from '../character.service';
+import * as angular from 'angular';
 
-declare var firebase: any;
+import CharacterService from '../character.service';
+import WeaponsService from './weapons.service';
 
 class CharacterWeaponsController {
 
   static $inject: Array<string> = [
+    '$scope',
     'CharacterService',
-    '$mdDialog'
+    '$mdDialog',
+    '$mdMedia',
+    'WeaponsService',
+    '$timeout'
   ];
 
   character: any;
@@ -21,41 +26,74 @@ class CharacterWeaponsController {
   filter: any;
   search: string;
   filters: any;
+  loaded: boolean;
+
   // abilityScores: any[];
   // skillOrder: any;
   // totalHP: number;
 
   constructor(
+    private $scope: angular.IScope,
     private characterService: CharacterService,
-    private $mdDialog: ng.material.IDialogService
+    private $mdDialog: ng.material.IDialogService,
+    private $mdMedia: ng.material.IMedia,
+    private weaponsService: WeaponsService,
+    private $timeout: angular.ITimeoutService
     ) {
-      this.selected = [];
-      this.limit = '5';
-      this.page = '1';
+      // this.selected = [];
+      // this.limit = '5';
+      // this.page = '1';
       
-      this.search = '';
+      // this.search = '';
       // this.abilityScores = abilityScores;
       // this.skillOrder = 'name';
       // this.totalHP = this.character.maxHP + this.character.tempHP;
 
-      this.init();
+      // this.init();
+
+      if(this.characterService.selectedCharacter) {
+        this.init();
+      }
+
+      this.$scope.$on('CHARACTER_SELECTED', () => {
+        this.init();
+      });
   }  
 
   init() {
-    // this.count = this.feats.length;
-    // this.count = this.weapons.length.toString();
+    this.limit = '5';
+    this.page = '1';
+
     this.equipped = {
       equipped: true
     };    
-    // this.mapWeapons();
+
+    this.loaded = false;
+    this.character = this.characterService.selectedCharacter;    
+
+    this.weaponsService.getWeapons().then((weapons: any[]) => {
+      this.weapons = weapons;
+      
+      this.mapWeapons();
+
+      this.$timeout(() => {
+        this.count = this.weapons.length.toString();
+        this.loaded = true;
+      }, 300);
+
+    });
+    
   }
 
   updateCount() {
     let array = this.weapons;
 
-    array = array.filter((value) => {
-      return value.name.toLowerCase().indexOf(this.search) > -1;
-    });
+    if(this.search && this.search !== '') {
+      array = array.filter((value) => {
+        return value.name.toLowerCase().indexOf(this.search) > -1;
+      });
+
+    }
 
     for(var i in this.filters) {
       if(typeof this.filters[i] === 'boolean' && this.filters[i]!== '') {
@@ -115,30 +153,34 @@ class CharacterWeaponsController {
     this.characterService.updateCharacter(path, property, value);
   }
 
-  showFeatsModal(ev:any, feat:any) {
-    // this.$mdDialog.show({
-    //   template: `<character-feats-modal feat-name="'${feat.name}'" feat-description="'${feat.description}'" />`,
-    //   ariaLabel: 'Character Feats Modal',
-    //   parent: angular.element(document.body),
-    //   targetEvent: ev,
-    //   clickOutsideToClose: true,
-    //   locals: {
-    //     item: 'testItem'
-    //   }
-    // })
-    // .then(() => {
-    //   // this.getCharacters();
-    //   // this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
-    // });
+  showWeaponsModal(ev:any, weapon:any) {
+    let useFullScreen = (this.$mdMedia('xs'));
+    weapon = JSON.stringify(weapon).replace(/"/g, "\\\'");
+    console.log(weapon);
+
+    this.$mdDialog.show({
+      template: `<character-weapons-modal weapon="'${weapon}'" />`,
+    //   template: `<character-weapons-modal weapon="'${{
+    // "name": "Club",
+    // "type": "weapon",
+    // "weaponType": "Simple Melee",
+    // "cost": "1 sp",
+    // "damage": "1d4",
+    // "damageType": "bludgeoning",
+    // "weight": "2 lb.",
+    // "properties": ["Light"]
+    // }}'" />`,
+      ariaLabel: 'Character Weapons Modal',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen
+    });
   }
 
 }
 
 export const characterWeaponsComponent = {
   controller: CharacterWeaponsController,
-  templateUrl: 'app/pages/character/weapons/weapons.component.html',
-  bindings: {
-    character: '=',
-    weapons: '='
-  }
+  templateUrl: 'app/character/weapons/weapons.component.html'
 };

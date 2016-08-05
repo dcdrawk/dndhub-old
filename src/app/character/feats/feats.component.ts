@@ -4,7 +4,6 @@ import * as angular from 'angular';
 import CharacterService from '../character.service';
 import FeatsService from './feats.service';
 
-declare var firebase: any;
 declare var featsService: any;
 
 class CharacterFeatsController {
@@ -14,7 +13,8 @@ class CharacterFeatsController {
     'CharacterService',
     '$mdDialog',
     '$mdMedia',
-    'FeatsService'
+    'FeatsService',
+    '$timeout'
   ];
 
   character: any;
@@ -34,7 +34,8 @@ class CharacterFeatsController {
     private characterService: CharacterService,
     private $mdDialog: ng.material.IDialogService,
     private $mdMedia: ng.material.IMedia,
-    private featsService: FeatsService
+    private featsService: FeatsService,
+    private $timeout: angular.ITimeoutService
     ) {
       // this.selected = [];
       // this.limit = '5';
@@ -55,6 +56,10 @@ class CharacterFeatsController {
     this.limit = '5';
     this.page = '1';
 
+    this.known = {
+      known: true
+    };
+
     this.loaded = false;
     this.character = this.characterService.selectedCharacter;    
 
@@ -62,12 +67,13 @@ class CharacterFeatsController {
       this.feats = feats;
       this.count = this.feats.length;
       this.mapFeats();
-    });    
 
-    // this.known = {
-    //   known: true
-    // };    
-    // this.mapFeats();
+      this.$timeout(() => {
+        this.loaded = true;
+      }, 300);
+
+    });
+    
   }
 
   changeFilter(filter: any) {
@@ -98,6 +104,10 @@ class CharacterFeatsController {
           break;
       }    
     }
+  }
+
+  clearFilter() {
+    this.filter = undefined;
   }
 
   updateCount() {
@@ -169,14 +179,7 @@ class CharacterFeatsController {
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
-      fullscreen: true,
-      // locals: {
-      //   item: 'testItem'
-      // }
-    })
-    .then(() => {
-      // this.getCharacters();
-      // this.$rootScope.$broadcast('CHARACTER_LIST_UPDATED');
+      fullscreen: useFullScreen
     });
   }
 

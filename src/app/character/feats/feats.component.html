@@ -1,70 +1,85 @@
-<!--Search Box-->
-<div layout="row" layout-padding>
-  
-  <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
-    <!-- Use floating placeholder instead of label -->
-    <md-icon class="material-icons">search</md-icon>
-    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();">
-    <!--Clear Search button-->
-    <md-button class="md-icon-button clear-search" aria-label="More" ng-if="$ctrl.search.length > 0" ng-click="$ctrl.search = ''">
-      <md-icon class="material-icons">
-        close
-      </md-icon>
-    </md-button>
-  </md-input-container>
+<section layout="row" layout-wrap layout-padding class="page-header">
+  <h4>
+    Feats
+  </h4>
+</section>
 
+<div layout="row" layout-sm="column" layout-align="space-around" ng-if="!$ctrl.loaded" class="md-padding">
+  <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
 </div>
-<md-card>
-  <md-card-content>
-    <section layout="row" class="table-filters">
 
-      <!--Filter-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="100">
-        <label>Filter</label>
-        <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
-          <md-option value="" selected>
-            All Feats
-          </md-option>
-          <md-option value="known">
-            Known Feats
-          </md-option>
-          <md-option value="unknown">
-            Unknown Feats
-          </md-option>
-        </md-select>
+<section class="container"> 
+  <div class="fade-in full-width" ng-if="$ctrl.loaded">
+    <!--Search Box-->
+    <div layout="row" layout-padding>
+      
+      <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
+        <!-- Use floating placeholder instead of label -->
+        <md-icon class="material-icons">search</md-icon>
+        <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();" ng-model-options="{ debounce: 350 }">
+        <!--Clear Search button-->
+        <md-button class="md-icon-button clear-search" aria-label="More" ng-if="$ctrl.search.length > 0" ng-click="$ctrl.search = ''; $ctrl.updateCount();">
+          <md-icon class="material-icons">
+            close
+          </md-icon>
+        </md-button>
       </md-input-container>
-    </section>
 
-    <!--Feats table-->
-    <md-table-container>
-      <table md-table ng-model="$ctrl.selected" md-progress="promise">
-        <thead md-head md-order="$ctrl.featOrder" md-on-reorder="">
-          <tr md-row>
-            <th md-column class="checkbox-col"><span>Known</span></th>
-            <th md-column md-order-by="name"><span>Name</span></th>
-          </tr>
-        </thead>
-        <tbody md-body>
-          <tr md-row 
-          ng-repeat="feat in $ctrl.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
-          ng-click="$ctrl.showFeatsModal($event, feat);">
-            <td md-cell ng-click="$event.stopPropagation();">
-              <md-checkbox ng-model="feat.known" aria-label="Checkbox 1" class="md-primary"
-              ng-change="$ctrl.selectFeat(feat);">
-              </md-checkbox>
-            </td>
-            <td md-cell>{{feat.name}}</td>
-          </tr>
+    </div>
 
-          <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.count === 0">
-            <td md-cell colspan="2">No Feats Found</td>
-          </tr>
+    <md-card>
+      <md-card-content>
+        <section layout="row" class="table-filters">
 
-        </tbody>
-      </table>
-    </md-table-container>
+          <!--Filter-->
+          <md-input-container flex="25" flex-sm="50" flex-xs="100">
+            <label>Filter</label>
+            <md-select ng-model="$ctrl.myfilter" ng-change="$ctrl.changeFilter($ctrl.myfilter)">
+              <md-option value="" selected>
+                All Feats
+              </md-option>
+              <md-option value="known">
+                Known Feats
+              </md-option>
+              <md-option value="unknown">
+                Unknown Feats
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </section>
 
-    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
+        <!--Feats table-->
+        <md-table-container>
+          <table md-table ng-model="$ctrl.selected" md-progress="promise">
+            <thead md-head md-order="$ctrl.featOrder" md-on-reorder="">
+              <tr md-row>
+                <th md-column class="checkbox-col"><span>Known</span></th>
+                <th md-column md-order-by="name"><span>Name</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row 
+              ng-repeat="feat in $ctrl.feats | orderBy: $ctrl.featOrder | filter:$ctrl.filter | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+              ng-click="$ctrl.showFeatsModal($event, feat);">
+                <td md-cell ng-click="$event.stopPropagation();">
+                  <md-checkbox ng-model="feat.known" aria-label="Checkbox 1" class="md-primary"
+                  ng-change="$ctrl.selectFeat(feat);">
+                  </md-checkbox>
+                </td>
+                <td md-cell>{{feat.name}}</td>
+              </tr>
 
-  </md-card-content>
-</md-card>
+              <tr md-row md-select="characters" md-select-id="name" md-auto-select ng-if="$ctrl.count === 0">
+                <td md-cell colspan="2">No Feats Found</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
+
+      </md-card-content>
+    </md-card>
+  </div>
+</section>

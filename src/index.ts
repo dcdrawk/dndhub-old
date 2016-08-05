@@ -44,6 +44,7 @@ import {characterStatsComponent} from './app/character/stats/stats.component';
 import {characterFeatsComponent} from './app/character/feats/feats.component';
 import {characterFeatsModalComponent} from './app/character/feats/feats-modal.component';
 import {characterWeaponsComponent} from './app/character/weapons/weapons.component';
+import {characterWeaponsModalComponent} from './app/character/weapons/weapons.modal.component';
 import {characterSpellsComponent} from './app/character/spells/spells.component';
 
 // -- Character Services --
@@ -51,7 +52,7 @@ import CharacterService from './app/character/character.service';
 import GeneralService from './app/character/general/general.service';
 import StatsService from './app/character/stats/stats.service';
 import FeatsService from './app/character/feats/feats.service';
-// import WeaponsService from './app/character/weapons/weapons.service';
+import WeaponsService from './app/character/weapons/weapons.service';
 // import ArmorService from './app/character/armor/armor.service';
 // import SpellsService from './app/character/spells/spells.service';
 // import InventoryService from './app/character/inventory/inventory.service';
@@ -85,6 +86,7 @@ angular
   .component('characterFeats', characterFeatsComponent)
   .component('characterFeatsModal', characterFeatsModalComponent)
   .component('characterWeapons', characterWeaponsComponent)
+  .component('characterWeaponsModal', characterWeaponsModalComponent)
   .component('characterSpells', characterSpellsComponent)
 
   //Character Services
@@ -92,6 +94,10 @@ angular
   .service('GeneralService', GeneralService)
   .service('StatsService', StatsService)
   .service('FeatsService', FeatsService)
+  .service('WeaponsService', WeaponsService)
+  // .service('ArmorService', ArmorService)
+  // .service('SpellsService', SpellsService)
+  // .service('InventoryService', InventoryService)
 
 
   //Auth

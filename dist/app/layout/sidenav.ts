@@ -16,8 +16,8 @@ const menu = [{
   sref: 'character.stats',
   svg: 'dice-d20'
 },{
-  title: 'Feats',
-  sref: 'character.general',
+  title: 'FeatSs',
+  sref: 'character.feats',
   icon: 'stars'
 },{
   title: 'Weapons',

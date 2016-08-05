@@ -52,4 +52,16 @@ function routesConfig(
       url: '/feats',
       template: '<character-feats/>'
     })
+    .state('character.weapons', {
+      url: '/weapons',
+      template: '<character-weapons/>'
+    })
+    // .state('character.armor', {
+    //   url: '/armor',
+    //   template: '<character-armor/>'
+    // })
+    .state('character.spells', {
+      url: '/spells',
+      template: '<character-spells/>'
+    })
 }

@@ -1,17 +1,17 @@
 .modal-lg {
-  max-width: 960px;
+  width: 960px;
 }
 
 .modal-md {
-  max-width: 720px;
+  width: 720px;
 }
 
 .modal-sm {
-  max-width: 540px;
+  width: 540px;
 }
 
 .modal-xs {
-  max-width: 320px;
+  width: 320px;
 }
 
 .md-dialog-content {
@@ -32,5 +32,27 @@
   }
   em {
     font-size: 14px;
+  }
+
+  p:first-child {
+    margin-top: 0px;
+  }
+  md-list-item._md-no-proxy {
+    padding: 0 8px;
+    div {
+      margin: 8px 0;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  md-dialog .md-dialog-content {
+    padding: 12px;
+  }
+  .modal-lg,
+  .modal-md,
+  .modal-sm,
+  .modal-xs {
+    max-width: 100%;
   }
 }
