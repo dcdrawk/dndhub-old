@@ -3,7 +3,7 @@ import 'angular-material';
 import FirebaseService from './firebase.service';
 import 'angular-ui-router';
 
-class FirebaseController {
+class SignInController {
 
   static $inject: Array<string> = ['FirebaseService', '$scope', '$state'];
   firebaseService: any;
@@ -47,7 +47,7 @@ class FirebaseController {
   }
 }
 
-export const firebaseComponent = {
-  controller: FirebaseController,
-  templateUrl: 'app/pages/firebase/firebase.component.html'
+export const signInComponent = {
+  controller: SignInController,
+  templateUrl: 'app/firebase/sign-in.component.html'
 };

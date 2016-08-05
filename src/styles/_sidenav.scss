@@ -3,6 +3,8 @@
 }
 .character-select {
   background-color: #EEEEEE;
+  min-height: 70px;
+
   md-input-container {
     width: 100%;
   }
@@ -25,6 +27,12 @@
       outline: none;
       cursor: pointer;
       position: relative;
+      border-left: 2px solid transparent;
+      color: #333;
+      font-weight: 500;
+      margin-top: 0;
+      padding: 12px 0 12px 22px;
+      font-size: 14px;
     }
   }
 }
@@ -44,9 +52,13 @@ md-sidenav._md-locked-open._md-closed {
   position: fixed;
 }
 
+._md-sidenav-backdrop {
+  position: fixed;
+}
+
 @media (max-width: 1280px) {
   md-sidenav {
-    height: 100vh;
+    // height: 100vh;
     position: absolute;
     top: -120px;
   }

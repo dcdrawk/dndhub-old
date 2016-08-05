@@ -21,17 +21,19 @@ md-tab-content md-content {
 md-tabs {
   overflow: visible;
 }
-
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-  min-height: calc(100vh - 104px);
+  min-height: 0px;
 }
+// md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+//   min-height: calc(100vh - 104px);
+// }
 
 md-tab-content md-content {
   max-width: 936px;
   margin: auto;
 }
-@media (max-width: 960px) {
-  md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-      min-height: calc(100vh - 48px);
-  }
-}
+// @media (max-width: 960px) {
+//   md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+//       min-height: calc(100vh - 48px);
+//   }
+// }

@@ -1,5 +1,5 @@
 import 'angular-material';
-import CharacterService from '../pages/character/character.service';
+import CharacterService from '../character/character.service';
 
 interface IMenuModel {
     toggleSidenav(menuId: string): void;
@@ -8,9 +8,29 @@ interface IMenuModel {
 declare var firebase: any;
 
 const menu = [{
-  title: 'Character Info',
-  sref: 'character-info',
-  icon: 'person'
+  title: 'General',
+  sref: 'character.general',
+  icon: 'info'
+},{
+  title: 'Stats',
+  sref: 'character.stats',
+  svg: 'dice-d20'
+},{
+  title: 'Feats',
+  sref: 'character.general',
+  icon: 'stars'
+},{
+  title: 'Weapons',
+  sref: 'character.general',
+  svg: 'sword'
+},{
+  title: 'Spells',
+  sref: 'character.general',
+  icon: 'whatshot'
+},{
+  title: 'Inventory',
+  sref: 'character.general',
+  icon: 'drafts'
 },{
   title: 'Adventure Group',
   sref: 'character-info',

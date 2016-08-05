@@ -1,7 +1,7 @@
 import 'angular-material';
 import * as angular from 'angular';
 import FirebaseService from './firebase.service';
-import ToastService from '../../services/toast.service';
+import ToastService from '../services/toast.service';
 
 class ProfileController {
 

@@ -1,8 +1,8 @@
 import 'angular-material';
 import * as angular from 'angular';
-import CharacterService from './character.service';
-import FirebaseService from '../firebase/firebase.service';
-import GameDataService from '../firebase/game-data.service';
+import CharacterService from '../character.service';
+import FirebaseService from '../../firebase/firebase.service';
+import GameDataService from '../../firebase/game-data.service';
 import ToastService from '../../services/toast.service';
 
 declare var firebase: any;

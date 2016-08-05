@@ -21,20 +21,22 @@
     </section>
 
     <!--Menu-->
-    <ul hide-sm hide-xs class="sidenav-menu"
+    <!--<ul hide-sm hide-xs class="sidenav-menu"
     ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
       <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
         <span ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
           <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
       </li>
-    </ul>
+    </ul>-->
 
     <!--Menu-->
-    <ul hide show-sm show-xs class="sidenav-menu"
+    <ul class="sidenav-menu"
     ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
       <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
         <span ng-click="$ctrl.toggleSidenav('right')" ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
-          <md-icon class="menu-icon material-icons">{{item.icon}}</md-icon>{{item.title}}</span>
+          <md-icon ng-if="item.icon" class="menu-icon material-icons">{{item.icon}}</md-icon>
+          <md-icon ng-if="item.svg" class="menu-icon" md-svg-src="images/icons/{{item.svg}}.svg"></md-icon>
+          {{item.title}}</span>
       </li>
     </ul>
 
