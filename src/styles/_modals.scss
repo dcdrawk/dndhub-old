@@ -1,15 +1,36 @@
 .modal-lg {
-  width: 960px;
+  max-width: 960px;
 }
 
 .modal-md {
-  width: 720px;
+  max-width: 720px;
 }
 
 .modal-sm {
-  width: 540px;
+  max-width: 540px;
 }
 
 .modal-xs {
-  width: 320px;
+  max-width: 320px;
+}
+
+.md-dialog-content {
+  ul {
+    list-style: none;
+    padding: 0;
+    border: 1px solid rgba(0,0,0,.15);
+    background: #F5F5F5;
+  }
+
+  li {
+    padding: 8px 8px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    font-size: 14px;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  em {
+    font-size: 14px;
+  }
 }

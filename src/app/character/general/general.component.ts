@@ -17,7 +17,8 @@ class CharacterGeneralController {
     'CharacterService',
     '$scope',
     '$rootScope',
-    'GeneralService'
+    'GeneralService',
+    '$timeout'
     // // '$mdDialogOptions',
   ];
 
@@ -29,6 +30,7 @@ class CharacterGeneralController {
 
   subraces: any[];
   gameData: any;
+  loaded: boolean;
 
   constructor(
     // private firebaseService: FirebaseService,
@@ -37,7 +39,8 @@ class CharacterGeneralController {
     private characterService: CharacterService,
     private $scope: angular.IScope,
     private $rootScope: angular.IRootScopeService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private $timeout: angular.ITimeoutService
     ) {
 
       // this.gameData = this.gameDataService.gameData;
@@ -70,6 +73,10 @@ class CharacterGeneralController {
         this.character = this.characterService.selectedCharacter;
         this.getSubraces(this.character.race);
       });
+
+      this.$timeout(() => {
+        this.loaded = true;
+      }, 300);
   }
 
   getSubraces(characterRace: string) {

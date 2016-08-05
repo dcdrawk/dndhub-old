@@ -10,9 +10,6 @@ export default class StatsService {
     'CacheService'
   ];
 
-  // db: any;
-  // gameData: any;
-
   constructor(
     private $q: angular.IQService,
     private $rootScope: angular.IRootScopeService,

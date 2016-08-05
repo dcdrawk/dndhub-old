@@ -50,6 +50,11 @@ import {characterSpellsComponent} from './app/character/spells/spells.component'
 import CharacterService from './app/character/character.service';
 import GeneralService from './app/character/general/general.service';
 import StatsService from './app/character/stats/stats.service';
+import FeatsService from './app/character/feats/feats.service';
+// import WeaponsService from './app/character/weapons/weapons.service';
+// import ArmorService from './app/character/armor/armor.service';
+// import SpellsService from './app/character/spells/spells.service';
+// import InventoryService from './app/character/inventory/inventory.service';
 
 //SCSS
 import './index.scss';
@@ -86,6 +91,7 @@ angular
   .service('CharacterService', CharacterService)
   .service('GeneralService', GeneralService)
   .service('StatsService', StatsService)
+  .service('FeatsService', FeatsService)
 
 
   //Auth

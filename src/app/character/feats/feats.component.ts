@@ -1,13 +1,20 @@
 import 'angular-material';
+import * as angular from 'angular';
+
 import CharacterService from '../character.service';
+import FeatsService from './feats.service';
 
 declare var firebase: any;
+declare var featsService: any;
 
 class CharacterFeatsController {
 
   static $inject: Array<string> = [
+    '$scope',
     'CharacterService',
-    '$mdDialog'
+    '$mdDialog',
+    '$mdMedia',
+    'FeatsService'
   ];
 
   character: any;
@@ -20,51 +27,77 @@ class CharacterFeatsController {
   known: any;
   filter: any;
   search: string;
+  loaded: boolean;
 
   constructor(
+    private $scope: angular.IScope,
     private characterService: CharacterService,
-    private $mdDialog: ng.material.IDialogService
+    private $mdDialog: ng.material.IDialogService,
+    private $mdMedia: ng.material.IMedia,
+    private featsService: FeatsService
     ) {
-      this.selected = [];
-      this.limit = '5';
-      this.page = '1';
-      this.count = this.feats.length;
-      this.init();
+      // this.selected = [];
+      // this.limit = '5';
+      // this.page = '1';
+      // this.count = this.feats.length;
+
+      if(this.characterService.selectedCharacter) {
+        this.init();
+      }
+
+      this.$scope.$on('CHARACTER_SELECTED', () => {
+        this.init();
+      });
+      // this.init();
   }  
 
   init() {
-    this.known = {
-      known: true
-    };    
+    this.limit = '5';
+    this.page = '1';
+
+    this.loaded = false;
+    this.character = this.characterService.selectedCharacter;    
+
+    this.featsService.getFeats().then((feats) => {
+      this.feats = feats;
+      this.count = this.feats.length;
+      this.mapFeats();
+    });    
+
+    // this.known = {
+    //   known: true
+    // };    
     // this.mapFeats();
   }
 
   changeFilter(filter: any) {
-    switch (filter) {
-      case 'known':
-        this.filter = {
-          known: true
-        };
-        //Set the count for the pagination
-        this.count = this.feats.filter((value) => {
-          return value.known === true;
-        }).length;
-        break;
-      case 'unknown':
-        this.filter = {
-          known: false
-        };
-        //Set the count for the pagination
-        this.count = this.feats.filter((value) => {
-          return value.known === false;
-        }).length;
-        break; 
-      default:
-        this.filter = undefined;
-        //Set the count for the pagination
-        this.count = this.feats.length;
-        break;
-    }    
+    if(this.feats) {
+      switch (filter) {
+        case 'known':
+          this.filter = {
+            known: true
+          };
+          //Set the count for the pagination
+          this.count = this.feats.filter((value) => {
+            return value.known === true;
+          }).length;
+          break;
+        case 'unknown':
+          this.filter = {
+            known: false
+          };
+          //Set the count for the pagination
+          this.count = this.feats.filter((value) => {
+            return value.known === false;
+          }).length;
+          break; 
+        default:
+          this.filter = undefined;
+          //Set the count for the pagination
+          this.count = this.feats.length;
+          break;
+      }    
+    }
   }
 
   updateCount() {
@@ -85,7 +118,7 @@ class CharacterFeatsController {
   }
 
   mapFeats() {
-    if(this.character.feats) {
+    if(this.character && this.character.feats ) {
       this.feats.forEach((feat:any, index:number) => {
         for(var i in this.character.feats) {
           if(this.character.feats[i].name === feat.name) {
@@ -128,16 +161,18 @@ class CharacterFeatsController {
   }
 
   showFeatsModal(ev:any, feat:any) {
-    console.log(feat);
+    let useFullScreen = (this.$mdMedia('xs'));
+
     this.$mdDialog.show({
       template: `<character-feats-modal feat-name="'${feat.name}'" feat-description="'${feat.description}'" />`,
       ariaLabel: 'Character Feats Modal',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
-      locals: {
-        item: 'testItem'
-      }
+      fullscreen: true,
+      // locals: {
+      //   item: 'testItem'
+      // }
     })
     .then(() => {
       // this.getCharacters();
@@ -149,9 +184,9 @@ class CharacterFeatsController {
 
 export const characterFeatsComponent = {
   controller: CharacterFeatsController,
-  templateUrl: 'app/pages/character/feats/feats.component.html',
-  bindings: {
-    character: '=',
-    feats: '='
-  }
+  templateUrl: 'app/character/feats/feats.component.html',
+  // bindings: {
+  //   character: '=',
+  //   feats: '='
+  // }
 };

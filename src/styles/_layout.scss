@@ -13,3 +13,21 @@ section {
   margin: auto;
   display: block;
 }
+
+md-progress-linear {
+  &.reversed-query-progress {
+    transform: translate(0, 0) scale(-1, 1);
+    // animation: query 1s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+}
+
+@keyframes query {
+  0% {
+    opacity: 1;
+    transform: translateX(60%) scale(.25, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0, 1);
+  }
+}

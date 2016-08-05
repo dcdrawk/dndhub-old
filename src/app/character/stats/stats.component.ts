@@ -38,6 +38,7 @@ class CharacterStatsController {
   skills: any[];
   races: any[];
   proficiencyBonus: number;
+  loaded: boolean;
 
   show: boolean;
   constructor(
@@ -70,6 +71,7 @@ class CharacterStatsController {
   }
 
   init() {
+    this.loaded = false;
     this.character = this.characterService.selectedCharacter;
     this.totalHP = this.character.maxHP + this.character.tempHP;
 
@@ -93,9 +95,10 @@ class CharacterStatsController {
     this.getProficiencyBonus();
 
     this.getInitiative();
-    
-    
 
+    this.$timeout(() => {
+      this.loaded = true;
+    }, 300);
   }
 
   getProficiencyBonus() {

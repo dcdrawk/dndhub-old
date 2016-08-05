@@ -1,5 +1,8 @@
 md-table-container {
   width: 100%;
+  input {
+    max-width: 72px;
+  }
 }
 
 .table-icon {
