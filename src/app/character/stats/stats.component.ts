@@ -56,7 +56,7 @@ class CharacterStatsController {
 
     this.statsService.getRaces().then((races: any[]) => {
       this.races = races;
-      this.getSpeed();
+      // this.getSpeed();
     });
     
     if(this.characterService.selectedCharacter) {
@@ -65,6 +65,7 @@ class CharacterStatsController {
 
     this.$scope.$on('CHARACTER_SELECTED', () => {
       this.init();
+      this.getSpeed();
     });
   }
 
@@ -105,10 +106,17 @@ class CharacterStatsController {
 
   getInitiative() {
     if(this.character.initiativeLock) {
-      this.character.initiative = this.getAbilityScoreModifier(
-        this.character.abilityScores.Dexterity.base + 
-        this.character.abilityScores.Dexterity.bonus
-      );
+      if(this.character.abilityScores) {
+        let base = +this.character.abilityScores.Dexterity.base ? +this.character.abilityScores.Dexterity.base : 0;
+        let bonus = +this.character.abilityScores.Dexterity.bonus ? +this.character.abilityScores.Dexterity.bonus : 0;
+
+        this.character.initiative = this.getAbilityScoreModifier(
+          base + bonus
+        );
+      } else {
+        this.character.initiative = 0;
+      }
+      
     }
   }
 

@@ -183,7 +183,7 @@
                   <span ng-if="abilityScore.name !== 'Dexterity'">
                     <input type="number" ng-model="$ctrl.character.abilityScores[abilityScore.name].base"
                     ng-change="$ctrl.updateCharacter('abilityScores/' + abilityScore.name + '/', 'base',
-                    $ctrl.character.abilityScores[abilityScore.name].base);"
+                    $ctrl.character.abilityScores[abilityScore.name].base);  $ctrl.getInitiative();"
                     aria-label="ability score bonus" class="text-center">
                   </span>
                 </md-input-container>
@@ -214,8 +214,8 @@
                   
                 <span ng-if="$ctrl.character">
                 {{$ctrl.getAbilityScoreModifier(
-                  $ctrl.character.abilityScores[abilityScore.name].base + 
-                  $ctrl.character.abilityScores[abilityScore.name].bonus)}}
+                  +$ctrl.character.abilityScores[abilityScore.name].base + 
+                  +$ctrl.character.abilityScores[abilityScore.name].bonus)}}
                 </span>
               </td>
             </tr>
@@ -275,10 +275,10 @@
                     $ctrl.character.skills[skill.name].bonus +
                     $ctrl.character.proficiencyBonus  > 0">+</span>
                   {{$ctrl.getAbilityScoreModifier(
-                    $ctrl.character.abilityScores[skill.abilityScore].base + 
-                    $ctrl.character.abilityScores[skill.abilityScore].bonus) +
-                    $ctrl.character.skills[skill.name].bonus +
-                    $ctrl.character.proficiencyBonus}}  
+                    +$ctrl.character.abilityScores[skill.abilityScore].base + 
+                    +$ctrl.character.abilityScores[skill.abilityScore].bonus) +
+                    +$ctrl.character.skills[skill.name].bonus +
+                    +$ctrl.character.proficiencyBonus}}  
                 </span>
                 <span ng-if="!$ctrl.character.skills[skill.name].trained">
                   <span ng-if="$ctrl.getAbilityScoreModifier(
@@ -286,8 +286,8 @@
                     $ctrl.character.abilityScores[skill.abilityScore].bonus) +
                     +$ctrl.character.skills[skill.name].bonus > 0">+</span>
                   {{$ctrl.getAbilityScoreModifier(
-                    $ctrl.character.abilityScores[skill.abilityScore].base + 
-                    $ctrl.character.abilityScores[skill.abilityScore].bonus) +
+                    +$ctrl.character.abilityScores[skill.abilityScore].base + 
+                    +$ctrl.character.abilityScores[skill.abilityScore].bonus) +
                     +$ctrl.character.skills[skill.name].bonus}}  
                 </span>
               </td>
