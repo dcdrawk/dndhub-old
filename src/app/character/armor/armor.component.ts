@@ -2,27 +2,27 @@ import 'angular-material';
 import * as angular from 'angular';
 
 import CharacterService from '../character.service';
-import SpellsService from './spells.service';
+import ArmorsService from './armor.service';
 
-class CharacterSpellsController {
+class CharacterArmorsController {
 
   static $inject: Array<string> = [
     '$scope',
     'CharacterService',
     '$mdDialog',
     '$mdMedia',
-    'SpellsService',
+    'ArmorService',
     '$timeout'
   ];
 
   character: any;
   selected: any;
-  spells: any[];
+  armor: any[];
   gameData: any;
   limit: string;
   page: string;
   count: string;
-  known: any;
+  equipped: any;
   filter: any;
   search: string;
   filters: any;
@@ -37,9 +37,19 @@ class CharacterSpellsController {
     private characterService: CharacterService,
     private $mdDialog: ng.material.IDialogService,
     private $mdMedia: ng.material.IMedia,
-    private spellsService: SpellsService,
+    private armorService: ArmorsService,
     private $timeout: angular.ITimeoutService
     ) {
+      // this.selected = [];
+      // this.limit = '5';
+      // this.page = '1';
+      
+      // this.search = '';
+      // this.abilityScores = abilityScores;
+      // this.skillOrder = 'name';
+      // this.totalHP = this.character.maxHP + this.character.tempHP;
+
+      // this.init();
 
       if(this.characterService.selectedCharacter) {
         this.init();
@@ -54,21 +64,20 @@ class CharacterSpellsController {
     this.limit = '5';
     this.page = '1';
 
-    this.known = {
-      known: true
-    };
+    this.equipped = {
+      equipped: true
+    };    
 
     this.loaded = false;
     this.character = this.characterService.selectedCharacter;    
 
-    this.spellsService.getSpells().then((spells: any[]) => {
-      console.log(spells);
-      this.spells = spells;
+    this.armorService.getArmor().then((armor: any[]) => {
+      this.armor = armor;
       
-      this.mapSpells();
+      this.mapArmor();
 
       this.$timeout(() => {
-        this.count = this.spells.length.toString();
+        this.count = this.armor.length.toString();
         this.loaded = true;
       }, 300);
 
@@ -77,7 +86,7 @@ class CharacterSpellsController {
   }
 
   updateCount() {
-    let array = this.spells;
+    let array = this.armor;
 
     if(this.search && this.search !== '') {
       array = array.filter((value) => {
@@ -101,15 +110,15 @@ class CharacterSpellsController {
     this.count = array.length.toString();
   }
 
-  mapSpells() {
-    if(this.character.spells) {
-      this.spells.forEach((feat:any, index:number) => {
-        for(var i in this.character.spells) {
-          if(this.character.spells[i].name === feat.name) {
-            feat.known = true;
+  mapArmor() {
+    if(this.character.armor) {
+      this.armor.forEach((feat:any, index:number) => {
+        for(var i in this.character.armor) {
+          if(this.character.armor[i].name === feat.name) {
+            feat.equipped = true;
             return;
           } else {
-            feat.known = false;
+            feat.equipped = false;
             // return;
           }
         }
@@ -117,62 +126,61 @@ class CharacterSpellsController {
     }
   }
 
-  selectSpell(feat: any) {
-    if(!this.character.spells) {
-      this.character.spells = [];
+  selectArmor(feat: any) {
+    if(!this.character.armor) {
+      this.character.armor = [];
     }
 
-    if(feat.known) {
+    if(feat.equipped) {
       let update = {
         name: feat.name,
-        known: feat.known
+        equipped: feat.equipped
       };
-      this.character.spells.push(update);
+      this.character.armor.push(update);
     } else {
-      for(var i in this.character.spells) {
-        if(this.character.spells[i].name === feat.name) {
-          this.character.spells.splice(i, 1);
+      for(var i in this.character.armor) {
+        if(this.character.armor[i].name === feat.name) {
+          this.character.armor.splice(i, 1);
         }
       }
     }
-    this.mapSpells();
-    this.updateCharacter('', 'spells', this.character.spells);
+    this.mapArmor();
+    this.updateCharacter('', 'armor', this.character.armor);
   }
 
   updateCharacter(path: string, property: string, value:any) {
+    // localStorage.setItem('selectedCharacter', JSON.stringify(this.character));
     this.characterService.updateCharacter(path, property, value);
   }
 
-  showSpellsModal(ev:any, spell:any) {
+  showArmorModal(ev:any, armor:any) {
     let useFullScreen = (this.$mdMedia('xs'));
-    // let spellName = spell.name;
-
-    spell = angular.copy(spell);
-    for(var i in spell) {
-      if(typeof spell[i] === 'string') {
-        spell[i] = spell[i].replace(/'/g, "`");
-
-      }
-    }
-
-    spell = JSON.stringify(spell).replace(/"/g, "\\'");
+    armor = JSON.stringify(armor).replace(/"/g, "\\\'");
+    console.log(armor);
 
     this.$mdDialog.show({
-
-      template: `<character-spells-modal spell="'${spell}'" />`,
-      ariaLabel: 'Character Spells Modal',
+      template: `<character-armor-modal armor="'${armor}'" />`,
+    //   template: `<character-Armor-modal armor="'${{
+    // "name": "Club",
+    // "type": "armor",
+    // "armorType": "Simple Melee",
+    // "cost": "1 sp",
+    // "damage": "1d4",
+    // "damageType": "bludgeoning",
+    // "weight": "2 lb.",
+    // "properties": ["Light"]
+    // }}'" />`,
+      ariaLabel: 'Character Armor Modal',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
-      // autoWrap: false,
-      fullscreen: useFullScreen,
-      // autoWrap: false
+      fullscreen: useFullScreen
     });
   }
 
 }
 
-export const characterSpellsComponent = {
-  controller: CharacterSpellsController,
-  templateUrl: 'app/character/spells/spells.component.html'
+export const characterArmorComponent = {
+  controller: CharacterArmorsController,
+  templateUrl: 'app/character/armor/armor.component.html'
 };

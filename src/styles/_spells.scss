@@ -1,0 +1,41 @@
+.spell-level {
+  background-color: #EEEEEE;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.spell-info {
+  background-color: #FAFAFA;
+  md-list {
+    border-right: 1px solid #E0E0E0;
+    padding: 0px;
+  }
+  md-list-item {
+    padding: 0 8px;
+    border-bottom: 1px solid #E0E0E0;
+    border-collapse: collapse;
+    text-align: center;
+    padding-top: 0px;
+  }
+  md-list-item._md-no-proxy div {
+    margin: 16px 0 0 0;
+  }
+}
+md-dialog {
+  .spell-modal {
+    .md-dialog-content {
+      padding: 0px;
+    }
+  }
+}
+// md-dialog{
+//   @extend .md-dialog-container;
+// }
+md-dialog {
+  character-spells-modal {
+    display: flex;
+    flex-direction: column;
+    .md-dialog-content {
+        padding: 0px;
+    }
+  }
+}

@@ -21,7 +21,7 @@ h5 {
 p {
   @extend .md-body-1;
   font-size: 16px;
-  strong {
+  strong, b {
     @extend .md-body-2;
   }
 }

@@ -1,0 +1,95 @@
+<!--<md-modal class="modal-md spell-modal">-->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{$ctrl.spell.name}}
+
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.close()">
+        <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+      <div class="text-center md-padding spell-level">
+        <span>{{$ctrl.spell.level}} {{$ctrl.spell.school}}</br>
+          <span ng-if="$ctrl.spell.ritual === 'yes'">
+            (Ritual)
+          </span>
+          <span ng-if="$ctrl.spell.concentration === 'yes'">
+            (Concentration)
+          </span>
+        </span>
+      </div>
+    <div class="md-dialog-content ">
+
+
+      <!--<div>{{$ctrl.spell}}</div>-->
+      <section class="spell-info"  layout="row" layout-wrap>      
+        <md-list flex="50">
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h3>Casting Time</h3>
+              <p>{{$ctrl.spell.casting_time}}</p>
+            </div>
+          </md-list-item>        
+
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h3>Components</h3>
+              <p>{{$ctrl.spell.components}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+
+        <md-list flex="50">
+
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h3>Range</h3>
+              <p>{{$ctrl.spell.range}}</p>
+            </div>
+          </md-list-item>
+
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h3>Duration</h3>
+              <p>{{$ctrl.spell.duration}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </section>
+
+      
+
+      <section class="spell-description md-padding">
+        <div data-ng-bind-html="$ctrl.desc" class="no-margin-top"></div>
+        <div ng-if="$ctrl.higherLevel">
+          <md-divider></md-divider>
+          <p>
+            <strong>At Higher Levels</strong>
+          </p>
+          <div data-ng-bind-html="$ctrl.higherLevel"></div>
+        </div>
+
+        <div ng-if="$ctrl.spell.material">
+          <md-divider></md-divider>
+          <p>
+            <strong>Material</strong>
+          </p>
+          <p>{{$ctrl.spell.material}}</p>
+        </div>
+
+        <div ng-if="$ctrl.spell.class">
+          <md-divider></md-divider>
+          <p>
+            <strong>Class</strong>
+          </p>
+          <p>{{$ctrl.spell.class}}</p>
+        </div>
+      </section>
+
+      
+    </div>
+  </md-dialog-content>
+<!--</md-modal>-->

@@ -16,34 +16,36 @@ const menu = [{
   sref: 'character.stats',
   svg: 'dice-d20'
 },{
-  title: 'FeatSs',
+  title: 'Feats',
   sref: 'character.feats',
   icon: 'stars'
 },{
   title: 'Weapons',
-  sref: 'character.general',
+  sref: 'character.weapons',
   svg: 'sword'
 },{
   title: 'Armor',
-  sref: 'character.general',
+  sref: 'character.armor',
   svg: 'shield-outline'
 },{
   title: 'Spells',
-  sref: 'character.general',
+  sref: 'character.spells',
   icon: 'whatshot'
 },{
   title: 'Inventory',
   sref: 'character.general',
   icon: 'drafts'
-},{
-  title: 'Adventure Group',
-  sref: 'character-info',
-  icon: 'group'
-},{
-  title: 'Quest Log',
-  sref: 'character-info',
-  icon: 'help'
-}];
+},
+// {
+//   title: 'Adventure Group',
+//   sref: 'character-info',
+//   icon: 'group'
+// },{
+//   title: 'Quest Log',
+//   sref: 'character-info',
+//   icon: 'help'
+// }
+];
 
 class SidenavController implements IMenuModel {
   
@@ -119,13 +121,10 @@ class SidenavController implements IMenuModel {
   selectCharacter(index: number) {
     localStorage.setItem('selectedCharacterIndex', index.toString());
     this.characterService.selectCharacter(this.characters[index]);
-
-    console.log(this.characterService.selectedCharacter);
   }
 
   toggleSidenav(menuId: string) {
     this.$mdSidenav(menuId).toggle();
-        console.log(menuId);
   }
 }
 

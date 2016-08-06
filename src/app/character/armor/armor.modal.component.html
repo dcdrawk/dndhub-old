@@ -1,0 +1,75 @@
+<div class="modal-md">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{$ctrl.armor.name}}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.close()">
+        <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content" layout="row" layout-wrap>
+      <!--<div>{{$ctrl.armor}}</div>-->
+
+      <md-list flex="50">
+        <md-list-item class="md-2-line">
+          <div class="md-list-item-text">
+            <h3>AC</h3>
+            <p class="text-capitalize">{{$ctrl.armor.ac}}</p>
+          </div>
+        </md-list-item>        
+
+        <md-list-item class="md-2-line">
+          <div class="md-list-item-text">
+            <h3>Armor Type</h3>
+            <p class="text-capitalize">{{$ctrl.armor.armorType}}</p>
+          </div>
+        </md-list-item>
+
+        <md-list-item class="md-2-line" ng-if="$ctrl.armor.properties">
+          <div class="md-list-item-text">
+            <h3>Properties</h3>
+            <p>
+              <span ng-repeat="property in $ctrl.armor.properties track by $index">
+                {{property}}<span ng-if=" $ctrl.armor.properties.length - 1 !== $index"><br>
+                </span>
+              </span>
+            </p>
+          </div>
+        </md-list-item>
+
+      </md-list>
+
+      <md-list flex="50">
+        
+        
+
+        <md-list-item class="md-2-line">
+          <div class="md-list-item-text">
+            <h3>Cost</h3>
+            <p>{{$ctrl.armor.cost}}</p>
+          </div>
+        </md-list-item>
+
+        <md-list-item class="md-2-line">
+          <div class="md-list-item-text">
+            <h3>Weight</h3>
+            <p>{{$ctrl.armor.weight}}</p>
+          </div>
+        </md-list-item>
+      </md-list>      
+
+      <div>
+        <small><em>* - plus Dex Modifier</em></small><br>
+        <small><em>** - plus Dex Modifier (max 2)</em></small>
+      </div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row" hide-xs>
+    <span flex></span>
+    <md-button ng-click="$ctrl.close()">
+      Close
+    </md-button>
+  </md-dialog-actions>
+</div>

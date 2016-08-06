@@ -1,190 +1,163 @@
-<!--Search Box-->
-<div layout="row" layout-padding>
-  
-  <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
-    <!-- Use floating placeholder instead of label -->
-    <md-icon class="material-icons">search</md-icon>
-    <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();">
-  </md-input-container>
+<section layout="row" layout-wrap layout-padding class="page-header">
+  <h4>
+    Spells
+  </h4>
+</section>
 
+<div layout="row" layout-sm="column" layout-align="space-around" ng-if="!$ctrl.loaded" class="md-padding">
+  <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
 </div>
-<md-card>
-  <md-card-content>
-<section layout="row" class="table-filters" layout-wrap>
-      <!--Filter-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="50">
-        <label>Filter</label>
-        <md-select ng-model="$ctrl.filters.known" ng-change="$ctrl.updateCount()">
-          <md-option ng-value="undefined" selected>
-            All Spells
-          </md-option>
-          <md-option ng-value="true">
-            Known Spells
-          </md-option>
-          <md-option ng-value="false">
-            Available Spells
-          </md-option>
-        </md-select>
+
+<section class="container"> 
+  <div class="fade-in full-width" ng-if="$ctrl.loaded">
+    <!--Search Box-->
+    <div layout="row" layout-padding>
+      
+      <md-input-container class="md-block md-no-error-spacer md-no-margin" md-no-float flex="100">
+        <!-- Use floating placeholder instead of label -->
+        <md-icon class="material-icons">search</md-icon>
+        <input ng-model="$ctrl.search" type="text" placeholder="Type to Search" ng-change="$ctrl.updateCount();"  ng-model-options="{ debounce: 350 }">
+        <!--Clear Search button-->
+        <md-button class="md-icon-button clear-search" aria-label="More" ng-if="$ctrl.search.length > 0" ng-click="$ctrl.search = ''; $ctrl.updateCount();">
+          <md-icon class="material-icons">
+            close
+          </md-icon>
+        </md-button>
       </md-input-container>
 
-      <!--Damage Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="50">
-        <label>School</label>
-        <md-select ng-model="$ctrl.filters.school" ng-change="$ctrl.updateCount()">
-          <md-option value="" selected>
-            All Schools
-          </md-option>
-          <md-option value="abjuration">
-            Abjuration
-          </md-option>
-          <md-option value="conjuration">
-            Conjuration
-          </md-option>
-          <md-option value="divination">
-            Divination
-          </md-option>
-          <md-option value="enchantment">
-            Enchantment
-          </md-option>
-          <md-option value="evocation">
-            Evocation
-          </md-option>
-          <md-option value="illusion">
-            Illusion
-          </md-option>
-          <md-option value="necromancy">
-            Necromancy
-          </md-option>
-          <md-option value="transmutation">
-            Transmutation
-          </md-option>
-        </md-select>
-      </md-input-container>
+    </div>
+    <md-card>
+      <md-card-content>
+        <section layout="row" class="table-filters" layout-wrap>
+          <!--Filter-->
+          <md-input-container flex="25" flex-sm="50" flex-xs="50">
+            <label>Filter</label>
+            <md-select ng-model="$ctrl.filters.known" ng-change="$ctrl.updateCount()">
+              <md-option ng-value="undefined" selected>
+                All Spells
+              </md-option>
+              <md-option ng-value="true">
+                Equipped Spells
+              </md-option>
+              <md-option ng-value="false">
+                Unknown Spells
+              </md-option>
+            </md-select>
+          </md-input-container>
 
-      <!--Weapon Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="50">
-        <label>Level</label>
-        <md-select ng-model="$ctrl.filters.level" ng-change="$ctrl.updateCount()">
-          <md-option value="" selected>
-            All Levels
-          </md-option>
-          <md-option value="Can">
-            Cantrip
-          </md-option>
-          <md-option value="1">
-            1st-level
-          </md-option>
-          <md-option value="2">
-            2nd-level
-          </md-option>
-          <md-option value="3">
-            3rd-level
-          </md-option>
-          <md-option value="4">
-            4th-level
-          </md-option>
-          <md-option value="5">
-            5th-level
-          </md-option>
-          <md-option value="6">
-            6th-level
-          </md-option>
-          <md-option value="7">
-            7th-level
-          </md-option>
-          <md-option value="8">
-            8th-level
-          </md-option>
-          <md-option value="9">
-            9th-level
-          </md-option>
-          </md-option>
-        </md-select>
-      </md-input-container>
+          <!--Spell Type-->
+          <md-input-container flex="25" flex-sm="50" flex-xs="50">
+            <label>Spell School</label>
+            <md-select ng-model="$ctrl.filters.school" ng-change="$ctrl.updateCount()">
+              <md-option value="" selected>
+                All Schools
+              </md-option>
+              <md-option value="abjuration">
+                Abjuration
+              </md-option>
+              <md-option value="conjuration">
+                Conjuration
+              </md-option>
+              <md-option value="divination">
+                Divination
+              </md-option>
+              <md-option value="Enchantment">
+                Enchantment
+              </md-option>
+              <md-option value="Evocation">
+                Evocation
+              </md-option>
+              <md-option value="Illusion">
+                Illusion
+              </md-option>
+              <md-option value="Necromancy">
+                Necromancy
+              </md-option>
+              <md-option value="Transmutation">
+                Transmutation
+              </md-option>
+            </md-select>
+          </md-input-container>
 
-      <!--Damage Type-->
-      <md-input-container flex="25" flex-sm="50" flex-xs="50">
-        <label>Class</label>
-        <md-select ng-model="$ctrl.filters.class" ng-change="$ctrl.updateCount()">
-          <md-option value="" selected>
-            All Classes
-          </md-option>
-          <!--<md-option value="barb">
-            Barbarian
-          </md-option>-->
-          <md-option value="bard">
-            Bard
-          </md-option>
-          <md-option value="cler">
-            Cleric
-          </md-option>
-          <md-option value="dru">
-            Druid
-          </md-option>
-          <!--<md-option value="fig">
-            Fighter
-          </md-option>-->
-          <!--<md-option value="mon">
-            Monk
-          </md-option>-->
-          <md-option value="pal">
-            Paladin
-          </md-option>
-          <md-option value="ran">
-            Ranger
-          </md-option>
-          <!--<md-option value="rog">
-            Rogue
-          </md-option>-->
-          <md-option value="sor">
-            Sorcerer
-          </md-option>
-          <md-option value="war">
-            Warlock
-          </md-option>
-          <md-option value="wiz">
-            Wizard
-          </md-option>
-        </md-select>
-      </md-input-container>
-    </section>
+          <!--Spell Type-->
+          <md-input-container flex="25" flex-sm="50" flex-xs="50">
+            <label>Spell Level</label>
+            <md-select ng-model="$ctrl.filters.level" ng-change="$ctrl.updateCount()">
+              <md-option value="" selected>
+                All Levels
+              </md-option>
+              <md-option value="can">
+                Cantrip
+              </md-option>
+              <md-option value="1">
+                1st-level
+              </md-option>
+              <md-option value="2">
+                2nd-level
+              </md-option>
+              <md-option value="3">
+                3rd-level
+              </md-option>
+              <md-option value="4">
+                4th-level
+              </md-option>
+              <md-option value="5">
+                5th-level
+              </md-option>
+              <md-option value="6">
+                6th-level
+              </md-option>
+              <md-option value="7">
+                7th-level
+              </md-option>
+              <md-option value="8">
+                8th-level
+              </md-option>
+              <md-option value="9">
+                9th-level
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </section>
 
-    <!--Feats table-->
-    <md-table-container>
-      <table md-table ng-model="$ctrl.selected" md-progress="promise">
-        <thead md-head md-order="$ctrl.spellOrder" md-on-reorder="">
-          <tr md-row>
-            <th md-column class="checkbox-col"><span>Known</span></th>
-            <th md-column md-order-by="name"><span>Name</span></th>
-            <th md-column md-order-by="school"><span>School</span></th>
-            <th md-column md-order-by="level"><span>Level</span></th>
-          </tr>
-        </thead>
-        <tbody md-body>
-          <tr md-row 
-          ng-repeat="spell in $ctrl.spells | orderBy: $ctrl.spellOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
-          ng-click="$ctrl.showSpellModal($event, spell);">
-            <td md-cell ng-click="$event.stopPropagation();">
-              <md-checkbox ng-model="spell.known" aria-label="Checkbox" class="md-primary"
-              ng-change="$ctrl.selectSpell(spell);">
-              </md-checkbox>
-            </td>
-            <td md-cell>{{spell.name}}</td>
-            <td md-cell>{{spell.school}}</td>
-            <td md-cell>{{spell.level}}</td>
-          </tr>
+        <!--Feats table-->
+        <md-table-container>
+          <table md-table ng-model="$ctrl.selected" md-progress="promise">
+            <thead md-head md-order="$ctrl.spellOrder" md-on-reorder="">
+              <tr md-row>
+                <th md-column class="checkbox-col"><span>Known</span></th>
+                <th md-column md-order-by="name"><span>Name</span></th>
+                <th md-column md-order-by="school"><span>School</span></th>
+                <th md-column md-order-by="level"><span>Level</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row 
+              ng-repeat="spell in $ctrl.spells | orderBy: $ctrl.spellOrder | filter:$ctrl.filters | filter:{name:$ctrl.search} | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit"
+              ng-click="$ctrl.showSpellsModal($event, spell);">
+                <td md-cell ng-click="$event.stopPropagation();">
+                  <md-checkbox ng-model="spell.known" aria-label="Checkbox 1" class="md-primary"
+                  ng-change="$ctrl.selectSpell(spell);">
+                  </md-checkbox>
+                </td>
+                <td md-cell>{{spell.name}}</td>
+                <td md-cell>{{spell.school}}</td>
+                <td md-cell>{{spell.level}}</td>
+              </tr>
 
-          <tr md-row ng-if="$ctrl.count === 0">
-            <td md-cell colspan="5">
-              <div class="text-center">No Spells Found</div>
-            </td>
-          </tr>
+              <tr md-row ng-if="$ctrl.count == 0">
+                <td md-cell colspan="5">
+                  <div class="text-center">No Spells Found</div>
+                </td>
+              </tr>
 
-        </tbody>
-      </table>
-    </md-table-container>
+            </tbody>
+          </table>
+        </md-table-container>
 
-    <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
+        <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
 
-  </md-card-content>
-</md-card>
+      </md-card-content>
+    </md-card>
+  </div>
+</section>

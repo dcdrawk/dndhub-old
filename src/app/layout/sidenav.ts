@@ -25,11 +25,11 @@ const menu = [{
   svg: 'sword'
 },{
   title: 'Armor',
-  sref: 'character.general',
+  sref: 'character.armor',
   svg: 'shield-outline'
 },{
   title: 'Spells',
-  sref: 'character.general',
+  sref: 'character.spells',
   icon: 'whatshot'
 },{
   title: 'Inventory',
