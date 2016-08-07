@@ -4,7 +4,10 @@
     border-radius: 50%;
     border: 5px solid #fff;
     width: 200px;
-    height: 200px;
+    height: 200px!important;
     background-color: #fff;
+    display: inline;
+    position: relative;
+    flex: none;
   }
 }

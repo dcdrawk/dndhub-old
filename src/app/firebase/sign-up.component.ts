@@ -32,5 +32,5 @@ class SignUpController {
 
 export const signUpComponent = {
   controller: SignUpController,
-  templateUrl: 'app/pages/firebase/sign-up.component.html'
+  templateUrl: 'app/firebase/sign-up.component.html'
 };

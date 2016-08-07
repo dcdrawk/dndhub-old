@@ -134,5 +134,5 @@ class CharacterListController {
 
 export const characterListComponent = {
   controller: CharacterListController,
-  templateUrl: 'app/pages/character/character-list.component.html'
+  templateUrl: 'app/character/character-list/character-list.component.html'
 };

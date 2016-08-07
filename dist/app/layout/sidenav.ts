@@ -16,6 +16,10 @@ const menu = [{
   sref: 'character.stats',
   svg: 'dice-d20'
 },{
+  title: 'Class Info',
+  sref: 'character.feats',
+  icon: 'school'
+},{
   title: 'Feats',
   sref: 'character.feats',
   icon: 'stars'

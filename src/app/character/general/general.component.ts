@@ -18,7 +18,9 @@ class CharacterGeneralController {
     '$scope',
     '$rootScope',
     'GeneralService',
-    '$timeout'
+    '$timeout',
+    '$mdDialog',
+    '$mdMedia'
     // // '$mdDialogOptions',
   ];
 
@@ -29,8 +31,15 @@ class CharacterGeneralController {
   alignments: any[];
 
   subraces: any[];
+  classFeatures: any[];
+
   gameData: any;
   loaded: boolean;
+  class: any;
+  limit: string;
+  page: string;
+  count: string;
+  order: string;
 
   constructor(
     // private firebaseService: FirebaseService,
@@ -40,11 +49,17 @@ class CharacterGeneralController {
     private $scope: angular.IScope,
     private $rootScope: angular.IRootScopeService,
     private generalService: GeneralService,
-    private $timeout: angular.ITimeoutService
+    private $timeout: angular.ITimeoutService,
+    private $mdDialog: ng.material.IDialogService,
+    private $mdMedia: ng.material.IMedia
     ) {
 
       // this.gameData = this.gameDataService.gameData;
-
+      this.limit = '5';
+      this.page = '1';
+      this.order = 'level';
+      this.classFeatures = [];
+        
       this.generalService.getRaces().then((races: any[]) => {
         this.races = races;
         if(this.character) {
@@ -54,6 +69,9 @@ class CharacterGeneralController {
 
       this.generalService.getClasses().then((classes: any[]) => {
         this.classes = classes;
+        if(this.character) {
+          this.getClass(this.character.class);
+        }
       });
 
       this.generalService.getBackgrounds().then((backgrounds: any[]) => {
@@ -63,20 +81,57 @@ class CharacterGeneralController {
       this.generalService.getAlignments().then((alignments: any[]) => {
         this.alignments = alignments;
       });
+      
+      this.generalService.getClassFeatures().then((classFeatures: any[]) => {
+        this.classFeatures = classFeatures;
+        this.getClassFeatures();
+      });
+
+
 
       if(this.characterService.selectedCharacter) {
         this.character = this.characterService.selectedCharacter;
-        // this.getSubraces(this.character.race);
+        
+        this.getSubraces(this.character.race);
       }
 
       this.$scope.$on('CHARACTER_SELECTED', () => {
-        this.character = this.characterService.selectedCharacter;
+        this.character = this.characterService.selectedCharacter;        
+        
         this.getSubraces(this.character.race);
+        this.getClass(this.character.class);
+        this.getClassFeatures();
       });
 
       this.$timeout(() => {
         this.loaded = true;
       }, 300);
+  }
+
+  getClass(className: string) {
+    this.classes.forEach((classObj) => {
+      if(className === classObj.name) {
+        this.class = classObj;
+        return;
+      }
+    });
+  }
+
+  getClassFeatures() {    
+    if(this.character && this.classFeatures) {
+      this.character.classFeatures = [];
+      this.classFeatures.forEach((classFeature) => {
+        if(this.character.class === classFeature.class) {
+          if(classFeature.archetype === 'None' || classFeature.archetype === this.character.archetype) {
+            classFeature.abilities.forEach((ability) => {
+              ability.level = parseInt(ability.level);
+            });
+            this.character.classFeatures = this.character.classFeatures.concat(classFeature.abilities);
+          }
+        }
+      });
+      this.count = this.character.classFeatures.length.toString();
+    }
   }
 
   getSubraces(characterRace: string) {
@@ -96,6 +151,31 @@ class CharacterGeneralController {
 
   updateCharacterName(name: string) {
     this.$rootScope.$broadcast('CHARACTER_NAME_UPDATED', name);
+  }
+
+  showClassFeatureModal(ev:any, classFeature:any) {
+    let useFullScreen = (this.$mdMedia('xs'));
+    // let spellName = spell.name;
+
+    classFeature = angular.copy(classFeature);
+    for(var i in classFeature) {
+      if(typeof classFeature[i] === 'string') {
+        classFeature[i] = classFeature[i].replace(/'/g, "`");
+      }
+    }
+    console.log('DWJAIODJAWDJIdDASDADASDADOAWDJAIWODJIAWODJWAIOJd');
+
+    classFeature = JSON.stringify(classFeature).replace(/"/g, "\\'");
+    console.log(classFeature);
+    console.log('DWJAIODJAWDJIOAWDJAIWODJIAWODJWAIOJd');
+    this.$mdDialog.show({
+      template: `<class-feature-modal class-feature="'${classFeature}'" />`,
+      ariaLabel: 'Class Feature Modal',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen
+    });
   }
 
 }

@@ -35,6 +35,20 @@ export default class GeneralService {
     });
   }
 
+  //Get the classes
+  getClassFeatures() {
+    return this.$q((resolve, reject) => {
+      if(this.cacheService.get('classFeatures')) {
+        resolve(this.cacheService.get('classFeatures'));
+      } else {
+        firebase.database().ref('/classFeatures').once('value').then((snapshot) => {
+          this.cacheService.put('classFeatures', snapshot.val());
+          resolve(snapshot.val());
+        });
+      }
+    });
+  }
+
   //Get the races
   getRaces() {
     return this.$q((resolve, reject) => {

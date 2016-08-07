@@ -79,7 +79,7 @@
             </md-select>
           </md-input-container>
 
-          <!--Spell Type-->
+          <!--Spell Level-->
           <md-input-container flex="25" flex-sm="50" flex-xs="50">
             <label>Spell Level</label>
             <md-select ng-model="$ctrl.filters.level" ng-change="$ctrl.updateCount()">
@@ -115,6 +115,40 @@
               </md-option>
               <md-option value="9">
                 9th-level
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!--Classe-->
+          <md-input-container flex="25" flex-sm="50" flex-xs="50">
+            <label>Class</label>
+            <md-select ng-model="$ctrl.filters.class" ng-change="$ctrl.updateCount()">
+              <md-option value="" selected>
+                All Classes
+              </md-option>
+              <md-option value="bard">
+                Bard
+              </md-option>
+              <md-option value="cler">
+                Cleric
+              </md-option>
+              <md-option value="Druid">
+                Druid
+              </md-option>
+              <md-option value="Paladin">
+                Paladin
+              </md-option>
+              <md-option value="Ranger">
+                Ranger
+              </md-option>
+              <md-option value="Sorcerer">
+                Sorcerer
+              </md-option>
+              <md-option value="Warlock">
+                Warlock
+              </md-option>
+              <md-option value="Wizard">
+                Wizard
               </md-option>
             </md-select>
           </md-input-container>

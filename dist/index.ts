@@ -49,6 +49,7 @@ import {characterArmorComponent} from './app/character/armor/armor.component';
 import {characterArmorModalComponent} from './app/character/armor/armor.modal.component';
 import {characterSpellsComponent} from './app/character/spells/spells.component';
 import {characterSpellsModalComponent} from './app/character/spells/spells.modal.component';
+import {classFeatureModalComponent} from './app/character/general/class-feature.modal.component';
 
 // -- Character Services --
 import CharacterService from './app/character/character.service';
@@ -85,6 +86,7 @@ angular
   .component('newCharacterModal', newCharacterModalComponent)
   .component('characterlist', characterListComponent)
   .component('characterGeneral', characterGeneralComponent)
+  .component('classFeatureModal', classFeatureModalComponent)
   .component('characterStats', characterStatsComponent)
   .component('characterFeats', characterFeatsComponent)
   .component('characterFeatsModal', characterFeatsModalComponent)

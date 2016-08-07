@@ -14,7 +14,7 @@ function routesConfig(
   $stateProvider    
     .state('app', {
       url: '/',
-      template: '<firebase></firebase>'
+      template: '<sign-in></sign-in>'
     })
 
     //Authentication

@@ -4,7 +4,8 @@
   </h4>
 </section>
 
-<section class="md-padding" layout="row" layout-wrap layout-padding>
+<div class="container">
+<md-card class="md-padding" layout="row" layout-wrap layout-padding>
   <div flex="33" flex-sm="50" flex-xs="100">
 
       <!--Profile Photo-->
@@ -44,18 +45,19 @@
       </div>  
   </div>
 
-  <div flex="33" flex-sm="50" flex-xs="100">
+  <div flex="66" flex-sm="50" flex-xs="100">
     <div layout="row" layout-wrap>
+
+      <md-input-container flex="100">
+        <label>Display Name</label>
+        <input ng-model="$ctrl.user.displayName" type="text">
+      </md-input-container>    
 
       <md-input-container flex="100">
         <label>Email</label>
         <input ng-model="$ctrl.user.email" type="email">
       </md-input-container>
 
-      <md-input-container flex="100">
-        <label>Display Name</label>
-        <input ng-model="$ctrl.user.displayName" type="text">
-      </md-input-container>    
     </div>
     <div flex="100">
       <md-button class="md-raised md-primary" ng-click="$ctrl.updateProfile();">
@@ -65,9 +67,10 @@
     </div>
   </div>
 
-  <div flex="33" flex-sm="100" flex-xs="100" layout="column">
+  <!--<div flex="33" flex-sm="100" flex-xs="100" layout="column">
     Other Info coming soon...
     <p>{{$ctrl.file.name}}</p>
-  </div>
+  </div>-->
   
-</section>
+</md-card>
+</div>

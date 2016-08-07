@@ -34,6 +34,7 @@ md-dialog {
   character-spells-modal {
     display: flex;
     flex-direction: column;
+    @extend .modal-md;
     .md-dialog-content {
         padding: 0px;
     }

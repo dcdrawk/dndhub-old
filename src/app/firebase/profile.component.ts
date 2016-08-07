@@ -53,6 +53,6 @@ class ProfileController {
 
 export const profileComponent = {
   controller: ProfileController,
-  templateUrl: 'app/pages/firebase/profile.component.html'
+  templateUrl: 'app/firebase/profile.component.html'
 };
 

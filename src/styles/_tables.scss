@@ -26,6 +26,10 @@ table.md-table {
     }
 }
 
+table.fixed {
+  table-layout: fixed;
+}
+
 .table-filters {
   margin: -16px -16px 0 -16px;
   padding: 16px 16px 0 16px;

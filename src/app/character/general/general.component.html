@@ -9,9 +9,14 @@
 </div>
 <section class="container" ng-cloak>
   <div class="fade-in full-width" ng-if="$ctrl.loaded">
+
+    <div layout="column" layout-padding>
+      <h5 class="no-margin">Basic</h5>
+    </div>
+
     <md-card>
       <md-card-content>
-        <form name="myForm">
+        <form name="basic">
           <div layout="row" layout-wrap>
             <!--Name-->
             <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
@@ -37,15 +42,7 @@
 
 
           <div layout="row" layout-wrap>
-            <!--Class-->
-            <md-input-container flex flex-sm="100" flex-xs="100">
-              <label>Class</label>
-              <md-select ng-model="$ctrl.character.class" ng-change="$ctrl.updateCharacter('', 'class', $ctrl.character.class);">
-                <md-option ng-repeat="class in $ctrl.classes" value="{{class.name}}">
-                  {{class.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+            
 
             <!--Race-->
             <md-input-container flex flex-sm="100" flex-xs="100">
@@ -75,8 +72,115 @@
               <md-tooltip md-direction="bottom" ng-if="!$ctrl.character.race">
                 Select a race
               </md-tooltip>
-            </md-input-container>          
+            </md-input-container>       
+
+            <!--Adventuring Group-->
+            <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
+              <label>Adventuring Group</label>
+              <input type="text" ng-model="$ctrl.character.adventuringGroup"
+              ng-change="$ctrl.updateCharacter('', 'adventuringGroup', $ctrl.character.adventuringGroup);">
+            </md-input-container>   
           </div>
+
+          
+        </form>
+      </md-card-content>
+    </md-card>
+
+    <div layout="column" layout-padding>
+      <h5 class="no-margin">Class</h5>
+    </div>
+
+    <md-card>
+      <md-card-content>
+        <form name="myForm">
+          <div layout="row" layout-wrap>
+            <!--Class-->
+            <md-input-container flex="33" flex-sm="100" flex-xs="100">
+              <label>Class</label>
+              <md-select ng-model="$ctrl.character.class"
+               ng-change="$ctrl.updateCharacter('', 'class', $ctrl.character.class); $ctrl.getClass($ctrl.character.class);
+               $ctrl.getClassFeatures();">
+                <md-option ng-repeat="class in $ctrl.classes" value="{{class.name}}">
+                  {{class.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            
+            <!--Archetype-->
+            <md-input-container flex="33" flex-sm="100" flex-xs="100">
+              <label>Archetype</label>
+              <md-select ng-model="$ctrl.character.archetype"
+              ng-change="$ctrl.updateCharacter('', 'archetype', $ctrl.character.archetype);
+              $ctrl.getClassFeatures(); ">
+                <md-option ng-repeat="archetype in $ctrl.class.specializations" value="{{archetype.title}}">
+                  {{archetype.title}}
+                </md-option>
+              </md-select>
+            </md-input-container>   
+
+            <!--Hit Dice-->
+            <div flex="33" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+              <label>Hit Dice</label>
+              <!--<input ng-model="$ctrl.class.hitDice">-->
+              <p>{{$ctrl.character.level}}{{$ctrl.class.hitDice}}</p>
+            </div>         
+          </div>
+        </form>
+
+        <!--Class Features table-->
+        <md-table-container>
+          <table md-table ng-model="$ctrl.selected" md-progress="promise" class="fixed">
+            <thead md-head md-order="$ctrl.order" md-on-reorder="">
+              <tr md-row>
+                <th md-column md-order-by="title"><span>Name</span></th>
+                <th md-column class="text-center" md-order-by="level"><span>Level</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row 
+              ng-repeat="feature in $ctrl.character.classFeatures | orderBy: $ctrl.order | limitTo: $ctrl.limit: ($ctrl.page - 1) * $ctrl.limit""
+              ng-click="$ctrl.showClassFeatureModal($event, feature);">
+                <td md-cell>{{feature.title}}</td>
+                <td md-cell class="text-center">{{feature.level | number}}</td>
+              </tr>
+
+              <tr md-row md-select-id="name" md-auto-select ng-if="$ctrl.count === 0">
+                <td md-cell colspan="2">No Features Found</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </md-table-container>
+        <md-table-pagination md-limit="$ctrl.limit" md-limit-options="[5, 10, 15]" md-page="$ctrl.page" md-total="{{$ctrl.count}}" md-page-select></md-table-pagination>
+      </md-card-content>
+    </md-card>
+
+    <div layout="column" layout-padding>
+      <h5 class="no-margin">Proficiency</h5>
+    </div>
+
+    <md-card>
+      <md-card-content>  
+
+          <div layout="row" layout-wrap class="proficiency-row">
+            <div flex flex-sm="50" flex-xs="50" ng-repeat="proficiency in $ctrl.class.proficiencies" ng-if="proficiency.description">
+              <p><strong>{{proficiency.title}}</strong></p>
+              <p>{{proficiency.description}}</p>
+            </div>
+          </div>
+
+      </md-card-content>
+    </md-card>
+
+
+    <div layout="column" layout-padding>
+      <h5 class="no-margin">Personality</h5>
+    </div>
+
+    <md-card>
+      <md-card-content>
+        <form name="myForm">
 
           <div layout="row" layout-wrap>
             <!--Class-->
@@ -99,17 +203,43 @@
                   {{background.name}}
                 </md-option>
               </md-select>
-            </md-input-container>
+            </md-input-container>            
+          </div>
 
-            <!--Adventuring Group-->
-            <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
-              <label>Adventuring Group</label>
-              <input type="text" ng-model="$ctrl.character.adventuringGroup"
-              ng-change="$ctrl.updateCharacter('', 'adventuringGroup', $ctrl.character.adventuringGroup);">
+          <div layout="row" layout-wrap>
+            <!--Personality Traits-->
+            <md-input-container flex="25" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+              <label>Personality Traits</label>
+              <textarea ng-model="$ctrl.character.personalityTraits" rows="2"
+              ng-change="$ctrl.updateCharacter('', 'personalityTraits', $ctrl.character.personalityTraits);">
+              </textarea>
             </md-input-container>
+            <!--Personality Traits-->
+            <md-input-container flex="25" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+              <label>Ideals</label>
+              <textarea ng-model="$ctrl.character.ideals" rows="2"
+              ng-change="$ctrl.updateCharacter('', 'ideals', $ctrl.character.ideals);">
+              </textarea>
+            </md-input-container>
+            <!--Personality Traits-->
+            <md-input-container flex="25" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+              <label>Bonds</label>
+              <textarea ng-model="$ctrl.character.bonds" rows="2"
+              ng-change="$ctrl.updateCharacter('', 'bonds', $ctrl.character.bonds);">
+              </textarea>
+            </md-input-container>
+            <!--Personality Traits-->
+            <md-input-container flex="25" flex-sm="50" flex-xs="100" class="md-no-error-spacer">
+              <label>Flaws</label>
+              <textarea ng-model="$ctrl.character.flaws" rows="2"
+              ng-change="$ctrl.updateCharacter('', 'flaws', $ctrl.character.flaws);">
+              </textarea>
+            </md-input-container>         
           </div>
         </form>
       </md-card-content>
     </md-card>
+
+    
   </div>
 </section>

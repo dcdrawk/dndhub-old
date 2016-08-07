@@ -164,9 +164,7 @@ class CharacterSpellsController {
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
-      // autoWrap: false,
-      fullscreen: useFullScreen,
-      // autoWrap: false
+      fullscreen: useFullScreen
     });
   }
 
