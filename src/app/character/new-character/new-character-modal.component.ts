@@ -73,5 +73,5 @@ class NewCharacterModalController {
 
 export const newCharacterModalComponent = {
   controller: NewCharacterModalController,
-  templateUrl: 'app/pages/character/new-character-modal.component.html'
+  templateUrl: 'app/character/new-character/new-character-modal.component.html'
 };

@@ -67,6 +67,7 @@ class CharacterStatsController {
     this.$scope.$on('CHARACTER_SELECTED', () => {
       this.init();
       this.getSpeed();
+      
     });
   }
 
@@ -96,6 +97,8 @@ class CharacterStatsController {
 
     this.getInitiative();
 
+    this.updateTotalHP();
+
     this.$timeout(() => {
       this.loaded = true;
     }, 300);
@@ -110,8 +113,8 @@ class CharacterStatsController {
   getInitiative() {
     if(this.character.initiativeLock) {
       if(this.character.abilityScores) {
-        let base = +this.character.abilityScores.Dexterity.base ? +this.character.abilityScores.Dexterity.base : 0;
-        let bonus = +this.character.abilityScores.Dexterity.bonus ? +this.character.abilityScores.Dexterity.bonus : 0;
+        let base = +this.character.abilityScores.Dexterity ? +this.character.abilityScores.Dexterity.base : 0;
+        let bonus = +this.character.abilityScores.Dexterity ? +this.character.abilityScores.Dexterity.bonus : 0;
 
         this.character.initiative = this.getAbilityScoreModifier(
           base + bonus
@@ -143,7 +146,11 @@ class CharacterStatsController {
   }
 
   updateTotalHP() {
-    this.totalHP = this.character.maxHP + this.character.tempHP;
+    if(this.character.tempHP) {
+      this.totalHP = +this.character.maxHP + +this.character.tempHP;
+    } else {
+      this.totalHP = +this.character.maxHP;
+    }
   }
 }
 
