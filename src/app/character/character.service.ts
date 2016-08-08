@@ -24,9 +24,6 @@ export default class CharacterService {
     private $rootScope: angular.IRootScopeService,
     private firebaseService: FirebaseService
   ) {
-    console.log(
-      'character service'
-    );
     this.userSignedIn = this.$rootScope.$on('USER_SIGNED_IN', () => {
       this.getCharacters().then((characterlist) => {
         this.characters = characterlist;
@@ -37,23 +34,15 @@ export default class CharacterService {
         }
       });
     });
-
-    // console.log('SERVICE THIS');
-//     if(firebase.auth().currentUser) {
-      
-    // }
   }
 
   //Get the list of characters
   getCharacters() {
-    console.log('CHARACTER SERVICE GET CHARACTERS');
-    // if(firebase.auth().currentUser) {
       var userId = firebase.auth().currentUser.uid;
       var url = 'characters/' + userId;
       var characterlist = [];
       return this.$q((resolve, reject) => {
         this.firebaseService.getData(url).then((characters:any) => {
-          // console.log(characters);
           //Map the character object to an array, including the id/key of the character
           //Knowing the id/key will allow us to update/delete it in the future
 
@@ -81,29 +70,16 @@ export default class CharacterService {
   //Save a character, requires a path to the property and value being assigned
   //e.g. path = 'skills/dexterity' value: {bon} 
   updateCharacter(path: string, property: string, value:any) {
-    console.log(this.selectedCharacter);
     var userId = firebase.auth().currentUser.uid;
     let update = {};
     update[property] = value;
-    firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update).then(() => {
-      console.log('update successful');
-      // localStorage.setItem('characters', JSON.stringify(this.getCharacters()));
-    });
-
-    //Update the master character list in local storage
-    // let characterIndex = this.getSelectedId();    
-    // // console.log(this.characters);
-    // // this.characters[characterIndex] = JSON.parse(localStorage.getItem('selectedCharacter'));
-    // // console.log(JSON.parse(localStorage.getItem('selectedCharacter')));
-    // // localStorage.setItem('selectCharacter', JSON.stringify(this.selectedCharacter));
-    // localStorage.setItem('characters', JSON.stringify(this.characters));
+    firebase.database().ref('characters/' + userId + '/' + this.selectedCharacter.id + '/' + path).update(update);
   }
   
 
   //Select a character
   selectCharacter(character:any) {
     this.selectedCharacter = character;
-    // localStorage.setItem('selectedCharacter', JSON.stringify(character));
     this.$rootScope.$broadcast('CHARACTER_SELECTED');
   }
 

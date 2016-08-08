@@ -99,7 +99,6 @@ class CharacterListController {
 
   //Get the list of characters
   getCharacters() {
-    console.log('get them');
     this.characterService.getCharacters().then((characters:any[]) => {
       if(characters) {
         this.characters = characters;

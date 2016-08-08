@@ -40,7 +40,6 @@ export default class GameDataService {
 
   //Get the game data for DND
   getGameData() {
-    console.log('getting game data...');
     //Get all of the necessary game data...
     var promises = endpoints.map((endpoint) => {
       return this.$q((resolve, reject) => {

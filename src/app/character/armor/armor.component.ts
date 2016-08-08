@@ -28,10 +28,6 @@ class CharacterArmorsController {
   filters: any;
   loaded: boolean;
 
-  // abilityScores: any[];
-  // skillOrder: any;
-  // totalHP: number;
-
   constructor(
     private $scope: angular.IScope,
     private characterService: CharacterService,
@@ -40,17 +36,6 @@ class CharacterArmorsController {
     private armorService: ArmorsService,
     private $timeout: angular.ITimeoutService
     ) {
-      // this.selected = [];
-      // this.limit = '5';
-      // this.page = '1';
-      
-      // this.search = '';
-      // this.abilityScores = abilityScores;
-      // this.skillOrder = 'name';
-      // this.totalHP = this.character.maxHP + this.character.tempHP;
-
-      // this.init();
-
       if(this.characterService.selectedCharacter) {
         this.init();
       }
@@ -100,7 +85,6 @@ class CharacterArmorsController {
         array = array.filter((value) => {
           return value[i] === this.filters[i];
         });
-        console.log(array);
       } else if(typeof this.filters[i] === 'string' && this.filters[i]!== '') {
         array = array.filter((value) => {
           return  value[i].toLowerCase().indexOf(this.filters[i].toLowerCase()) > -1;
@@ -155,21 +139,9 @@ class CharacterArmorsController {
 
   showArmorModal(ev:any, armor:any) {
     let useFullScreen = (this.$mdMedia('xs'));
-    armor = JSON.stringify(armor).replace(/"/g, "\\\'");
-    console.log(armor);
-
+    armor = JSON.stringify(armor).replace(/"/g, '\\\'');
     this.$mdDialog.show({
       template: `<character-armor-modal armor="'${armor}'" />`,
-    //   template: `<character-Armor-modal armor="'${{
-    // "name": "Club",
-    // "type": "armor",
-    // "armorType": "Simple Melee",
-    // "cost": "1 sp",
-    // "damage": "1d4",
-    // "damageType": "bludgeoning",
-    // "weight": "2 lb.",
-    // "properties": ["Light"]
-    // }}'" />`,
       ariaLabel: 'Character Armor Modal',
       parent: angular.element(document.body),
       targetEvent: ev,

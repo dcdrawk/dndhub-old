@@ -121,7 +121,6 @@ class CharacterFeatsController {
       }).length;
     } else {
       this.count = this.feats.filter((value) => {
-        console.log(value.name.indexOf(this.search));
         return value.name.toLowerCase().indexOf(this.search) >= 0;
       }).length;
     }

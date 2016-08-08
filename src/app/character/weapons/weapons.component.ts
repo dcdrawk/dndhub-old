@@ -100,7 +100,6 @@ class CharacterWeaponsController {
         array = array.filter((value) => {
           return value[i] === this.filters[i];
         });
-        console.log(array);
       } else if(typeof this.filters[i] === 'string' && this.filters[i]!== '') {
         array = array.filter((value) => {
           return  value[i].toLowerCase().indexOf(this.filters[i].toLowerCase()) > -1;
@@ -155,9 +154,7 @@ class CharacterWeaponsController {
 
   showWeaponsModal(ev:any, weapon:any) {
     let useFullScreen = (this.$mdMedia('xs'));
-    weapon = JSON.stringify(weapon).replace(/"/g, "\\\'");
-    console.log(weapon);
-
+    weapon = JSON.stringify(weapon).replace(/"/g, '\\\'');
     this.$mdDialog.show({
       template: `<character-weapons-modal weapon="'${weapon}'" />`,
     //   template: `<character-weapons-modal weapon="'${{

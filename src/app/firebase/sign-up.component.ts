@@ -19,10 +19,6 @@ class SignUpController {
     this.firebaseService = firebaseService;
   }
 
-  init() {
-    console.log('init');
-  }
-
   signUp() {
     this.firebaseService.signUp(this.email, this.password).then(() => {
       this.$state.go('profile');

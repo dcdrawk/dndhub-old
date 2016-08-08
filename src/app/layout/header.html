@@ -13,7 +13,7 @@
       <!--<span hide-xs hide-sm ng-if="!$ctrl.user.displayName">{{$ctrl.user.email}}</span>-->
         <!--<span hide-xs hide-sm ng-if="$ctrl.user.displayName">{{$ctrl.user.displayName}}</span>-->
         <img ng-if="$ctrl.user.photoURL" class="app-bar-photo" ng-src="{{$ctrl.user.photoURL}}">
-        <md-icon  md-menu-origin class="material-icons account-icon">account_circle</md-icon>
+        <md-icon ng-if="!$ctrl.user.photoURL" md-menu-origin class="material-icons account-icon">account_circle</md-icon>
         <md-icon md-menu-origin class="material-icons">arrow_drop_down</md-icon>
       </md-button>
       <md-menu-content width="4">

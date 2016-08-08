@@ -29,7 +29,7 @@ class ClassFeatureModalController {
 
     this.init();
 
-    this.$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    this.$scope.$on('$stateChangeStart', function(event:any, toState:any, toParams:any, fromState:any, fromParams:any) {
       event.preventDefault();
       $mdDialog.cancel();
     });
@@ -37,14 +37,11 @@ class ClassFeatureModalController {
   
 
   init() {
-    console.log('class feature modal');
-    console.log(this.classFeature);
-
     this.feature = JSON.parse(this.classFeature.replace(/'/g, '"'));
 
     for(var i in this.feature) {
       if(typeof this.feature[i] === 'string') {
-        this.feature[i] = angular.copy(this.feature[i].replace(/`/g, "'"));
+        this.feature[i] = angular.copy(this.feature[i].replace(/`/g, '\''));
       }
     }
 

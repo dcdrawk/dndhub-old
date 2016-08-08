@@ -106,7 +106,7 @@ class CharacterStatsController {
 
   getProficiencyBonus() {
     if(this.character.proficiencyBonusLock) {
-      this.character.proficiencyBonus = Math.ceil(parseInt(this.character.level)/4+1);
+      this.character.proficiencyBonus = Math.ceil(parseInt(this.character.level, 0)/4+1);
     }
   }
 
@@ -136,9 +136,12 @@ class CharacterStatsController {
     }
   }
 
-  getAbilityScoreModifier(score) {
-    return Math.floor((parseInt(score) / 2 - 5));
+  getAbilityScoreModifier(score:any) {
+    // return Math.floor((parseInt(score) / 2 - 5, 0));
+    return Math.floor((parseInt(score, 0) / 2 - 5));
   }
+
+  //
 
 
   updateCharacter(path: string, property: string, value:any) {

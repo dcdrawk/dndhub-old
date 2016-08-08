@@ -16,10 +16,6 @@ const menu = [{
   sref: 'character.stats',
   svg: 'dice-d20'
 },{
-  title: 'Class Info',
-  sref: 'character.feats',
-  icon: 'school'
-},{
   title: 'Feats',
   sref: 'character.feats',
   icon: 'stars'
@@ -107,7 +103,6 @@ class SidenavController implements IMenuModel {
   getCharacters() {
     if(firebase.auth().currentUser) {    
       this.characterService.getCharacters().then((characters:any[]) => {
-        // console.log(characters);
         this.characters = characters;      
       });
     }

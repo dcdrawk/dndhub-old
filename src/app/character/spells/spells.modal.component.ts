@@ -23,18 +23,22 @@ class CharacterSpellsModalController {
     // this.name = this.$sce.trustAsHtml(angular.extend(this.featName));    
     // this.description = this.$sce.trustAsHtml(angular.extend(this.featDescription));
 
-    this.init();
+    
 
-    this.$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    this.$scope.$on('$stateChangeStart', function(event:any, toState:any, toParams:any, fromState:any, fromParams:any) {
       event.preventDefault();
       $mdDialog.cancel();
     });
-    console.log(this.spell);
     this.spell = JSON.parse(this.spell.replace(/'/g, '"'));
 
+    this.init(); 
+  }
+  
+
+  init() {
     for(var i in this.spell) {
       if(typeof this.spell[i] === 'string') {
-        this.spell[i] = this.spell[i].replace(/`/g, "'");
+        this.spell[i] = this.spell[i].replace(/`/g, '\'');
       }
     }
 
@@ -42,11 +46,6 @@ class CharacterSpellsModalController {
     if(this.spell.higher_level) {
       this.higherLevel = this.$sce.trustAsHtml(this.spell.higher_level);
     }
-  }
-  
-
-  init() {
-
   }
 
   close() {

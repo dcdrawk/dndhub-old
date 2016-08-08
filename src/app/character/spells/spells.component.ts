@@ -62,7 +62,6 @@ class CharacterSpellsController {
     this.character = this.characterService.selectedCharacter;    
 
     this.spellsService.getSpells().then((spells: any[]) => {
-      console.log(spells);
       this.spells = spells;
       
       this.mapSpells();
@@ -91,7 +90,6 @@ class CharacterSpellsController {
         array = array.filter((value) => {
           return value[i] === this.filters[i];
         });
-        console.log(array);
       } else if(typeof this.filters[i] === 'string' && this.filters[i]!== '') {
         array = array.filter((value) => {
           return  value[i].toLowerCase().indexOf(this.filters[i].toLowerCase()) > -1;
@@ -150,12 +148,12 @@ class CharacterSpellsController {
     spell = angular.copy(spell);
     for(var i in spell) {
       if(typeof spell[i] === 'string') {
-        spell[i] = spell[i].replace(/'/g, "`");
+        spell[i] = spell[i].replace(/'/g, '`');
 
       }
     }
 
-    spell = JSON.stringify(spell).replace(/"/g, "\\'");
+    spell = JSON.stringify(spell).replace(/"/g, '\\\'');
 
     this.$mdDialog.show({
 

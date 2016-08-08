@@ -23,10 +23,6 @@ class SignInController {
     });
   }
 
-  init() {
-    console.log('init');
-  }
-
   signIn(email:string, password:string) {
     this.signingIn = true;
     this.firebaseService.signIn(email, password).then((response) => {

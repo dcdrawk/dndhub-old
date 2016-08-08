@@ -18,22 +18,17 @@ class CharacterWeaponsModalController {
     private $sce: angular.ISCEService
     ) {
 
-    // this.name = this.$sce.trustAsHtml(angular.extend(this.featName));    
-    // this.description = this.$sce.trustAsHtml(angular.extend(this.featDescription));
-
     this.init();
 
-    this.$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    this.$scope.$on('$stateChangeStart', function(event:any, toState:any, toParams:any, fromState:any, fromParams:any) {
       event.preventDefault();
       $mdDialog.cancel();
     });
-
-    this.weapon = JSON.parse(this.weapon.replace(/'/g, '"'));
-  }
-  
+    
+  }  
 
   init() {
-
+    this.weapon = JSON.parse(this.weapon.replace(/'/g, '"'));
   }
 
   close() {

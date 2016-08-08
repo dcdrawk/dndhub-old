@@ -124,7 +124,7 @@ class CharacterGeneralController {
         if(this.character.class === classFeature.class) {
           if(classFeature.archetype === 'None' || classFeature.archetype === this.character.archetype) {
             classFeature.abilities.forEach((ability) => {
-              ability.level = parseInt(ability.level);
+              ability.level = parseInt(ability.level, 0);
             });
             this.character.classFeatures = this.character.classFeatures.concat(classFeature.abilities);
           }
@@ -160,14 +160,11 @@ class CharacterGeneralController {
     classFeature = angular.copy(classFeature);
     for(var i in classFeature) {
       if(typeof classFeature[i] === 'string') {
-        classFeature[i] = classFeature[i].replace(/'/g, "`");
+        classFeature[i] = classFeature[i].replace(/'/g, '`');
       }
     }
-    console.log('DWJAIODJAWDJIdDASDADASDADOAWDJAIWODJIAWODJWAIOJd');
 
-    classFeature = JSON.stringify(classFeature).replace(/"/g, "\\'");
-    console.log(classFeature);
-    console.log('DWJAIODJAWDJIOAWDJAIWODJIAWODJWAIOJd');
+    classFeature = JSON.stringify(classFeature).replace(/"/g, '\\\'');
     this.$mdDialog.show({
       template: `<class-feature-modal class-feature="'${classFeature}'" />`,
       ariaLabel: 'Class Feature Modal',

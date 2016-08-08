@@ -23,12 +23,9 @@ class CharacterFeatsModalController {
     private $sce: angular.ISCEService
     ) {
 
-    this.name = this.$sce.trustAsHtml(angular.extend(this.featName));    
-    this.description = this.$sce.trustAsHtml(angular.extend(this.featDescription));
-
     this.init();
 
-    this.$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    this.$scope.$on('$stateChangeStart', function(event:any, toState:any, toParams:any, fromState:any, fromParams:any) {
       event.preventDefault();
       $mdDialog.cancel();
     });
@@ -36,7 +33,8 @@ class CharacterFeatsModalController {
   
 
   init() {
-
+    this.name = this.$sce.trustAsHtml(angular.extend(this.featName));    
+    this.description = this.$sce.trustAsHtml(angular.extend(this.featDescription));
   }
 
   close() {
