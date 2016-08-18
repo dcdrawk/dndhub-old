@@ -7,50 +7,57 @@ interface IMenuModel {
 
 declare var firebase: any;
 
-const menu = [{
-  title: 'General',
-  sref: 'character.general',
-  icon: 'info'
-},{
-  title: 'Stats',
-  sref: 'character.stats',
-  svg: 'dice-d20'
-},{
-  title: 'Feats',
-  sref: 'character.feats',
-  icon: 'stars'
-},{
-  title: 'Weapons',
-  sref: 'character.weapons',
-  svg: 'sword'
-},{
-  title: 'Armor',
-  sref: 'character.armor',
-  svg: 'shield-outline'
-},{
-  title: 'Spells',
-  sref: 'character.spells',
-  icon: 'whatshot'
-},{
-  title: 'Inventory',
-  sref: 'character.general',
-  icon: 'drafts'
-},
-// {
-//   title: 'Adventure Group',
-//   sref: 'character-info',
-//   icon: 'group'
-// },{
-//   title: 'Quest Log',
-//   sref: 'character-info',
-//   icon: 'help'
-// }
+const characterMenu = [{
+    title: 'General',
+    sref: 'character.general',
+    icon: 'info'
+  },{
+    title: 'Stats',
+    sref: 'character.stats',
+    svg: 'dice-d20'
+  },{
+    title: 'Feats',
+    sref: 'character.feats',
+    icon: 'stars'
+  },{
+    title: 'Weapons',
+    sref: 'character.weapons',
+    svg: 'sword'
+  },{
+    title: 'Armor',
+    sref: 'character.armor',
+    svg: 'shield-outline'
+  },{
+    title: 'Spells',
+    sref: 'character.spells',
+    icon: 'whatshot'
+  // },{
+  //   title: 'Inventory',
+  //   sref: 'character.general',
+  //   icon: 'drafts'
+  // },{
+  //   title: 'Quest Log',
+  //   sref: 'character-info',
+  //   icon: 'help'
+  }
+];
+
+const userMenu = [{
+    title: 'Character List',
+    sref: 'character-list',
+    icon: 'list'
+  // },{
+    // title: 'Adventure Group',
+    // sref: 'character-info',
+    // icon: 'group'
+  }
 ];
 
 class SidenavController implements IMenuModel {
   
   static $inject: Array<string> = ['$mdSidenav', '$scope', 'CharacterService', '$state'];
-  menu: any[];
+  characterMenu: any[];
+  userMenu: any[];
   userSignedIn: any;
   userSignedOut : any;
   characters: any;
@@ -66,12 +73,15 @@ class SidenavController implements IMenuModel {
     private characterService: CharacterService,
     private $state: ng.ui.IStateService
   ) {
-    this.menu = menu;
+    this.characterMenu = characterMenu;
+    this.userMenu = userMenu;
     this.signedIn = false;
     this.getSelectedId();
-
+    // console.log('hello');
     //Listen if the user signs in
     this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
+      console.log(user);
+      console.log('a user has signed in!');
       this.signedIn = true;
       this.selectedCharacterIndex = this.getSelectedId();
     });

@@ -3,14 +3,14 @@
     <!--<section class="md-padding" ng-if="$ctrl.signedIn && !$ctrl.characters">
     </section>-->
 
-    <section class="md-padding character-select" layout="row">
-      <div class="md-padding" ng-if="!$ctrl.signedIn">
+    <section class="md-padding character-select" layout="row" ng-if="$ctrl.signedIn">
+      <!--<div class="md-padding">
         <md-progress-circular md-mode="indeterminate" class="md-margin-auto"></md-progress-circular>   
-      </div>
-      <p ng-if="$ctrl.signedIn && $ctrl.characters.length === 0">
+      </div>-->
+      <p ng-if="$ctrl.characters.length === 0">
         It looks like you haven't created any characters yet, <a ui-sref="character-list">go make one!</a>
       </p>
-      <md-input-container ng-if="$ctrl.signedIn && $ctrl.characters && $ctrl.characters.length !== 0" flex="70">
+      <md-input-container ng-if="$ctrl.characters && $ctrl.characters.length !== 0">
         <label>Selected Character</label>
         <md-select ng-model="$ctrl.selectedCharacterIndex" ng-change="$ctrl.selectCharacter($ctrl.selectedCharacterIndex);">
           <md-option ng-repeat="character in $ctrl.characters" value="{{$index}}" >
@@ -18,11 +18,11 @@
           </md-option>
         </md-select>
       </md-input-container>
-      <div flex>
+      <!--<div flex>-->
         
         
-        <md-button class="md-raised" ui-sref="character-list" ng-if="$ctrl.signedIn && $ctrl.characters && $ctrl.characters.length !== 0">View All</md-button>
-      </div>
+        <!--<md-button ui-sref="character-list" ng-if="$ctrl.signedIn && $ctrl.characters && $ctrl.characters.length !== 0">View All</md-button>-->
+      <!--</div>-->
     </section>
 
     <!--Menu-->
@@ -37,7 +37,17 @@
     <!--Menu-->
     <ul class="sidenav-menu"
     ng-if="$ctrl.characters && $ctrl.selectedCharacterIndex || $ctrl.characters && $ctrl.selectedCharacterIndex === 0">
-      <li ng-repeat="item in $ctrl.menu " id="{{item.title}}">        
+      <li ng-repeat="item in $ctrl.characterMenu " id="{{item.title}}">        
+        <span ng-click="$ctrl.toggleSidenav('right')" ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
+          <md-icon ng-if="item.icon" class="menu-icon material-icons">{{item.icon}}</md-icon>
+          <md-icon ng-if="item.svg" class="menu-icon" md-svg-src="images/icons/{{item.svg}}.svg"></md-icon>
+          {{item.title}}</span>
+      </li>
+    </ul>
+    <md-divider></md-divider>
+
+    <ul class="sidenav-menu" ng-if="$ctrl.signedIn">
+      <li ng-repeat="item in $ctrl.userMenu " id="{{item.title}}">        
         <span ng-click="$ctrl.toggleSidenav('right')" ui-sref="{{item.sref}}" class="sidenav-button expand-button" md-ink-ripple>          
           <md-icon ng-if="item.icon" class="menu-icon material-icons">{{item.icon}}</md-icon>
           <md-icon ng-if="item.svg" class="menu-icon" md-svg-src="images/icons/{{item.svg}}.svg"></md-icon>
@@ -45,10 +55,11 @@
       </li>
     </ul>
 
+
     <section class="md-padding">
       <p>DnD Hub is an online resource for Dungeons and Dragons. Create characters, join adventuring parties, and keep track of your quests, and more.</p>
       <p>DnD Hub is currently in early alpha, and will see significant changes in the weeks and months to come.</p>
-      <p>- Devin</p>
+      <p>- Devin {{$ctrl.signedIn}}</p>
     </section>
   <!--</md-content>-->
 </md-sidenav>
