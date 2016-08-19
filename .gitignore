@@ -1,4 +1,6 @@
 .tmp/
+.idea/
+npm-debug.log
 coverage/
 node_modules/
 jspm_packages/

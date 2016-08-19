@@ -18,6 +18,23 @@ gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
 gulp.task('default', gulp.series('clean', 'build'));
 gulp.task('watch', watch);
 
+gulp.task('generate-service-worker', function(callback) {
+  var path = require('path');
+  var swPrecache = require('sw-precache');
+  var rootDir = 'src';
+
+  swPrecache.write(path.join(rootDir, 'service-worker.js'), {
+    staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+    stripPrefix: rootDir,
+    runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+          handler: 'networkFirst'
+        }
+      ]
+  }, callback);
+});
+
 function reloadBrowserSync(cb) {
   browserSync.reload();
   cb();
