@@ -28,7 +28,7 @@ function routesConfig(
     })
     .state('sign-up', {
       url: '/sign-up',
-      template: '<signup></signup>'
+      template: '<sign-up></sign-up>'
     })
 
     //Character
