@@ -158,9 +158,21 @@ class CharacterGeneralController {
     // let spellName = spell.name;
 
     classFeature = angular.copy(classFeature);
+    console.log(classFeature);
     for(var i in classFeature) {
       if(typeof classFeature[i] === 'string') {
         classFeature[i] = classFeature[i].replace(/'/g, '`');
+      } else {
+        
+      }
+      if(classFeature.hasOwnProperty('options')) {
+        classFeature.options.forEach((item, index) => {
+          for(var j in item) {
+            if(typeof item[j] === 'string') {
+              item[j] = item[j].replace(/'/g, '`');
+            }
+          }
+        });
       }
     }
 
