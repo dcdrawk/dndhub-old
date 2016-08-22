@@ -51,7 +51,6 @@ class HeaderController implements IMenuModel {
   //Toggle the sidenav
   toggleSidenav(menuId: string) {
     this.$mdSidenav(menuId).toggle();
-        console.log(menuId);
   }
 
   //Sign the user out

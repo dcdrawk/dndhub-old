@@ -8,14 +8,14 @@
   <div flex="33" flex-md="50" flex-sm="100" flex-xs="100">
     <md-card class="md-padding">
       <div ng-if="$ctrl.user">
-        <p>
+        <p class="text-center">
           You are currently signed in as           
           <strong ng-if="$ctrl.user.displayName">{{$ctrl.user.displayName}}</strong>
           <strong ng-if="!$ctrl.user.displayName">{{$ctrl.user.email}}</strong>
         </p>
       </div>
       <form name="signUpForm" layout="column" ng-submit="$ctrl.signUp()">
-        <p>Sign up with your email</p>
+        <p class="text-center">Sign up with your email</p>
         <md-input-container>
           <label>Email</label>
           <input required type="email" name="email" ng-model="$ctrl.email" ng-pattern="/^.+@.+\..+$/" md-no-asterisk>
