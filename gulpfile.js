@@ -24,11 +24,11 @@ gulp.task('generate-service-worker', function(callback) {
   var rootDir = 'src';
 
   swPrecache.write(path.join(rootDir, 'service-worker.js'), {
-    staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+    staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}', 'service-worker.js'],
     stripPrefix: rootDir,
     runtimeCaching: [
         {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/css/,
           handler: 'networkFirst'
         }
       ]
