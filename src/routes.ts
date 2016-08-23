@@ -64,4 +64,10 @@ function routesConfig(
       url: '/spells',
       template: '<character-spells/>'
     })
+    .state('character.inventory', {
+      url: '/inventory',
+      template: '<character-inventory/>'
+    })
 }
+
+
