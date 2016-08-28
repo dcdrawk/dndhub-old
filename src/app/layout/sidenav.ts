@@ -31,10 +31,10 @@ const characterMenu = [{
     title: 'Spells',
     sref: 'character.spells',
     icon: 'whatshot'
-  // },{
-  //   title: 'Inventory',
-  //   sref: 'character.general',
-  //   icon: 'drafts'
+  },{
+    title: 'Inventory',
+    sref: 'character.general',
+    icon: 'drafts'
   // },{
   //   title: 'Quest Log',
   //   sref: 'character-info',
