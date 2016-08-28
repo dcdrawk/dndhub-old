@@ -17,6 +17,7 @@ class CharacterListController {
     '$scope',
     '$mdDialog',
     '$rootScope',
+    '$mdMedia'
     // '$mdDialogOptions',
   ];
 
@@ -37,8 +38,8 @@ class CharacterListController {
     private characterService: CharacterService,
     private $scope: angular.IScope,
     private $mdDialog: ng.material.IDialogService,
-    private $rootScope: angular.IRootScopeService
-    // private $mdDialogOptions: ng.material.IDialogOptions
+    private $rootScope: angular.IRootScopeService,
+    private $mdMedia: ng.material.IMedia
     ) {
 
     //If it detects a user has signed in, get the characters for that user
@@ -117,12 +118,15 @@ class CharacterListController {
   }
 
   showNewCharacterModal(ev:any) {
+    let useFullScreen = (this.$mdMedia('xs'));
+
     this.$mdDialog.show({
       template: '<new-character-modal/>',
       ariaLabel: 'New Character Dialog',
       parent: angular.element(document.body),
       targetEvent: ev,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen
     })
     .then(() => {
       this.getCharacters();

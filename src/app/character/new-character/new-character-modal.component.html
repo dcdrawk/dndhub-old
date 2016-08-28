@@ -1,7 +1,7 @@
 <!--<md-dialog aria-label="New Character" class="modal-md">-->
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>New Character!</h2>
+      <h2>New Character</h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="$ctrl.close()">
         <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
@@ -11,30 +11,30 @@
   <md-dialog-content>
     <div class="md-dialog-content">
       <form name="myForm">
-        <div layout="row">
+        <div layout="row" layout-wrap>
           <!--Name-->
-          <md-input-container flex="33" class="md-no-error-spacer">
+          <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
             <label>Character Name</label>
             <input type="text" ng-model="$ctrl.character.name" required>
           </md-input-container>
 
           <!--Level-->
-          <md-input-container flex="33" class="md-no-error-spacer">
+          <md-input-container flex="33" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Level</label>
             <input type="number" ng-model="$ctrl.character.level" required>
           </md-input-container>
 
           <!--Experience-->
-          <md-input-container flex="33" class="md-no-error-spacer">
+          <md-input-container flex="33" flex-sm="50" flex-xs="50" class="md-no-error-spacer">
             <label>Experience</label>
             <input type="number" ng-model="$ctrl.character.experience">
           </md-input-container>          
         </div>
 
         
-        <div layout="row">
+        <div layout="row" layout-wrap>
           <!--Class-->
-          <md-input-container flex>
+          <md-input-container flex flex-sm="100" flex-xs="100">
             <label>Class</label>
             <md-select ng-model="$ctrl.character.class" required>
               <md-option ng-repeat="class in $ctrl.gameData.classes" value="{{class.name}}">
@@ -44,7 +44,7 @@
           </md-input-container>
 
           <!--Race-->
-          <md-input-container flex>
+          <md-input-container flex flex-sm="50" flex-xs="50">
             <label>Race</label>
             <md-select ng-model="$ctrl.character.race" required>
               <md-option ng-repeat="race in $ctrl.gameData.races" value="{{race.name}}" ng-click="$ctrl.selectRace(race);">
@@ -54,7 +54,7 @@
           </md-input-container>
 
           <!--Subrace-->
-          <md-input-container flex>
+          <md-input-container flex flex-sm="50" flex-xs="50">
             <label>Subrace</label>
             <md-select ng-model="$ctrl.character.subrace" ng-disabled="!$ctrl.subraces">
               <md-option ng-repeat="subrace in $ctrl.subraces track by $index" value="{{subrace.name}}">
@@ -63,20 +63,20 @@
             </md-select>
             
             <!--If there are no subraces-->
-            <md-tooltip md-direction="bottom" ng-if="$ctrl.character.race && !$ctrl.subraces">
+            <md-tooltip md-direction="top" ng-if="$ctrl.character.race && !$ctrl.subraces">
               No {{character.race}} Subraces
             </md-tooltip>
 
             <!--Tell the user to select a race-->
-            <md-tooltip md-direction="bottom" ng-if="!$ctrl.character.race">
+            <md-tooltip md-direction="top" ng-if="!$ctrl.character.race">
               Select a race
             </md-tooltip>
           </md-input-container>          
         </div>
 
-        <div layout="row">
+        <div layout="row" layout-wrap>
           <!--Class-->
-          <md-input-container flex>
+          <md-input-container flex flex-sm="50" flex-xs="50">
             <label>Alignment</label>
             <md-select ng-model="$ctrl.character.alignment">
               <md-option ng-repeat="alignment in $ctrl.gameData.alignments" value="{{alignment.name}}">
@@ -86,7 +86,7 @@
           </md-input-container>
 
           <!--Background-->
-          <md-input-container flex>
+          <md-input-container flex flex-sm="50" flex-xs="50">
             <label>Background</label>
             <md-select ng-model="$ctrl.character.background">
               <md-option ng-repeat="background in $ctrl.gameData.backgrounds" value="{{background.name}}">
@@ -96,7 +96,7 @@
           </md-input-container>
 
           <!--Adventuring Group-->
-          <md-input-container flex="33" class="md-no-error-spacer">
+          <md-input-container flex="33" flex-sm="100" flex-xs="100" class="md-no-error-spacer">
             <label>Adventuring Group</label>
             <input type="text" ng-model="$ctrl.character.adventuringGroup">
           </md-input-container>

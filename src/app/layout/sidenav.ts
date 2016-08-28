@@ -33,7 +33,7 @@ const characterMenu = [{
     icon: 'whatshot'
   },{
     title: 'Inventory',
-    sref: 'character.general',
+    sref: 'character.inventory',
     icon: 'drafts'
   // },{
   //   title: 'Quest Log',
