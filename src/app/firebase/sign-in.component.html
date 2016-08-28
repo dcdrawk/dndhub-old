@@ -24,8 +24,10 @@
           <label>Password</label>
           <input ng-model="$ctrl.password" type="password">
         </md-input-container>
-        <input type="submit" class="md-button md-raised md-primary" value="Sign In" ng-disabled="!$ctrl.email || !$ctrl.password">
-        <md-button class="md-primary" ui-sref="sign-up">Sign Up</md-button>
+        <div layout="row">
+          <md-button flex="50" class="md-raised" ui-sref="sign-up">Sign Up</md-button>
+          <input flex="50" type="submit" class="md-button md-raised md-primary" value="Sign In" ng-disabled="!$ctrl.email || !$ctrl.password">
+        </div>
       </form>
     </md-card>
     <md-progress-circular md-mode="indeterminate" class="md-margin-auto" ng-if="$ctrl.signingIn"></md-progress-circular>        

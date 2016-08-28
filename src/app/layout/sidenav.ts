@@ -80,8 +80,6 @@ class SidenavController implements IMenuModel {
     // console.log('hello');
     //Listen if the user signs in
     this.userSignedIn = this.$scope.$on('USER_SIGNED_IN', (event, user) => {
-      console.log(user);
-      console.log('a user has signed in!');
       this.signedIn = true;
       this.selectedCharacterIndex = this.getSelectedId();
     });
@@ -94,7 +92,10 @@ class SidenavController implements IMenuModel {
     
     //Get notified if the character list is updated
     this.characterListLoaded = this.$scope.$on('CHARACTER_LIST_LOADED', (event, characters) => {
+      this.signedIn = true;
       this.characters = characters;
+
+      // this.$scope.$apply();
       
     });
 

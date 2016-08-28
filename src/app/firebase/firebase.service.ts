@@ -20,6 +20,7 @@ export default class FirebaseService {
         // User is signed in.
         this.currentUser = user;
         $rootScope.$broadcast('USER_SIGNED_IN', user);
+        $rootScope.$emit('USER_SIGNED_IN', user);
       } else {
         // No user is signed in.
       }

@@ -25,7 +25,9 @@ export default class CharacterService {
     private firebaseService: FirebaseService
   ) {
     this.userSignedIn = this.$rootScope.$on('USER_SIGNED_IN', () => {
+      console.log('user signed in!!!');
       this.getCharacters().then((characterlist) => {
+        console.log('got the characters...');
         this.characters = characterlist;
         this.$rootScope.$broadcast('CHARACTER_LIST_LOADED', characterlist);
         if(localStorage.getItem('selectedCharacterIndex')) {
